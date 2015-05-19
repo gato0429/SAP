@@ -23,6 +23,9 @@
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
      <property name="tabPosition">
       <enum>QTabWidget::East</enum>
      </property>
@@ -30,7 +33,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -793,6 +796,33 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>LineCodTipo</tabstop>
+  <tabstop>LineNombreTipo</tabstop>
+  <tabstop>ListaTipo</tabstop>
+  <tabstop>LineCodUnidad</tabstop>
+  <tabstop>LineNombreUnidad</tabstop>
+  <tabstop>LineSimbolo</tabstop>
+  <tabstop>ListaUnidad</tabstop>
+  <tabstop>ComboVigencia</tabstop>
+  <tabstop>LineImagen</tabstop>
+  <tabstop>LineNombre</tabstop>
+  <tabstop>LineCodigo</tabstop>
+  <tabstop>BotonBusquedaImagen</tabstop>
+  <tabstop>LineCodigoInterno</tabstop>
+  <tabstop>LineCodigoExterno</tabstop>
+  <tabstop>BotonGuardar</tabstop>
+  <tabstop>BotonModificar</tabstop>
+  <tabstop>BotonEliminar</tabstop>
+  <tabstop>LineCodigoAlias</tabstop>
+  <tabstop>LineNombreAlias</tabstop>
+  <tabstop>ListaAlias</tabstop>
+  <tabstop>BotonNuevoAlias</tabstop>
+  <tabstop>BotonGuardarAlias</tabstop>
+  <tabstop>BotonModificarAlias</tabstop>
+  <tabstop>BotonEliminarAlias</tabstop>
+ </tabstops>
  <resources>
   <include location="../Recursos.qrc"/>
  </resources>

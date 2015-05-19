@@ -12,6 +12,7 @@
 #include <vector>
 #include "../Fabricas/fabricabasedatos.h"
 #include "../DefBD.h"
+#include <QLineEdit>
 using namespace std;
 class Repisa:public QMainWindow
 {
@@ -23,6 +24,9 @@ protected:
   QPushButton*    Atras;
   QPushButton*    Siguiente;
   QPushButton*    Cerrar;
+
+  QLineEdit*      LineBuscar;
+  QLabel*         LabelTitulo;
 
   QMap<QString,ObjetoMaestro*>*   Mapa;
   QMap<QString,ObjetoMaestro*>::iterator it;
@@ -46,6 +50,8 @@ protected:
   int cantidadMostrar;
   QString Ordenamiento;
 private:
+
+  int TotalRepisa;
     void LimpiarRepisa();
 
 

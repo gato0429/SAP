@@ -49,5 +49,6 @@
         <file>Imagenes/fondos/repisa.png</file>
         <file>Imagenes/fondos/repisa1.png</file>
         <file>Imagenes/fondos/techo.png</file>
+        <file>Imagenes/fondos/estante.png</file>
     </qresource>
 </RCC>

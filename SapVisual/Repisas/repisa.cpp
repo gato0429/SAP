@@ -2,6 +2,7 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QFile>
+#include <QPalette>
 
 
 QMainWindow* Repisa::Formulario=0;
@@ -14,6 +15,7 @@ Repisa::Repisa()
     cantidadMostrar=100;
     Ordenamiento="desc";
 
+    TotalRepisa=16;
     Bd=DefBD::IniciarBD();
    Formulario=this;
    Formulario->setGeometry(100,100,420,577);
@@ -24,16 +26,36 @@ Repisa::Repisa()
                         | Qt::WindowMaximizeButtonHint
                         | Qt::WindowCloseButtonHint);
 
-    QPixmap bkgnd(":/Imagenes/fondos/madera4.png");
+    QPixmap bkgnd(":/Imagenes/fondos/madera.png");
     bkgnd = bkgnd.scaled(Formulario->size(), Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
     QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    Formulario->setPalette(palette);
+   palette.setBrush(QPalette::Background, bkgnd);
+ //   Formulario->setPalette(palette);
 
 
+    setAttribute(Qt::WA_TranslucentBackground);
+   //   setStyleSheet("background:transparent;");
 
 
        DibujarRepisa();
+       QFont serifFont("Cambria", 12, QFont::Cursive);
+       serifFont.setStyle(QFont::StyleItalic);
+
+       LineBuscar=new QLineEdit(Formulario);
+       LineBuscar->setGeometry(120,160,150,20);
+       LineBuscar->setStyleSheet("    border: 1px solid gray;"
+                                 "border-radius: 10px;"
+                                 "padding: 0 8px;"
+                                 "background: transparent;"
+                                 "selection-background-color: darkgray;");
+       LineBuscar->setFont(serifFont);
+
+       LabelTitulo=new QLabel(Formulario);
+       LabelTitulo->setGeometry(123,90,135,20);
+       LabelTitulo->setAlignment(Qt::AlignCenter);
+
+       LabelTitulo->setFont(serifFont);
+       LabelTitulo->setText("Sin Nombre");
        Atras= new QPushButton(Formulario);
        Siguiente= new QPushButton(Formulario);
        Nuevo= new QPushButton(Formulario);
@@ -50,8 +72,17 @@ Repisa::Repisa()
 }
 ObjetoMaestro* Repisa::ObjetoConsulta=0;
 
+
 void Repisa::DibujarRepisa()
 {
+
+    QPixmap* pix=new QPixmap(":/Imagenes/fondos/estante.png");
+    QLabel* muroder=new QLabel(Formulario);
+    muroder->setGeometry(0,0,420,577);
+    muroder->setPixmap(pix->scaled(371,561,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
+
+   /*
     int y=0;
 
     QPixmap* pix=new QPixmap(":/Imagenes/fondos/muroder.png");
@@ -130,7 +161,7 @@ void Repisa::DibujarRepisa()
     pix=new QPixmap(":/Imagenes/fondos/division.png");
     division5->setPixmap(pix->scaled(71,146,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     division5->setGeometry(271,401-y,71,146);
-
+*/
 }
 void Repisa::LimpiarRepisa()
 {
@@ -230,12 +261,12 @@ void Repisa::AtrasClick()
         if(Ordenamiento=="asc"||Ordenamiento=="ASC")
         {
             it=Mapa->begin();
-            it+=20;
+            it+=TotalRepisa;
         }
         else
         {
             it=Mapa->begin();
-            it+=19;
+            it+=(TotalRepisa-1);
         }
 
         LlenarRepisa();
@@ -247,7 +278,7 @@ void Repisa::AtrasClick()
 
         if(Ordenamiento=="asc"||Ordenamiento=="ASC")
         {
-          it-=elementos+20;
+          it-=elementos+TotalRepisa;
 
         }
         else
@@ -256,11 +287,11 @@ void Repisa::AtrasClick()
                      if(it==Mapa->begin()-1)
                      {
                           it=Mapa->begin();
-                          it+=elementos+19;
+                          it+=elementos+(TotalRepisa-1);
                      }
                      else
                      {
-                         it+=elementos+20;
+                         it+=elementos+TotalRepisa;
                      }
 
         }
@@ -270,7 +301,7 @@ void Repisa::AtrasClick()
 
 
 
-if(TotalElementos<=20)
+if(TotalElementos<=TotalRepisa)
 {
     Atras->setEnabled(false);
 }
@@ -321,7 +352,7 @@ void Repisa::SiguienteClick()
          Siguiente->setEnabled(true);
     }
 
-    if(TotalElementos<=20)
+    if(TotalElementos<=TotalRepisa)
     {
         Atras->setEnabled(false);
     }
@@ -358,18 +389,18 @@ void Repisa::Dibujar()
     Nuevo->setIcon(QIcon(":/Imagenes/iconos/add.png"));
     Nuevo->setIconSize(QSize(60,60));
     Nuevo->setFlat(true);
-    Nuevo->setGeometry(325,40,60,60);
+    Nuevo->setGeometry(290,215,60,60);
 
     Buscar->setIcon(QIcon(":/Imagenes/iconos/buscar.png"));
     Buscar->setIconSize(QSize(60,60));
     Buscar->setFlat(true);
-    Buscar->setGeometry(325,140,60,60);
+    Buscar->setGeometry(290,300,60,60);
 
 
     Cerrar->setIcon(QIcon(":/Imagenes/iconos/delete.png"));
     Cerrar->setIconSize(QSize(60,60));
     Cerrar->setFlat(true);
-    Cerrar->setGeometry(325,245,60,60);
+    Cerrar->setGeometry(290,455,60,60);
 }
 
 void Repisa::LlenarRepisa()
@@ -380,7 +411,7 @@ void Repisa::LlenarRepisa()
     fil=1;
     col=1;
     ix=40;
-    iy=48;
+    iy=210;//48
     elementos=0;
 
     if(Ordenamiento=="asc"||Ordenamiento=="ASC")
@@ -392,7 +423,7 @@ void Repisa::LlenarRepisa()
         ittemp=Mapa->begin()-1;
     }
 
-    while (it!=ittemp&&fil<=5)
+    while (it!=ittemp&&fil<=4) //cantidad de filas
     {
 
         if(col<=4)
@@ -416,14 +447,14 @@ void Repisa::LlenarRepisa()
         {
             ix=40;
             col=1;
-            iy=iy+104;
+            iy=iy+80;//104
             fil++;
         }
    }
 
 
 
-    if(TotalElementos<=20)
+    if(TotalElementos<=TotalRepisa)
     {
         Atras->setEnabled(false);
     }
@@ -441,7 +472,7 @@ void Repisa::LlenarRepisa()
          Siguiente->setEnabled(true);
     }
 
-    if(RegistrosTabla<=20)
+    if(RegistrosTabla<=TotalRepisa)
     {
         Siguiente->setEnabled(false);
     }

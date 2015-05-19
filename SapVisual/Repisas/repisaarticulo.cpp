@@ -3,6 +3,9 @@
 RepisaArticulo::RepisaArticulo():Repisa()
 {
     ActualizarMapa((ObjetoMaestro*)new Articulo());
+    LabelTitulo->setText("Articulos");
+
+
     //Ordenamiento="asc";
 }
 
