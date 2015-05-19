@@ -218,4 +218,4 @@ build-SapVisual-Desktop_Qt_5_3_MSVC2012_OpenGL_32bit-Debug/Makefile
 *.Debug
 *.Release
 build-SapVisual-Desktop_Qt_5_3_MSVC2012_OpenGL_32bit-Debug/ui_mainwindow.h
-*.pro
+
