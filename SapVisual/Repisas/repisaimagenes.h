@@ -10,12 +10,10 @@ private:
     FabricaImagenes*    FabricaLocal;
     FormImagenes*   Dialogo;
 
-    static RepisaImagenes* mUnico;
 public:
     RepisaImagenes();
-    void ActualizarMapa(ObjetoMaestro* Objeto);
+  //  void ActualizarMapa(ObjetoMaestro* Objeto);
     void ObjetosIndependientes();
-    static RepisaImagenes* Iniciar();
     void ActualizarConsulta();
 public slots:
     void NuevoClick();

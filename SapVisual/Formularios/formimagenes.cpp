@@ -23,7 +23,7 @@ FormImagenes::FormImagenes(QWidget *parent) :
         FabricaBaseDatos* bd=DefBD::IniciarBD();
         bd->Fabrica->Conectar();
         FabricaImagenes* Img=bd->Fabrica->CrearImagen();
-        QMap<QString,ObjetoMaestro*>* mapa=Img->BuscarMapa(Imagen(),TODO);
+        QMap<QString,ObjetoMaestro*>* mapa=Img->BuscarMapa((ObjetoMaestro*)new Imagen(),"",TODO);
 
         QMap<QString,ObjetoMaestro*>::iterator it;
 
@@ -65,7 +65,7 @@ FormImagenes::FormImagenes(QWidget *parent) :
 /*--------------*/
 
 
-        mRepisa=RepisaImagenes::Iniciar();
+     //   mRepisa=RepisaImagenes::Iniciar();
          ui->LineNombre->setInputMask("AAAAAAAAAAAAAAAA");
 }
 

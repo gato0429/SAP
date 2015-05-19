@@ -1,0 +1,2 @@
+
+copia las dll de la carpeta bin de postgress menos las q empiecen por w, en  C:\Qt\5.3\msvc2012_opengl\bin

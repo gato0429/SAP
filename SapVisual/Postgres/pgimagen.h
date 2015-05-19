@@ -18,7 +18,7 @@ public:
     bool Insertar(Imagen valor);
     bool Actualizar(Imagen Antiguo, Imagen Nuevo);
     Imagen Buscar(Imagen valor);
-    QMap<QString, ObjetoMaestro*> *BuscarMapa(Imagen valor, CONSULTA tipo);
+    QMap<QString, ObjetoMaestro*> *BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo);
     int Contar();
 };
 

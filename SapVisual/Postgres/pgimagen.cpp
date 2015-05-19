@@ -130,9 +130,9 @@ Imagen PgImagen::Buscar(Imagen valor)
     return resp;
 }
 
-QMap<QString, ObjetoMaestro*> *PgImagen::BuscarMapa(Imagen valor, CONSULTA tipo)
+QMap<QString, ObjetoMaestro*> *PgImagen::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
 {
-
+    Imagen* val=(Imagen*)(valor);
 
     QString consulta;
 
@@ -148,21 +148,21 @@ QMap<QString, ObjetoMaestro*> *PgImagen::BuscarMapa(Imagen valor, CONSULTA tipo)
 
 
 
-    if(!valor.getCodigo().isNull())
+    if(!val->getCodigo().isNull())
     {
-        consulta=consulta+" codigo like '%"+valor.getCodigo()+"%' AND ";
+        consulta=consulta+" codigo like '%"+val->getCodigo()+"%' AND ";
     }
-    if(!valor.getCarpeta().isNull())
+    if(!val->getCarpeta().isNull())
     {
-        consulta=consulta+" carpeta like '%"+valor.getCarpeta()+"%' AND ";
+        consulta=consulta+" carpeta like '%"+val->getCarpeta()+"%' AND ";
     }
-    if(!valor.getNombre().isNull())
+    if(!val->getNombre().isNull())
     {
-        consulta=consulta+" nombre like '%"+valor.getNombre()+"%' AND ";
+        consulta=consulta+" nombre like '%"+val->getNombre()+"%' AND ";
     }
-    if(!valor.getPixel().isNull())
+    if(!val->getPixel().isNull())
     {
-        consulta=consulta+" pixel like '%"+valor.getPixel()+"%' AND ";
+        consulta=consulta+" pixel like '%"+val->getPixel()+"%' AND ";
     }
 
     consulta.replace(consulta.size()-5,5,";");

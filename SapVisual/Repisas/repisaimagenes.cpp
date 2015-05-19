@@ -2,22 +2,9 @@
 
 RepisaImagenes::RepisaImagenes()
 {
-     ActualizarMapa(new Imagen());
+    ActualizarMapa((ObjetoMaestro*)new Imagen());
 }
-RepisaImagenes* RepisaImagenes::mUnico=0;
 
-void RepisaImagenes::ActualizarMapa(ObjetoMaestro *Objeto)
-{
-    FabricaLocal=Bd->Fabrica->CrearImagen();
-    Bd->Fabrica->Conectar();
-    Mapa=FabricaLocal->BuscarMapa(*((Imagen*)Objeto),CAMPOS);
-    Bd->Fabrica->Desconectar();
-    qDebug()<<Mapa->size();
-    it=Mapa->begin();
-    GrupoBotones=new QButtonGroup(this);
-    connect(GrupoBotones, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(GrupoBotonesClick(QAbstractButton*)));
-    SiguienteClick();
-}
 
 void RepisaImagenes::ObjetosIndependientes()
 {
@@ -35,18 +22,23 @@ void RepisaImagenes::ObjetosIndependientes()
     pp->setVisible(true);
 }
 
-RepisaImagenes *RepisaImagenes::Iniciar()
-{
-    if(mUnico==NULL)
-    {
-        mUnico=new RepisaImagenes();
-    }
-
-    return mUnico;
-}
-
 void RepisaImagenes::ActualizarConsulta()
 {
+    FabricaLocal=Bd->Fabrica->CrearImagen();
+    Bd->Fabrica->Conectar();
+
+    RegistrosTabla=FabricaLocal->Contar();
+    // qDebug()<<"elem:"+TotalElementos;
+
+    QString extra=" order by codigo "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);
+    qDebug()<<"aqui toy as";
+
+    Mapa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
+
+    Bd->Fabrica->Desconectar();
+    qDebug()<<Mapa->size();
+    GrupoBotones=new QButtonGroup(this);
+    connect(GrupoBotones, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(GrupoBotonesClick(QAbstractButton*)));
 
 }
 

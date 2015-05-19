@@ -10,6 +10,7 @@
 #include "Repisas/repisaempleados.h"
 #include "Repisas/repisaunidades.h"
 #include "Repisas/repisaarticuloalias.h"
+#include "Repisas/repisaimagenes.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +18,8 @@ int main(int argc, char *argv[])
 
     DefBD::IniciarBD();
 
-    RepisaUnidades* w=new RepisaUnidades();
+    RepisaImagenes* w=new RepisaImagenes();
+ //       RepisaArticulo* w=new RepisaArticulo();
     w->show();
 
 

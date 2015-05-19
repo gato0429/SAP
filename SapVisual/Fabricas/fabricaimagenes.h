@@ -12,7 +12,7 @@ public:
     virtual bool Insertar(Imagen valor)=0;
     virtual bool Actualizar(Imagen Antiguo, Imagen Nuevo)=0;
     virtual Imagen Buscar(Imagen valor)=0;
-    virtual QMap<QString,ObjetoMaestro*>* BuscarMapa(Imagen valor, CONSULTA tipo)=0;
+    virtual QMap<QString,ObjetoMaestro*>* BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)=0;
     virtual int Contar()=0;
 };
 
