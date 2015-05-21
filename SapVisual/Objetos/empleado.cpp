@@ -116,7 +116,7 @@ Empleado::Empleado()
     FechaIngreso.setDate(1,1,1);
     FechaFin.currentDate();
     QPixmap pix;
-    pix.load(RutaImagenes+"Demo/gato.png");
+    pix.load(RutaImagenes+"Navidad/Regalo.png");
 
     addPixmap(pix);
 }

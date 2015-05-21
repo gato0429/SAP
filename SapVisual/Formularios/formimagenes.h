@@ -14,7 +14,8 @@ class FormImagenes : public QWidget
 public:
     explicit FormImagenes(QWidget *parent = 0);
     ~FormImagenes();
-
+signals:
+    void ActualizarRepisa(ObjetoMaestro* );
 private:
     Ui::FormImagenes *ui;
     QString fileName;

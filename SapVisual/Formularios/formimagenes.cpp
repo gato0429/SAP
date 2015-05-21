@@ -18,6 +18,8 @@ FormImagenes::FormImagenes(QWidget *parent) :
         QPalette palette;
         palette.setBrush(QPalette::Background, bkgnd);
         this->setPalette(palette);
+        connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
+
      /*--------------------------*/
 
         FabricaBaseDatos* bd=DefBD::IniciarBD();
@@ -145,7 +147,8 @@ void FormImagenes::on_BotonAgregarImagen_clicked()
 
         ui->LineCarpeta->clear();
         ui->LineNombre->clear();
-        mRepisa->ActualizarMapa((ObjetoMaestro*)new Imagen());
+             emit ActualizarRepisa((ObjetoMaestro*)new Imagen());
+      //  mRepisa->ActualizarMapa((ObjetoMaestro*)new Imagen());
     }
     else
     {

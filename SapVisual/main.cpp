@@ -18,9 +18,11 @@ int main(int argc, char *argv[])
 
     DefBD::IniciarBD();
 
- //   RepisaImagenes* w=new RepisaImagenes();
-    RepisaArticulo* w=new RepisaArticulo();
-    w->show();
+   // RepisaImagenes* w=new RepisaImagenes();
+   //RepisaArticulo* w=new RepisaArticulo();
+   RepisaEmpleados* w=new RepisaEmpleados();
+
+   w->show();
 
 
 

@@ -66,7 +66,8 @@ static QIcon   toQicon(QByteArray bytea)
 static QPixmap  toQpixmap(QByteArray bytea)
 {
     QPixmap p;
-    p.loadFromData(bytea,"PNG");
+    p.loadFromData(bytea,"PNG",Qt::AutoColor);
+
     return p;
 }
 static QByteArray toQByteArray(QImage image)

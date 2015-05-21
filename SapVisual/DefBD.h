@@ -36,12 +36,16 @@ static void GuardarImagen(QString CarpetaImagen)
        QFile file_for_reading(RutaImagenes+Ruta);
        if(!file_for_reading.exists())
        {
+           qDebug()<<"Entre a la imagen";
            Imagen i;
            i.setCarpeta(CarpetaLocal);
            i.setNombre(Ruta);
            FabricaImagenes* img=IniciarBD()->Fabrica->CrearImagen();
            Imagen d=img->Buscar(i);
+           qDebug()<<"Entre a la imagen pixel";
            QPixmap pixmap=Definiciones::toQpixmap(d.getPixel());
+           qDebug()<<"Entre a la imagen png";
+
            pixmap.save(RutaImagenes+CarpetaLocal+"/"+Ruta,"png");
 
        }
