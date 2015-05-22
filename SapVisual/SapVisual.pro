@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     Busqueda/busquedaunidad.cpp \
     Objetos/marca.cpp \
     Fabricas/fabricamarca.cpp \
-    Postgres/pgmarca.cpp
+    Postgres/pgmarca.cpp \
+    Objetos/moneda.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -124,7 +125,8 @@ HEADERS  += mainwindow.h \
     Busqueda/busquedaunidad.h \
     Objetos/marca.h \
     Fabricas/fabricamarca.h \
-    Postgres/pgmarca.h
+    Postgres/pgmarca.h \
+    Objetos/moneda.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
