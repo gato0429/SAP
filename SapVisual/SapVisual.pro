@@ -62,7 +62,10 @@ SOURCES += main.cpp\
     Busqueda/busquedaarticulotipo.cpp \
     Busqueda/busquedaempleado.cpp \
     Busqueda/busquedamaestra.cpp \
-    Busqueda/busquedaunidad.cpp
+    Busqueda/busquedaunidad.cpp \
+    Objetos/marca.cpp \
+    Fabricas/fabricamarca.cpp \
+    Postgres/pgmarca.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -118,7 +121,10 @@ HEADERS  += mainwindow.h \
     Busqueda/busquedaarticulotipo.h \
     Busqueda/busquedaempleado.h \
     Busqueda/busquedamaestra.h \
-    Busqueda/busquedaunidad.h
+    Busqueda/busquedaunidad.h \
+    Objetos/marca.h \
+    Fabricas/fabricamarca.h \
+    Postgres/pgmarca.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
