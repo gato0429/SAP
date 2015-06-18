@@ -7,7 +7,6 @@
 class BusquedaArticulo:public BusquedaMaestra
 {
 private:
-    FabricaArticulos* Fab;
 
     FabricaArticuloTipos* FabTip;
     FabricaUnidades* FabUni;
@@ -28,8 +27,7 @@ public:
     // BusquedaMaestra interface
 public:
     void IniciarCampos();
-    void ObtenerConsulta();
-    void CambiarCombo(int index);
+
 };
 
 #endif // BUSQUEDAARTICULO_H

@@ -5,13 +5,13 @@
 class BusquedaArticuloTipo:public BusquedaMaestra
 {
 private:
-    FabricaArticuloTipos* Fab;
+
 public:
     BusquedaArticuloTipo(QWidget *parent = 0);
 
     // BusquedaMaestra interface
 public:
-    void ObtenerConsulta();
+
     void IniciarCampos();
 };
 

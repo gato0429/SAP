@@ -19,6 +19,7 @@ public:
     void SetEmpleado(Empleado Externo);
 
 signals:
+    void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 private:
     Ui::FormEmpleado *ui;
@@ -56,6 +57,11 @@ private slots:
     void on_BotonModificar_clicked();
     void on_BotonEliminar_clicked();
     void on_tabWidget_tabBarClicked(int index);
+    void on_BotonEliminar_2_clicked();
+
+    // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
 };
 
 #endif // FORMEMPLEADO_H

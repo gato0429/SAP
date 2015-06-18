@@ -26,7 +26,7 @@ private:
     Ui::VisorConsultas *ui;
 
     /*Para la movilidad del formulario*/
-   protected:
+/*   protected:
        void mousePressEvent(QMouseEvent *evt)
        {
            oldPos = evt->globalPos();
@@ -39,7 +39,7 @@ private:
            oldPos = evt->globalPos();
        }
    private:
-       QPoint oldPos;
+       QPoint oldPos;*/
    /*---------------------------------------------*/
 };
 

@@ -2,8 +2,8 @@
 
 FormMaestro::FormMaestro()
 {
-
     Bd=DefBD::IniciarBD();
+
 }
 
 void FormMaestro::SetFondo()
@@ -20,6 +20,7 @@ void FormMaestro::SetFondo()
         QPalette palette;
         palette.setBrush(QPalette::Background, bkgnd);
         Form->setPalette(palette);
+
 
 
 }

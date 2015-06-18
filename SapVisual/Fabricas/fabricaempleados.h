@@ -7,14 +7,15 @@
 class FabricaEmpleados
 {
 public:
+    QList<ObjetoMaestro*>* MapaRepisaGlobal;
     FabricaEmpleados();
     virtual bool Borrar(Empleado valor)=0;
     virtual bool Insertar(Empleado valor)=0;
     virtual bool Actualizar(Empleado Antiguo, Empleado Nuevo)=0;
     virtual Empleado Buscar(Empleado valor)=0;
     virtual QMap<QString,ObjetoMaestro*>* BuscarMapa(ObjetoMaestro* valor,QString Extra, CONSULTA tipo)=0;
-    virtual int Contar()=0;
-    virtual int ContarConsulta(ObjetoMaestro* valor)=0;
+    virtual qint64 Contar()=0;
+    virtual qint64 ContarConsulta(ObjetoMaestro* valor)=0;
     virtual QSqlQueryModel* BuscarTabla(Empleado valor,QString Extra,CONSULTA tipo)=0;
 };
 

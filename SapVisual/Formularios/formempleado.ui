@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
+    <width>377</width>
     <height>441</height>
    </rect>
   </property>
@@ -20,17 +20,59 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <italic>true</italic>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QTabWidget::pane { 
+font: bold 14px;
+   background: transparent; 
+  margin: 0px,0px,0px,0px;
+   border: 0px solid transparent;  
+  }
+
+QTabBar::tab {
+    background: transparent;
+    border: 2px solid transparent;
+    border-bottom-color: transparent; /* same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    padding: 2px;
+}
+
+
+
+</string>
+     </property>
      <property name="tabPosition">
       <enum>QTabWidget::East</enum>
      </property>
      <property name="tabShape">
-      <enum>QTabWidget::Triangular</enum>
+      <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
       <number>0</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
      </property>
      <property name="elideMode">
       <enum>Qt::ElideNone</enum>
@@ -39,12 +81,15 @@
       <bool>true</bool>
      </property>
      <property name="documentMode">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="tabsClosable">
       <bool>false</bool>
      </property>
      <property name="movable">
+      <bool>false</bool>
+     </property>
+     <property name="tabBarAutoHide">
       <bool>false</bool>
      </property>
      <widget class="QWidget" name="tab">
@@ -56,60 +101,14 @@
        <string/>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="3" column="0" colspan="3">
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QLabel" name="label_9">
-         <property name="minimumSize">
-          <size>
-           <width>125</width>
-           <height>125</height>
-          </size>
-         </property>
-         <property name="baseSize">
-          <size>
-           <width>50</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item row="5" column="2">
+        <layout class="QVBoxLayout" name="verticalLayout">
          <property name="sizeConstraint">
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>33</number>
          </property>
-         <item>
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Empleado</string>
-           </property>
-           <property name="scaledContents">
-            <bool>false</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="6" column="0" colspan="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QPushButton" name="BotonGuardar">
            <property name="maximumSize">
@@ -188,15 +187,56 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="BotonEliminar_2">
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/izquierda.png</normaloff>:/Imagenes/iconos/izquierda.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="4" column="2" colspan="3">
-          <widget class="QLineEdit" name="LineNombre"/>
+          <widget class="QLineEdit" name="LineNombre">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label_10">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Codigo:</string>
            </property>
@@ -204,6 +244,13 @@
          </item>
          <item row="3" column="2">
           <widget class="QComboBox" name="ComboSexo">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <item>
             <property name="text">
              <string>Masculino</string>
@@ -218,6 +265,13 @@
          </item>
          <item row="9" column="4">
           <spacer name="horizontalSpacer_3">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -231,6 +285,13 @@
          </item>
          <item row="6" column="0">
           <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>E-mail:</string>
            </property>
@@ -238,6 +299,13 @@
          </item>
          <item row="8" column="0">
           <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Descuento:</string>
            </property>
@@ -245,16 +313,38 @@
          </item>
          <item row="5" column="0">
           <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Dirección:</string>
            </property>
           </widget>
          </item>
          <item row="6" column="2" colspan="3">
-          <widget class="QLineEdit" name="LineMail"/>
+          <widget class="QLineEdit" name="LineMail">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="9" column="0">
           <widget class="QLabel" name="label_6">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Fecha Ingreso:</string>
            </property>
@@ -262,6 +352,13 @@
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_7">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Sexo:</string>
            </property>
@@ -269,19 +366,49 @@
          </item>
          <item row="9" column="2">
           <widget class="QDateEdit" name="DateIngreso">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="calendarPopup">
             <bool>true</bool>
            </property>
           </widget>
          </item>
          <item row="2" column="2" colspan="3">
-          <widget class="QLineEdit" name="LineDni"/>
+          <widget class="QLineEdit" name="LineDni">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="5" column="2" colspan="3">
-          <widget class="QLineEdit" name="LineDireccion"/>
+          <widget class="QLineEdit" name="LineDireccion">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Nombre:</string>
            </property>
@@ -289,6 +416,13 @@
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Dni:</string>
            </property>
@@ -296,6 +430,13 @@
          </item>
          <item row="8" column="4">
           <spacer name="horizontalSpacer_2">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -308,10 +449,25 @@
           </spacer>
          </item>
          <item row="7" column="2" colspan="3">
-          <widget class="QLineEdit" name="LineTelefono"/>
+          <widget class="QLineEdit" name="LineTelefono">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="7" column="0">
           <widget class="QLabel" name="label_11">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Telefono:</string>
            </property>
@@ -319,6 +475,13 @@
          </item>
          <item row="3" column="4">
           <spacer name="horizontalSpacer">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -332,6 +495,13 @@
          </item>
          <item row="8" column="3">
           <widget class="QLabel" name="label_12">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>%</string>
            </property>
@@ -339,6 +509,13 @@
          </item>
          <item row="0" column="2">
           <widget class="QLineEdit" name="LineCodigo">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -346,6 +523,13 @@
          </item>
          <item row="1" column="2">
           <widget class="QLineEdit" name="LineCodigo_Interno">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="readOnly">
             <bool>false</bool>
            </property>
@@ -353,6 +537,13 @@
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_13">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Codigo Interno:</string>
            </property>
@@ -360,8 +551,18 @@
          </item>
          <item row="8" column="2">
           <widget class="QDoubleSpinBox" name="LineDescuento">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
            </property>
            <property name="showGroupSeparator" stdset="0">
             <bool>false</bool>
@@ -370,30 +571,113 @@
          </item>
         </layout>
        </item>
-       <item row="5" column="0">
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="Line" name="line_3">
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
+       <item row="3" column="0" colspan="3">
+        <widget class="Line" name="line">
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="lineWidth">
+          <number>1</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_15">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>80</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="text">
+            <string>Empleado</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>80</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="icon">
-       <iconset resource="../Recursos.qrc">
-        <normaloff>:/Imagenes/iconos/delete.png</normaloff>:/Imagenes/iconos/delete.png</iconset>
-      </attribute>
-      <attribute name="title">
-       <string/>
-      </attribute>
      </widget>
     </widget>
    </item>
@@ -409,9 +693,6 @@
   <tabstop>LineMail</tabstop>
   <tabstop>LineTelefono</tabstop>
   <tabstop>DateIngreso</tabstop>
-  <tabstop>BotonGuardar</tabstop>
-  <tabstop>BotonModificar</tabstop>
-  <tabstop>BotonEliminar</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources>

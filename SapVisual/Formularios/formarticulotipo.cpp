@@ -6,10 +6,11 @@ FormArticuloTipo::FormArticuloTipo(QWidget *parent) :
     ui(new Ui::FormArticuloTipo)
 {
     ui->setupUi(this);
-    connect(this,SIGNAL(Activar(int)),parent,SLOT(ActivarBoton(int)));
+
     /*Dos Lineas Para el fondo Madera*/
     Form=this;
     Parent=parent;
+    connect(this,SIGNAL(ActivarBoton(QString)),parent,SLOT(ActivarBotonRepisa(QString)));
     connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
 
     SetFondo();
@@ -241,4 +242,9 @@ void FormArticuloTipo::AsignarCampos()
     Objeto.setNombre(ui->nombre->text());
     Objeto.setCodigo_Imagen(CodigoImagen);
     qDebug()<<"PAse"+CodigoImagen;
+}
+
+
+void FormArticuloTipo::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
 }

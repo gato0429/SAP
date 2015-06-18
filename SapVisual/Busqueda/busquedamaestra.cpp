@@ -8,10 +8,10 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
     ui->setupUi(this);
 
     /*conexion con el visor*/
-    VisorConsulta=new VisorConsultas(this);
-    connect(this,SIGNAL(my_signal(QSqlQueryModel *,QList<bool>)),VisorConsulta,SLOT(Consulta(QSqlQueryModel *,QList<bool>)));
-    connect(this,SIGNAL(SignalRepisa(ObjetoMaestro*,int,QString)),parent,SLOT(ActualizarRepisa(ObjetoMaestro *,int,QString)));
+
+ //   connect(this,SIGNAL(SignalRepisa(ObjetoMaestro*,int,QString)),parent,SLOT(ActualizarRepisa(ObjetoMaestro *,int,QString)));
     connect(this,SIGNAL(Activar()),parent,SLOT(ActivarRepisa()));
+    connect(this,SIGNAL(SignalBusquedaTipo(int,bool,int)),parent,SLOT(RecibirTipoConsulta(int,bool,int)));
     /**/
 
     /*Fondo Madera*/
@@ -22,6 +22,7 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
                          | Qt::WindowCloseButtonHint);
 
      QPixmap bkgnd(FondoForm);
+
         bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
         QPalette palette;
         palette.setBrush(QPalette::Background, bkgnd);
@@ -29,31 +30,13 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
     /*------------------------------------------------*/
 
         /*Conexion con la BD y Fabrica*/
-                BD=DefBD::IniciarBD();
-                ui->ComboCampos->addItem("Todo");
-                ComboCampos=ui->ComboCampos;
-                ComboTipos=ui->ComboTipo;
-                LineNombre=ui->LineNombre_2;
-                LineFin=ui->LineFin_2;
-                FechaEdit=ui->EditFecha;
-                FechaEditFin=ui->EditFechaFin;
-                ui->EditFecha->setHidden(true);
-                ui->LineNombre_2->setHidden(false);
-                ui->ComboTipo->setHidden(true);
 
-                ui->labelDesde->setVisible(false);
-                ui->labelHasta->setVisible(false);
-                FechaEdit->setVisible(false);
-                FechaEditFin->setVisible(false);
-
-                GrupoBoton=new QButtonGroup(this);
-                GrupoBoton->addButton(ui->ButAsc,1);
-                GrupoBoton->addButton(ui->ButDesc,2);
-
+           //     ui->ComboCampos->addItem("Todo");
+               // ComboCampos=new QComboBox(this);
+                ComboCampos=this->ui->ComboCamposLabel;
+               // ComboCampos->addItem("Todo");
                 //ui->LineFin_2->setValidator(new QIntValidator(LineFin));
         /*-----------------------------*/
-        VisorConsulta->show();
-        VisorConsulta->setGeometry(parent->x()+parent->width(),parent->y()+this->height(),300,300);
 
 
         /*Autocompletar
@@ -74,9 +57,7 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
 
 void BusquedaMaestra::CambiarCombo(int index)
 {
-    ui->EditFecha->setHidden(true);
-    ui->ComboTipo->setHidden(true);
-    ui->LineNombre_2->setHidden(false);
+
 }
 
 
@@ -90,22 +71,11 @@ void BusquedaMaestra::VisibleLine()
     LineNombre->setVisible(true);
     LineNombre->clear();
 
-    ui->labelDesde->setVisible(false);
-    ui->labelHasta->setVisible(false);
-    FechaEdit->setVisible(false);
-    FechaEditFin->setVisible(false);
 
-    ComboTipos->setVisible(false);
 }
 
 void BusquedaMaestra::VisibleFecha()
 {
-    ui->labelDesde->setVisible(true);
-    ui->labelHasta->setVisible(true);
-    FechaEdit->setVisible(true);
-    FechaEditFin->setVisible(true);
-    FechaEdit->setDate(QDate::currentDate());
-    FechaEditFin->setDate(QDate::currentDate());
 
     ComboTipos->setVisible(false);
 
@@ -114,85 +84,44 @@ void BusquedaMaestra::VisibleFecha()
 
 void BusquedaMaestra::VisibleCombo()
 {
-    ComboTipos->setVisible(true);
-    ComboTipos->clear();
 
-    ui->labelDesde->setVisible(false);
-    ui->labelHasta->setVisible(false);
-    FechaEdit->setVisible(false);
-    FechaEditFin->setVisible(false);
 
-    LineNombre->setVisible(false);
-
-}
-
-void BusquedaMaestra::on_BotonConsultar_2_clicked()
-{
-    ObtenerConsulta();
-    /*
-
-    ArticuloTipo ObjetoConsulta;
-    if(ui->CheckNombre->isChecked())
-    {
-        ObjetoConsulta.setNombre(ui->LineNombre->text());
-        //FlagConsulta=CAMPOS;
-    }
-
-    BD->Fabrica->Conectar();
-    QString ini=ui->LineInicio->text();
-    QString fin=ui->LineFin->text();
-    QString Extra=" order by codigo desc LIMIT "+fin+" offset "+ini;
-    QSqlQueryModel* Model= Fab->BuscarTabla(ObjetoConsulta,Extra,CAMPOS);
-    BD->Fabrica->Desconectar();
-
-    emit my_signal(Model);
-    emit SignalRepisa((ObjetoMaestro*)(&ObjetoConsulta),fin.toInt());
-    VisorConsulta->move(this->x(),this->y()+this->height());
-
-    */
 }
 
 
 
-void BusquedaMaestra::on_tabWidget_tabBarClicked(int index)
-{
-    if(index==1)
-    {
-        VisorConsulta->close();
-
-        emit Activar();
-        this->close();
-        this->destroy();
-    }
-}
-
-void BusquedaMaestra::on_LineNombre_2_returnPressed()
-{
-    ObtenerConsulta();
-}
-
-
-void BusquedaMaestra::on_ComboCampos_currentIndexChanged(int index)
-{
-    CambiarCombo(index);
-}
-
-void BusquedaMaestra::on_ComboTipo_currentIndexChanged(int index)
-{
-    ObtenerConsulta();
-}
-
-void BusquedaMaestra::on_EditFecha_dateChanged(const QDate &date)
-{
-    ObtenerConsulta();
-}
-
-void BusquedaMaestra::on_EditFechaFin_dateChanged(const QDate &date)
-{
-       ObtenerConsulta();
-}
 
 void BusquedaMaestra::on_LineFin_2_valueChanged(int arg1)
 {
-    ObtenerConsulta();
+  emit(SignalBusquedaTipo(ui->ComboCamposLabel->currentIndex(),ui->checkBoxDetalle->isChecked(),ui->LineFin_2->value()));
+    if (!ui->checkBoxDetalle->isChecked())
+    {
+        this->close();
+      this->destroy();
+        emit (Activar());
+    }
+}
+
+void BusquedaMaestra::on_checkBoxDetalle_stateChanged(int arg1)
+{
+    emit(SignalBusquedaTipo(ui->ComboCamposLabel->currentIndex(),ui->checkBoxDetalle->isChecked(),ui->LineFin_2->value()));
+    if (!ui->checkBoxDetalle->isChecked())
+    {
+        this->close();
+      this->destroy();
+        emit (Activar());
+    }
+}
+
+void BusquedaMaestra::on_ComboCamposLabel_currentIndexChanged(int index)
+{
+    emit(SignalBusquedaTipo(index,ui->checkBoxDetalle->isChecked(),ui->LineFin_2->value()));
+
+    if (!ui->checkBoxDetalle->isChecked())
+    {
+        this->close();
+      this->destroy();
+        emit (Activar());
+    }
+
 }

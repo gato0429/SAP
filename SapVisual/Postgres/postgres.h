@@ -9,6 +9,7 @@
 #include "pgempleado.h"
 #include "pgunidad.h"
 #include "pgarticuloalias.h"
+#include "pgmarca.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -32,6 +33,7 @@ public:
     FabricaEmpleados     *CrearEmpleado();
     FabricaUnidades      *CrearUnidad();
     FabricaArticuloAlias *CrearArticuloAlias();
+    FabricaMarca *CrearMarca();
 };
 
 

@@ -21,9 +21,9 @@ public:
     bool Insertar(Marca valor);
     bool Actualizar(Marca Antiguo, Marca Nuevo);
     Marca Buscar(Marca valor);
-    QMap<QString, ObjetoMaestro *> *BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA Marca);
-    int Contar();
-    int ContarConsulta(ObjetoMaestro *valor);
+    QMap<QString, ObjetoMaestro *> *BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo);
+    qint64 Contar();
+    qint64 ContarConsulta(ObjetoMaestro *valor);
     QSqlQueryModel *BuscarTabla(Marca valor, QString Extra, CONSULTA tipo);
 };
 

@@ -13,7 +13,7 @@ void RepisaArticuloAlias::GrupoBotonesClick(QAbstractButton *buttonID)
      /*Cambia*/
      Dialogo=new FormArticuloAlias(this);
      Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
-     Dialogo->SetArticulo(*((Articulo*)Mapa->value(buttonID->objectName())));
+     Dialogo->SetArticulo(*((Articulo*)MapaRepisa->value(buttonID->objectName())));
      /**/
      Dialogo->show();
 }
@@ -42,7 +42,7 @@ void RepisaArticuloAlias::ObjetosIndependientes()
      * Para el Tool Tip
     */
     QPushButton* pp=new QPushButton(this);
-    Articulo *i=(Articulo*)(it.value());
+    Articulo *i=(Articulo*)(*it);
     pp->setObjectName(i->getCodigo());
     pp->setIcon(DefBD::toQicon(i->getRutaImagen()));
     pp->setIconSize(QSize(55,55));
@@ -66,8 +66,7 @@ void RepisaArticuloAlias::ActualizarConsulta()
     QString extra=" order by codigo "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);
     qDebug()<<"aqui toy";
 
-    Mapa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
-
+    MapaRepisa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
     Bd->Fabrica->Desconectar();
     qDebug()<<Mapa->size();
     GrupoBotones=new QButtonGroup(this);

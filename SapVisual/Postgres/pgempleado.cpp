@@ -247,19 +247,20 @@ Empleado PgEmpleado::Buscar(Empleado valor)
 
 QMap<QString, ObjetoMaestro *> *PgEmpleado::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
 {
+    MapaRepisaGlobal=new QList<ObjetoMaestro*>();
+
     Empleado* val=(Empleado*)(valor);
     QString consulta;
 
     if(tipo==TODO)
     {
     consulta="SELECT codigo,codigo_interno, nombre, direccion, email, descuento, fecha_ingreso, dni, telefono, sexo "
-             "FROM empleado WHERE";
+             "FROM empleado";
     }
     else
     {
         consulta="SELECT codigo,codigo_interno, nombre, direccion, email, descuento, fecha_ingreso, dni, telefono, sexo  "
                  "FROM empleado WHERE";
-
 
     if(!val->getCodigo().isNull())
     {
@@ -304,7 +305,7 @@ QMap<QString, ObjetoMaestro *> *PgEmpleado::BuscarMapa(ObjetoMaestro *valor, QSt
     consulta.replace(consulta.size()-5,5," ");
 }
     consulta=consulta+Extra;
-    qDebug()<<consulta+Extra;
+    qDebug()<<consulta;
 
 
     QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
@@ -324,26 +325,32 @@ QMap<QString, ObjetoMaestro *> *PgEmpleado::BuscarMapa(ObjetoMaestro *valor, QSt
           resp->setSexo(query.value(9).toString());
 
           salida->insert(resp->getCodigo(),(ObjetoMaestro*)resp);
+          MapaRepisaGlobal->push_front((ObjetoMaestro*)resp);
       }
 
 
     return salida;
 }
 
-int PgEmpleado::Contar()
+qint64 PgEmpleado::Contar()
 {
     QString consulta="SELECT count(*) FROM empleado";
+    qint64 num;
+
     QSqlQuery query(consulta);
-  int num=0;
+
       while (query.next() )
       {
-        num=query.value(0).toInt();
+        num=query.value(0).toLongLong();
+        return num;
       }
+
   return num;
 }
 
-int PgEmpleado::ContarConsulta(ObjetoMaestro *valor)
+qint64 PgEmpleado::ContarConsulta(ObjetoMaestro *valor)
 {
+
     Empleado* val=(Empleado*)(valor);
     QString consulta;
 
@@ -393,12 +400,12 @@ int PgEmpleado::ContarConsulta(ObjetoMaestro *valor)
     consulta.replace(consulta.size()-5,5," ");
 
 
-
         QSqlQuery query(consulta);
-        int num=0;
+        qint64 num;
         while(query.next())
         {
-          num=query.value(0).toInt();
+          num=query.value(0).toLongLong();
+          return num;
         }
 
     return num;

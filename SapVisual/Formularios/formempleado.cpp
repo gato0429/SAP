@@ -9,6 +9,7 @@ FormEmpleado::FormEmpleado(QWidget *parent) :
     /*Dos Lineas Para el fondo Madera*/
     Form=this;
     Parent=parent;
+    connect(this,SIGNAL(ActivarBoton(QString)),parent,SLOT(ActivarBotonRepisa(QString)));
     connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
 
     SetFondo();
@@ -35,7 +36,7 @@ FormEmpleado::~FormEmpleado()
 void FormEmpleado::SetEmpleado(Empleado Externo)
 {
 
-
+    Objeto.setCodigo(Externo.getCodigo());
     ui->LineNombre->setEnabled(false);
     ui->LineCodigo_Interno->setEnabled(false);
     ui->LineDireccion->setEnabled(false);
@@ -222,6 +223,7 @@ void FormEmpleado::on_BotonGuardar_clicked()
     if(Estado==MODIFICAR)
     {
     Modificar();
+    qDebug()<<"ante de modificar gatunooooo";
      emit ActualizarRepisa((ObjetoMaestro*)new Empleado());
     }
 }
@@ -253,8 +255,20 @@ void FormEmpleado::on_tabWidget_tabBarClicked(int index)
 {
     if(index==1)
     {
-
+    emit(ActivarBoton(Objeto.getCodigo()));
     this->close();
     this->destroy();
     }
+}
+
+void FormEmpleado::on_BotonEliminar_2_clicked()
+{
+    emit(ActivarBoton(Objeto.getCodigo()));
+    this->close();
+    this->destroy();
+}
+
+
+void FormEmpleado::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
 }

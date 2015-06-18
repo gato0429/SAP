@@ -15,6 +15,7 @@ public:
     explicit FormImagenes(QWidget *parent = 0);
     ~FormImagenes();
 signals:
+    void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 private:
     Ui::FormImagenes *ui;

@@ -5,14 +5,13 @@
 
 class BusquedaUnidad:public BusquedaMaestra
 {
-private:
-    FabricaUnidades* Fab;
+
 public:
     BusquedaUnidad(QWidget *parent = 0);
 
     // BusquedaMaestra interface
 public:
-    void ObtenerConsulta();
+
     void IniciarCampos();
 };
 

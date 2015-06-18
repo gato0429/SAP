@@ -24,14 +24,15 @@ class BusquedaMaestra : public QWidget
 {
     Q_OBJECT
 public:
+        QComboBox*      ComboCampos;
     explicit BusquedaMaestra(QWidget *parent = 0);
-    virtual void ObtenerConsulta()=0;
-    virtual void IniciarCampos()=0;
+
     virtual void CambiarCombo(int index);
     ~BusquedaMaestra();
 signals:
-    void my_signal(QSqlQueryModel*,QList<bool>);
+   // void my_signal(QSqlQueryModel*,QList<bool>);
     void SignalRepisa(ObjetoMaestro*,int,QString);
+    void SignalBusquedaTipo(int index,bool detalle, int registro); // Por que campo buscara en la repisa
     void Activar();
 
 private:
@@ -41,7 +42,7 @@ protected:
     VisorConsultas* VisorConsulta;
     QCompleter*     Completar;
     CONSULTA        FlagConsulta;
-    QComboBox*      ComboCampos;
+
     QComboBox*      ComboTipos;
     QLineEdit*      LineNombre;
     QSpinBox*      LineFin;
@@ -54,26 +55,17 @@ protected:
     void VisibleCombo();
 
 private slots:
-    void on_BotonConsultar_2_clicked();
-
-    void on_tabWidget_tabBarClicked(int index);
-
-    void on_LineNombre_2_returnPressed();
 
 
-
-    void on_ComboCampos_currentIndexChanged(int index);
-
-    void on_ComboTipo_currentIndexChanged(int index);
-
-    void on_EditFecha_dateChanged(const QDate &date);
-
-    void on_EditFechaFin_dateChanged(const QDate &date);
 
     void on_LineFin_2_valueChanged(int arg1);
 
-protected:
+    void on_checkBoxDetalle_stateChanged(int arg1);
 
+    void on_ComboCamposLabel_currentIndexChanged(int index);
+
+protected:
+/*
     void mousePressEvent(QMouseEvent *evt)
     {
         oldPos = evt->globalPos();
@@ -88,7 +80,7 @@ protected:
 
 
 private:
-    QPoint oldPos;
+    QPoint oldPos;*/
 /*---------------------------------------------*/
 };
 

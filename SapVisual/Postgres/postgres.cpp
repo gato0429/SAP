@@ -79,3 +79,9 @@ FabricaArticuloAlias *Postgres::CrearArticuloAlias()
 {
     return new PgArticuloAlias;
 }
+
+
+FabricaMarca *Postgres::CrearMarca()
+{
+    return new PgMarca;
+}

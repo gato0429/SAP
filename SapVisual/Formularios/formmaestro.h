@@ -9,11 +9,11 @@
 #include "../Extras/visorimagenes.h"
 class FormMaestro
 {
-
 public:
 
     FormMaestro();
-
+public:
+     virtual void SetObjeto(ObjetoMaestro* ObjetoTipo)=0;
 protected:
      QWidget*          Form;
      QWidget*          Parent;
@@ -25,6 +25,7 @@ protected:
      virtual bool Eliminar()=0;
      virtual bool ValidarCampos()=0;
      virtual void AsignarCampos()=0;
+
 };
 
 #endif // FORMMAESTRO_H

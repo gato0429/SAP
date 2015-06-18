@@ -66,7 +66,9 @@ SOURCES += main.cpp\
     Objetos/marca.cpp \
     Fabricas/fabricamarca.cpp \
     Postgres/pgmarca.cpp \
-    Objetos/moneda.cpp
+    Objetos/moneda.cpp \
+    Formularios/formmarca.cpp \
+    Repisas/repisamarca.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -126,7 +128,9 @@ HEADERS  += mainwindow.h \
     Objetos/marca.h \
     Fabricas/fabricamarca.h \
     Postgres/pgmarca.h \
-    Objetos/moneda.h
+    Objetos/moneda.h \
+    Formularios/formmarca.h \
+    Repisas/repisamarca.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -139,7 +143,8 @@ FORMS    += mainwindow.ui \
     Extras/mensajeemergente.ui \
     Extras/visorconsultas.ui \
     Extras/visorimagenes.ui \
-    Busqueda/busquedamaestra.ui
+    Busqueda/busquedamaestra.ui \
+    Formularios/formmarca.ui
 
 RESOURCES += \
     Recursos.qrc

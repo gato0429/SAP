@@ -9,11 +9,22 @@ QMainWindow* Repisa::Formulario=0;
 
 Repisa::Repisa()
 {
+
+    AnchoVisor=420;
+    AltoVisor=275;
+    InicioVisor=20;
+
     elementos=0;
     TotalElementos=0;
     ElementosContados=0;
-    cantidadMostrar=100;
+    cantidadMostrar=32;
     Ordenamiento="desc";
+    OrderByCampo="codigo";
+    IndiceBusqueda=0;
+        RegistrosBusqueda=100;
+Busqueda=NULL;
+VisorConsulta=new VisorConsultas(this);
+connect(this,SIGNAL(my_signal(QSqlQueryModel *,QList<bool>)),VisorConsulta,SLOT(Consulta(QSqlQueryModel *,QList<bool>)));
 
     TotalRepisa=16;
     Bd=DefBD::IniciarBD();
@@ -38,24 +49,8 @@ Repisa::Repisa()
 
 
        DibujarRepisa();
-       QFont serifFont("Cambria", 12, QFont::Cursive);
-       serifFont.setStyle(QFont::StyleItalic);
+       LLenarDetalles();
 
-       LineBuscar=new QLineEdit(Formulario);
-       LineBuscar->setGeometry(120,160,150,20);
-       LineBuscar->setStyleSheet("    border: 1px solid gray;"
-                                 "border-radius: 10px;"
-                                 "padding: 0 8px;"
-                                 "background: transparent;"
-                                 "selection-background-color: darkgray;");
-       LineBuscar->setFont(serifFont);
-
-       LabelTitulo=new QLabel(Formulario);
-       LabelTitulo->setGeometry(123,90,135,20);
-       LabelTitulo->setAlignment(Qt::AlignCenter);
-
-       LabelTitulo->setFont(serifFont);
-       LabelTitulo->setText("Sin Nombre");
        Atras= new QPushButton(Formulario);
        Siguiente= new QPushButton(Formulario);
        Nuevo= new QPushButton(Formulario);
@@ -70,8 +65,99 @@ Repisa::Repisa()
         connect(Cerrar, SIGNAL(clicked()), Formulario, SLOT(CerrarClick()));
 
 }
-ObjetoMaestro* Repisa::ObjetoConsulta=0;
 
+
+void Repisa::LLenarDetalles()
+{
+    QFont serifFont("Cambria", 12, QFont::Cursive);
+    serifFont.setStyle(QFont::StyleItalic);
+    /*Titulo*/
+    LabelTitulo=new QLabel(Formulario);
+    LabelTitulo->setGeometry(123,90,135,20);
+    LabelTitulo->setAlignment(Qt::AlignCenter);
+    LabelTitulo->setFont(serifFont);
+    LabelTitulo->setText("Sin Nombre");
+
+
+    QString style="QDateEdit {"
+            "border: 1px solid gray;"
+            "border-radius: 10px;"
+            "padding: 0 8px;"
+           " background: transparent;"
+           " }"
+            "font: italic 12pt 'Cambria';";
+           /* "QDateEdit::down-arrow {"
+            "image: url(:/down-arrow.png);"
+            "border: 1px solid #000000;"
+            "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+            "stop: 0 #dedede, stop: 0.5 #434343,"
+            "stop: 0.51 #000000, stop: 1 #656a6d);"
+            "}";*/
+    QString stylecombo="QComboBox"
+    "{"
+          " border: 1px solid gray;"
+          "border-radius: 10px;"
+          "padding: 0 8px;"
+          "background: transparent;"
+          "selection-background-color: darkgray;"
+    "}"
+
+   " QComboBox QListView"
+    "{"
+
+            "background: qlineargradient(x1:0, y1:0, x2:1,y2:0, stop: 1 rgba(228, 41, 81, 100), stop: 0 rgba(234, 107, 101, 100));"
+           " color: rgb(220, 220, 220);"
+           " margin: 0 0 0 0;"
+                       " border: 1px solid gray;"
+
+                        "padding: 0 8px;"
+                       "selection-background-color: darkgray;"
+                      "background-color: qlineargradient(x1:0, y1:0, x2:1,y2:0, stop: 1 rgba(228, 41, 81, 100), stop: 0 rgba(234, 107, 101, 100));"
+       "}"
+
+";";
+
+    /*Line Buscar*/
+    LineBuscar=new QLineEdit(Formulario);
+    LineBuscar->setGeometry(120,160,150,20);
+    LineBuscar->setStyleSheet("    border: 1px solid gray;"
+                              "border-radius: 10px;"
+                              "padding: 0 8px;"
+                              "background: transparent;"
+                              "selection-background-color: darkgray;");
+    LineBuscar->setFont(serifFont);
+
+    /*Combo*/
+
+    ComboTipo=new QComboBox(Formulario);
+    ComboTipo->setGeometry(120,160,150,20);
+    ComboTipo->setStyleSheet(stylecombo);
+    ComboTipo->setFont(serifFont);
+
+    /*Fechas*/
+
+
+    FechaInicio=new QDateEdit(Formulario);
+    FechaInicio->setCalendarPopup(true);
+    FechaInicio->setGeometry(120,135,150,20);
+    FechaInicio->setStyleSheet(style);
+    FechaInicio->setFont(serifFont);
+
+    FechaFin=new QDateEdit(Formulario);
+    FechaFin->setCalendarPopup(true);
+    FechaFin->setGeometry(120,160,150,20);
+    FechaFin->setStyleSheet(style);
+    FechaFin->setFont(serifFont);
+
+
+  MostrarLabel();
+/*Vinculando Señales*/
+  connect(ComboTipo, SIGNAL(currentIndexChanged (int)),Formulario, SLOT(on_ComboTipo_currentIndexChanged(int)));
+  connect(FechaInicio, SIGNAL(dateChanged(const QDate&)),Formulario, SLOT(on_EditFecha_dateChanged(const QDate&)));
+  connect(FechaFin, SIGNAL(dateChanged(const QDate&)),Formulario, SLOT(on_EditFechaFin_dateChanged(const QDate&)));
+  connect(LineBuscar, SIGNAL(returnPressed()),Formulario, SLOT(on_LineBusqueda_returnPresed()));
+
+}
 
 void Repisa::DibujarRepisa()
 {
@@ -163,6 +249,74 @@ void Repisa::DibujarRepisa()
     division5->setGeometry(271,401-y,71,146);
 */
 }
+
+void Repisa::MostrarLabel()
+{
+      LineBuscar->setHidden(false);
+      ComboTipo->setHidden(true);
+      FechaFin->setHidden(true);
+      FechaInicio->setHidden(true);
+}
+
+void Repisa::MostrarCombo()
+{
+    LineBuscar->setHidden(true);
+    ComboTipo->setHidden(false);
+    FechaFin->setHidden(true);
+    FechaInicio->setHidden(true);
+}
+
+void Repisa::MostrarFecha()
+{
+    LineBuscar->setHidden(true);
+    ComboTipo->setHidden(true);
+    FechaFin->setHidden(false);
+    FechaInicio->setHidden(false);
+}
+
+void Repisa::OcultarTodo()
+{
+    LineBuscar->setHidden(true);
+    ComboTipo->setHidden(true);
+    FechaFin->setHidden(true);
+    FechaInicio->setHidden(true);
+    ObtenerConsulta();
+}
+
+void Repisa::ActualizarRepisaLocal(ObjetoMaestro *Objeto, int limite, QString Ord)
+{
+    Ordenamiento=Ord;
+    elementos=0;
+    TotalElementos=0;
+    ElementosContados=0;
+    ObjetoConsulta=Objeto;
+    cantidadMostrar=limite;
+    ActualizarConsulta();
+    if(Mapa->size()<32)
+    {
+        RegistrosTabla=Mapa->size();
+      //   qDebug()<<"register-->"<<RegistrosTabla;
+    }
+    else
+    {
+        RegistrosTabla=32;
+    }
+    if(Ordenamiento=="asc"||Ordenamiento=="ASC")
+    {
+        it=Mapa->begin();
+    }
+    else
+    {
+        it=Mapa->end();
+        it--;
+    }
+
+    LlenarRepisa();
+    ElementosContados=ElementosContados+elementos;
+    TotalElementos=TotalElementos+elementos;
+   // qDebug()<<"-->"<<TotalElementos;
+}
+
 void Repisa::LimpiarRepisa()
 {
     for(int a=0; a<Botones.size(); a++)
@@ -171,8 +325,10 @@ void Repisa::LimpiarRepisa()
         GrupoBotones->removeButton(Botones[a]);
         delete Botones[a];
     }
-     Botones.clear();
+    Botones.clear();
 }
+
+
 
 void Repisa::ActualizarRepisa(ObjetoMaestro *Objeto, int limite, QString Ord)
 {
@@ -184,14 +340,14 @@ void Repisa::ActualizarRepisa(ObjetoMaestro *Objeto, int limite, QString Ord)
     ObjetoConsulta=Objeto;
     cantidadMostrar=limite;
     ActualizarConsulta();
-    if(Mapa->size()<100)
+    if(Mapa->size()<32)
     {
         RegistrosTabla=Mapa->size();
-      //   qDebug()<<"register-->"<<RegistrosTabla;
+        qDebug()<<"register-->"<<RegistrosTabla;
     }
     else
     {
-        RegistrosTabla=100;
+        RegistrosTabla=32;
     }
     if(Ordenamiento=="asc"||Ordenamiento=="ASC")
     {
@@ -210,14 +366,43 @@ void Repisa::ActualizarRepisa(ObjetoMaestro *Objeto, int limite, QString Ord)
 
 }
 
+void Repisa::RecibirTipoConsulta(int index, bool detalle, int registros)
+{
+    IndiceBusqueda=index;
+    DetalleBusqueda=detalle;
+    RegistrosBusqueda=registros;
+   // qDebug()<<"ssssss";
+
+    if (detalle)
+    {
+
+
+        VisorConsulta->setGeometry(this->geometry().center().x()-InicioVisor/2-20,this->pos().y()+380,AnchoVisor,AltoVisor);
+  //   VisorConsulta->move(0,this->height()/2); //siempre igual
+        InicioVisor=VisorConsulta->geometry().width();
+        AnchoVisor=VisorConsulta->geometry().width();
+        AltoVisor=VisorConsulta->geometry().height();
+     VisorConsulta->show();
+    }
+    else
+    {
+        InicioVisor=VisorConsulta->geometry().width();
+        AnchoVisor=VisorConsulta->geometry().width();
+        AltoVisor=VisorConsulta->geometry().height();
+       VisorConsulta->close();
+    }
+    ConsultarBusqueda();
+}
+
 void Repisa::ActualizarTodo(ObjetoMaestro *Objeto)
 {
     Ordenamiento="desc";
     elementos=0;
     TotalElementos=0;
     ElementosContados=0;
-   // ObjetoConsulta=Objeto;
+    ObjetoConsulta=Objeto; //esto estaba comentado
     ActualizarConsulta();
+
     if(Ordenamiento=="asc"||Ordenamiento=="ASC")
     {
         it=Mapa->begin();
@@ -245,6 +430,45 @@ void Repisa::ActivarBoton(int id)
     GrupoBotones->button(id)->setEnabled(true);
 }
 
+void Repisa::ActivarBotonRepisa(QString codigo)
+{
+    //qDebug()<<"codigo recibido:"+codigo;
+    if ( ObjetosAbiertos.contains(codigo)) {
+        ObjetosAbiertos.removeOne(codigo);
+        QList<QAbstractButton*> vb=GrupoBotones->buttons();
+        for (int var = 0; var < vb.size(); ++var)
+        {
+            if(vb.at(var)->objectName()==codigo)
+            {
+                vb.at(var)->setEnabled(true);
+                return;
+            }
+
+        }
+
+    }
+}
+
+void Repisa::on_ComboTipo_currentIndexChanged(int index)
+{
+    ObtenerConsulta();
+}
+
+void Repisa::on_EditFecha_dateChanged(const QDate &date)
+{
+    ObtenerConsulta();
+}
+
+void Repisa::on_EditFechaFin_dateChanged(const QDate &date)
+{
+    ObtenerConsulta();
+}
+
+void Repisa::on_LineBusqueda_returnPresed()
+{
+    ObtenerConsulta();
+}
+
 void Repisa::AtrasClick()
 {
 
@@ -255,7 +479,7 @@ void Repisa::AtrasClick()
          qDebug()<<"retrocedi llege a 100";
 //         ElementosContados=80;
          int t=TotalElementos;
-         TotalElementos=TotalElementos-100;
+         TotalElementos=TotalElementos-32;
         ActualizarConsulta();
 
         if(Ordenamiento=="asc"||Ordenamiento=="ASC")
@@ -270,7 +494,7 @@ void Repisa::AtrasClick()
         }
 
         LlenarRepisa();
-        ElementosContados=100;
+        ElementosContados=32;
         TotalElementos=t;
     }
     else
@@ -315,13 +539,13 @@ qDebug()<<"-->"<<TotalElementos;
 void Repisa::SiguienteClick()
 {
 
-
+         qDebug()<<"antes de dar siguiente";
     if(ElementosContados>=cantidadMostrar)
     {
-         qDebug()<<" avanzo llege a 100";
+         qDebug()<<" avanzo llege a 100 casa";
          ElementosContados=0;
         ActualizarConsulta();
-
+         qDebug()<<" pase llege a 100";
         if(Ordenamiento=="asc"||Ordenamiento=="ASC")
         {
             it=Mapa->begin();
@@ -336,7 +560,7 @@ void Repisa::SiguienteClick()
     }
     else
     {
-
+         qDebug()<<"else del siguiente";
     LlenarRepisa();
     }
 
@@ -368,7 +592,16 @@ qDebug()<<"-->"<<TotalElementos;
 
 void Repisa::CerrarClick()
 {
+
+    VisorConsulta->close();
+    delete VisorConsulta;
+    if(Busqueda!=NULL)
+    {
+    Busqueda->close();
+    delete Busqueda;
+    }
     this->close();
+    this->destroy();
 }
 
 void Repisa::Dibujar()
@@ -411,7 +644,7 @@ void Repisa::LlenarRepisa()
     fil=1;
     col=1;
     ix=40;
-    iy=210;//48
+    iy=230;//48
     elementos=0;
 
     if(Ordenamiento=="asc"||Ordenamiento=="ASC")
@@ -447,7 +680,7 @@ void Repisa::LlenarRepisa()
         {
             ix=40;
             col=1;
-            iy=iy+80;//104
+            iy=iy+82;//104
             fil++;
         }
    }
@@ -485,8 +718,9 @@ void Repisa::ActualizarMapa(ObjetoMaestro *Objeto)
     elementos=0;
     TotalElementos=0;
     ElementosContados=0;
-    cantidadMostrar=100;
+    cantidadMostrar=32;
     ObjetoConsulta=Objeto;
+
     ActualizarConsulta();
 
 

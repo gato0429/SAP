@@ -10,6 +10,7 @@ FormArticuloAlias::FormArticuloAlias(QWidget *parent) :
     /*Dos Lineas Para el fondo Madera*/
     Form=this;
     Parent=parent;
+    connect(this,SIGNAL(ActivarBoton(QString)),parent,SLOT(ActivarBotonRepisa(QString)));
     connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
 
     SetFondo();
@@ -164,4 +165,9 @@ void FormArticuloAlias::on_modificar_clicked()
 void FormArticuloAlias::on_guardar_clicked()
 {
     Guardar();
+}
+
+
+void FormArticuloAlias::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
 }

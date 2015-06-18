@@ -35,7 +35,7 @@ void RepisaArticuloTipo::ActualizarConsulta()
     QString extra=" order by codigo "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);
     qDebug()<<"aqui toy";
 
-    Mapa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
+    MapaRepisa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
 
     Bd->Fabrica->Desconectar();
     qDebug()<<Mapa->size();
@@ -50,7 +50,7 @@ void RepisaArticuloTipo::ObjetosIndependientes()
      * Para el Tool Tip
     */
     QPushButton* pp=new QPushButton(this);
-    ArticuloTipo *i=(ArticuloTipo*)(it.value());
+    ArticuloTipo *i=(ArticuloTipo*)(*it);
     pp->setObjectName(i->getCodigo());
     pp->setIcon(DefBD::toQicon(i->getImagen()));
     pp->setIconSize(QSize(55,55));
@@ -72,7 +72,68 @@ void RepisaArticuloTipo::GrupoBotonesClick(QAbstractButton* buttonID)
     /*Cambia*/
     Dialogo=new FormArticuloTipo(this);
     Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
-    Dialogo->SetArticuloTipo(i,*((ArticuloTipo*)Mapa->value(buttonID->objectName())));
+    Dialogo->SetArticuloTipo(i,*((ArticuloTipo*)MapaRepisa->value(buttonID->objectName())));
     /**/
     Dialogo->show();
+}
+
+
+void RepisaArticuloTipo::RecibirTipoConsulta(int index, bool detalle, int registros)
+{
+}
+
+void RepisaArticuloTipo::ObtenerConsulta()
+{
+/*
+    QString fin=LineFin->text();
+    QString ord;
+    int index=ComboCampos->currentIndex();
+
+
+    if(GrupoBoton->button(1)->isChecked())
+    {
+        ord="asc";
+    }
+    if(GrupoBoton->button(2)->isChecked())
+    {
+        ord="desc";
+    }
+
+    ArticuloTipo ObjetoConsulta;
+
+    switch (index)
+    {
+    case 1:
+        ObjetoConsulta.setCodigo(LineNombre->text());
+        break;
+    case 2:
+        ObjetoConsulta.setNombre(LineNombre->text());
+        break;
+    default:
+        break;
+    }
+
+
+    BD->Fabrica->Conectar();
+
+    QString Extra=" order by codigo "+ord+" LIMIT "+fin+" offset 0";
+    QSqlQueryModel* Model= Fab->BuscarTabla(ObjetoConsulta,Extra,CAMPOS);
+    BD->Fabrica->Desconectar();
+
+
+    Model->setHeaderData(0,Qt::Horizontal,"Codigo");
+    Model->setHeaderData(1,Qt::Horizontal,"Nombre");
+    Model->setHeaderData(2,Qt::Horizontal,"CodigoImagen");
+    Model->setHeaderData(3,Qt::Horizontal,"Ruta");
+
+    QList<bool> CamposVisibles;
+    CamposVisibles.push_back(true);
+    CamposVisibles.push_back(true);
+    CamposVisibles.push_back(false);
+    CamposVisibles.push_back(true);*/
+
+/*    emit my_signal(Model,CamposVisibles);
+    emit SignalRepisa((ObjetoMaestro*)(&ObjetoConsulta),fin.toInt(),ord);
+    VisorConsulta->move(this->x(),this->y()+this->height());
+*/
 }

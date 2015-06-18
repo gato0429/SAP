@@ -19,9 +19,9 @@ public:
     explicit FormArticuloTipo(QWidget *parent = 0);
     void     SetArticuloTipo(int boton,ArticuloTipo valor);
     ~FormArticuloTipo();
+
 signals:
-    void Activar(int);
-signals:
+    void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 private slots:
     void on_BotonArchivo_clicked();
@@ -72,6 +72,10 @@ protected:
     bool Eliminar();
     bool ValidarCampos();
     void AsignarCampos();
+
+    // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
 };
 
 

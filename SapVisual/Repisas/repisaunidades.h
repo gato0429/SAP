@@ -27,6 +27,13 @@ public slots:
 public:
     void ObjetosIndependientes();
     void ActualizarConsulta();
+
+    // Repisa interface
+private slots:
+    void RecibirTipoConsulta(int index, bool detalle, int registros);
+
+public:
+    void ObtenerConsulta();
 };
 
 #endif // REPISAUNIDADES_H

@@ -1,16 +1,9 @@
 
 #include "principal.h"
 #include <QApplication>
-#include "Fabricas.h"
-#include "Objetos.h"
-#include "Repisas/repisaarticulotipo.h"
-#include "Formularios/formarticulotipo.h"
-#include "Repisas/repisaarticulo.h"
-#include "Extras/visorimagenes.h"
-#include "Repisas/repisaempleados.h"
-#include "Repisas/repisaunidades.h"
-#include "Repisas/repisaarticuloalias.h"
-#include "Repisas/repisaimagenes.h"
+
+#include "Repisas/repisamarca.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -20,8 +13,8 @@ int main(int argc, char *argv[])
 
    // RepisaImagenes* w=new RepisaImagenes();
    //RepisaArticulo* w=new RepisaArticulo();
-   RepisaEmpleados* w=new RepisaEmpleados();
-
+   //RepisaEmpleados* w=new RepisaEmpleados();
+   RepisaMarca* w=new RepisaMarca();
    w->show();
 
 

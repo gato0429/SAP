@@ -9,7 +9,7 @@ RepisaImagenes::RepisaImagenes()
 void RepisaImagenes::ObjetosIndependientes()
 {
     QPushButton* pp=new QPushButton(this);
-    Imagen *i=(Imagen*)(it.value());
+    Imagen *i=(Imagen*)(*it);
 
     pp->setObjectName(i->getCodigo());
     pp->setIcon(DefBD::toQicon(i->getCarpeta()+"/"+i->getNombre()));
@@ -33,7 +33,7 @@ void RepisaImagenes::ActualizarConsulta()
     QString extra=" order by codigo "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);
     qDebug()<<"aqui toy as";
 
-    Mapa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
+    MapaRepisa=FabricaLocal->BuscarMapa(ObjetoConsulta,extra,CAMPOS);
 
     Bd->Fabrica->Desconectar();
     qDebug()<<Mapa->size();

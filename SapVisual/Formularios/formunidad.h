@@ -17,8 +17,8 @@ public:
     ~FormUnidad();
 
     /*-------------------------*/
-
 signals:
+    void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 
 private:
@@ -64,6 +64,10 @@ protected:
 
 protected:
     QPoint oldPos;
+
+    // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
 };
 
 #endif // FORMUNIDAD_H

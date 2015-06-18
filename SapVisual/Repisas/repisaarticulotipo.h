@@ -21,6 +21,13 @@ public slots:
     void NuevoClick();
     void BuscarClick();
     void GrupoBotonesClick(QAbstractButton *buttonID);
+
+    // Repisa interface
+private slots:
+    void RecibirTipoConsulta(int index, bool detalle, int registros);
+
+public:
+    void ObtenerConsulta();
 };
 
 #endif // REPISAARTICULOTIPO_H

@@ -19,6 +19,7 @@ public:
     void SetArticulo(Articulo Externo);
     ~FormArticulo();
 signals:
+    void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 private:
     QString CodigoImagen;
@@ -89,6 +90,10 @@ private slots:
     void on_BotonEliminarAlias_clicked();
     void on_BotonNuevoAlias_clicked();
     void on_ListaAlias_currentRowChanged(int currentRow);
+
+    // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
 };
 
 #endif // FORMARTICULO_H

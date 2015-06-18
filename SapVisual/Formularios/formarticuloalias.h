@@ -23,6 +23,9 @@ public:
     explicit FormArticuloAlias(QWidget *parent = 0);
     ~FormArticuloAlias();
     void SetArticulo(Articulo Externo);
+signals:
+    void ActivarBoton(QString);
+    void ActualizarRepisa(ObjetoMaestro* );
 private:
     Ui::FormArticuloAlias *ui;
 
@@ -37,6 +40,10 @@ private slots:
     void on_eliminar_clicked();
     void on_modificar_clicked();
     void on_guardar_clicked();
+
+    // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
 };
 
 #endif // FORMARTICULOALIAS_H

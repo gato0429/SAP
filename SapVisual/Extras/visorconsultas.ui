@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>325</width>
-    <height>281</height>
+    <width>400</width>
+    <height>275</height>
    </rect>
   </property>
   <property name="font">
@@ -18,6 +18,9 @@
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -107,11 +110,11 @@
          </brush>
         </colorrole>
         <colorrole role="Base">
-         <brush brushstyle="SolidPattern">
+         <brush brushstyle="NoBrush">
           <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
           </color>
          </brush>
         </colorrole>
@@ -131,6 +134,54 @@
            <green>0</green>
            <blue>0</blue>
           </color>
+         </brush>
+        </colorrole>
+        <colorrole role="HighlightedText">
+         <brush brushstyle="RadialGradientPattern">
+          <gradient centralx="0.500000000000000" centraly="0.500000000000000" focalx="0.500000000000000" focaly="0.500000000000000" radius="0.500000000000000" type="RadialGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
+           <gradientstop position="0.000000000000000">
+            <color alpha="206">
+             <red>255</red>
+             <green>235</green>
+             <blue>235</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.350000000000000">
+            <color alpha="80">
+             <red>255</red>
+             <green>188</green>
+             <blue>188</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.400000000000000">
+            <color alpha="80">
+             <red>255</red>
+             <green>162</green>
+             <blue>162</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.425000000000000">
+            <color alpha="156">
+             <red>255</red>
+             <green>132</green>
+             <blue>132</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.440000000000000">
+            <color alpha="80">
+             <red>252</red>
+             <green>128</green>
+             <blue>128</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="1.000000000000000">
+            <color alpha="0">
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </gradientstop>
+          </gradient>
          </brush>
         </colorrole>
         <colorrole role="AlternateBase">
@@ -244,11 +295,11 @@
          </brush>
         </colorrole>
         <colorrole role="Base">
-         <brush brushstyle="SolidPattern">
+         <brush brushstyle="NoBrush">
           <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
           </color>
          </brush>
         </colorrole>
@@ -268,6 +319,54 @@
            <green>0</green>
            <blue>0</blue>
           </color>
+         </brush>
+        </colorrole>
+        <colorrole role="HighlightedText">
+         <brush brushstyle="RadialGradientPattern">
+          <gradient centralx="0.500000000000000" centraly="0.500000000000000" focalx="0.500000000000000" focaly="0.500000000000000" radius="0.500000000000000" type="RadialGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
+           <gradientstop position="0.000000000000000">
+            <color alpha="206">
+             <red>255</red>
+             <green>235</green>
+             <blue>235</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.350000000000000">
+            <color alpha="80">
+             <red>255</red>
+             <green>188</green>
+             <blue>188</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.400000000000000">
+            <color alpha="80">
+             <red>255</red>
+             <green>162</green>
+             <blue>162</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.425000000000000">
+            <color alpha="156">
+             <red>255</red>
+             <green>132</green>
+             <blue>132</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.440000000000000">
+            <color alpha="80">
+             <red>252</red>
+             <green>128</green>
+             <blue>128</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="1.000000000000000">
+            <color alpha="0">
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </gradientstop>
+          </gradient>
          </brush>
         </colorrole>
         <colorrole role="AlternateBase">
@@ -381,10 +480,10 @@
          </brush>
         </colorrole>
         <colorrole role="Base">
-         <brush brushstyle="SolidPattern">
+         <brush brushstyle="NoBrush">
           <color alpha="255">
-           <red>170</red>
-           <green>85</green>
+           <red>0</red>
+           <green>0</green>
            <blue>0</blue>
           </color>
          </brush>
@@ -405,6 +504,54 @@
            <green>0</green>
            <blue>0</blue>
           </color>
+         </brush>
+        </colorrole>
+        <colorrole role="HighlightedText">
+         <brush brushstyle="RadialGradientPattern">
+          <gradient centralx="0.500000000000000" centraly="0.500000000000000" focalx="0.500000000000000" focaly="0.500000000000000" radius="0.500000000000000" type="RadialGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
+           <gradientstop position="0.000000000000000">
+            <color alpha="206">
+             <red>255</red>
+             <green>235</green>
+             <blue>235</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.350000000000000">
+            <color alpha="80">
+             <red>255</red>
+             <green>188</green>
+             <blue>188</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.400000000000000">
+            <color alpha="80">
+             <red>255</red>
+             <green>162</green>
+             <blue>162</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.425000000000000">
+            <color alpha="156">
+             <red>255</red>
+             <green>132</green>
+             <blue>132</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="0.440000000000000">
+            <color alpha="80">
+             <red>252</red>
+             <green>128</green>
+             <blue>128</blue>
+            </color>
+           </gradientstop>
+           <gradientstop position="1.000000000000000">
+            <color alpha="0">
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </gradientstop>
+          </gradient>
          </brush>
         </colorrole>
         <colorrole role="AlternateBase">
@@ -436,6 +583,13 @@
         </colorrole>
        </disabled>
       </palette>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/Imagenes/fondos/madera3.jpg);
+selection-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 206), stop:0.35 rgba(255, 188, 188, 80), stop:0.4 rgba(255, 162, 162, 80), stop:0.425 rgba(255, 132, 132, 156), stop:0.44 rgba(252, 128, 128, 80), stop:1 rgba(255, 255, 255, 0));
+font: italic 12pt &quot;Cambria&quot;;
+border-image: url(:/Imagenes/fondos/madera1.jpg);
+gridline-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));</string>
      </property>
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>

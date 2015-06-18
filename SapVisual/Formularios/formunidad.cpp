@@ -11,6 +11,7 @@ FormUnidad::FormUnidad(QWidget *parent) :
 
     Form=this;
     Parent=parent;
+    connect(this,SIGNAL(ActivarBoton(QString)),parent,SLOT(ActivarBotonRepisa(QString)));
     connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
 
     SetFondo();
@@ -246,4 +247,9 @@ void FormUnidad::on_BotonArchivo_clicked()
 {
     VisorImagenes* v=new VisorImagenes(this);
     v->exec();
+}
+
+
+void FormUnidad::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
 }

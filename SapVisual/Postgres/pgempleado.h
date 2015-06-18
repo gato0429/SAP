@@ -6,11 +6,12 @@
 #include <QVariant>
 #include <qdebug.h>
 #include <QMap>
-
+#include <QList>
 class PgEmpleado:public FabricaEmpleados
 {
 public:
     PgEmpleado();
+
     // FabricaEmpleados interface
 public:
     bool Borrar(Empleado valor);
@@ -18,8 +19,8 @@ public:
     bool Actualizar(Empleado Antiguo, Empleado Nuevo);
     Empleado Buscar(Empleado valor);
     QMap<QString, ObjetoMaestro *> *BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo);
-    int Contar();
-    int ContarConsulta(ObjetoMaestro *valor);
+    qint64 Contar() ;
+    qint64 ContarConsulta(ObjetoMaestro *valor) ;
     QSqlQueryModel *BuscarTabla(Empleado valor, QString Extra, CONSULTA tipo);
 };
 

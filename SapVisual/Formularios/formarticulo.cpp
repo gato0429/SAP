@@ -9,7 +9,9 @@ FormArticulo::FormArticulo(QWidget *parent) :
     /*Dos Lineas Para el fondo Madera*/
     Form=this;
     Parent=parent;
+    connect(this,SIGNAL(ActivarBoton(QString)),parent,SLOT(ActivarBotonRepisa(QString)));
     connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
+
 
     SetFondo();
     /*------------------------------*/
@@ -109,13 +111,13 @@ void FormArticulo::LlenarListaTipos()
     QSqlQueryModel* Model;
     Bd->Fabrica->Conectar();
 
-    Model=new QSqlQueryModel();
+  /*  Model=new QSqlQueryModel();
     Model->setQuery("SELECT distinct nombre FROM articulo_tipo ;");
     QCompleter* Completar=new QCompleter(Model,this);
     Completar->setCaseSensitivity(Qt::CaseInsensitive);
     Completar->setCompletionColumn(0);
     ui->LineNombreTipo->setCompleter(Completar);
-
+*/
     Bd->Fabrica->Desconectar();
 }
 
@@ -136,13 +138,13 @@ void FormArticulo::LlenarListaUnidad()
     QSqlQueryModel* Model=new QSqlQueryModel();
 
     Bd->Fabrica->Conectar();
-
+/*
     Model->setQuery("SELECT distinct nombre FROM unidad ;");
     QCompleter* Completar=new QCompleter(Model,this);
     Completar->setCaseSensitivity(Qt::CaseInsensitive);
     Completar->setCompletionColumn(0);
     ui->LineNombreUnidad->setCompleter(Completar);
-
+*/
     Bd->Fabrica->Desconectar();
 }
 
@@ -638,4 +640,9 @@ void FormArticulo::on_ListaAlias_currentRowChanged(int currentRow)
     ui->BotonModificarAlias->setEnabled(true);
     ui->BotonEliminarAlias->setEnabled(true);
     }
+}
+
+
+void FormArticulo::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
 }
