@@ -38,6 +38,8 @@ static QString BotonIzquierda;
 static QString BotonNuevo;
 static QString BotonBuscar;
 static QString FondoForm=":/Imagenes/fondos/madera4";
+static QString FondoBusqueda=":/Imagenes/fondos/busqueda.png";
+
 /*Ruta Imagen*/
 static QString RutaImagenes="c:/Sap/Imagenes/";
 
