@@ -28,6 +28,7 @@ protected:
     BusquedaMaestra*        Busqueda;
     /*Titulo de la Repisa*/
     QLabel*         LabelTitulo;
+     QLabel* FondoRepisa;
     /**/
     /*Busqueda*/
     QString CampoBusqueda;
@@ -157,6 +158,12 @@ protected:
 
 private:
     QPoint oldPos;
+
+    virtual void enterEvent(QEvent * event)
+    {
+
+        this->setFocus();
+    }
 };
 
 

@@ -37,6 +37,7 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
 
            //     ui->ComboCampos->addItem("Todo");
                // ComboCampos=new QComboBox(this);
+        ui->ComboCamposLabel->installEventFilter(this);
                 ComboCampos=this->ui->ComboCamposLabel;
                // ComboCampos->addItem("Todo");
                 //ui->LineFin_2->setValidator(new QIntValidator(LineFin));
@@ -67,6 +68,8 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
        this->ui->checkBoxDetalle->setParent(muroder);
                 this->ui->checkBoxDetalle->setGeometry(1,31,134,23);
 */
+
+
 }
 
 void BusquedaMaestra::CambiarCombo(int index)
@@ -129,13 +132,19 @@ void BusquedaMaestra::on_checkBoxDetalle_stateChanged(int arg1)
 
 void BusquedaMaestra::on_ComboCamposLabel_currentIndexChanged(int index)
 {
+
+    if(index!=-1)
+    {
+
     emit(SignalBusquedaTipo(index,ui->checkBoxDetalle->isChecked(),ui->LineFin_2->value()));
 
-    if (!ui->checkBoxDetalle->isChecked())
-    {
+        if (!ui->checkBoxDetalle->isChecked())
+        {
         this->close();
       this->destroy();
         emit (Activar());
+        }
     }
+
 
 }
