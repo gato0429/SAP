@@ -24,9 +24,8 @@ bool PgMarca::Insertar(Marca valor)
 {
 
     QSqlQuery query;
-      query.prepare("INSERT INTO marca("
-                    "nombre, codigo_imagen)"
-            "VALUES (?, ?, ?);");
+      query.prepare("INSERT INTO marca(nombre, codigo_imagen)"
+            " VALUES (?, ?);");
 
       query.addBindValue(valor.getNombre());
       query.addBindValue(valor.getCodigoImagen());

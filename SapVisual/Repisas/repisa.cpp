@@ -63,6 +63,11 @@ connect(this,SIGNAL(my_signal(QSqlQueryModel *,QList<bool>)),VisorConsulta,SLOT(
         connect(Nuevo, SIGNAL(clicked()),Formulario, SLOT(NuevoClick()));
         connect(Buscar, SIGNAL(clicked()),Formulario, SLOT(BuscarClick()));
         connect(Cerrar, SIGNAL(clicked()), Formulario, SLOT(CerrarClick()));
+       Atras->setParent(FondoRepisa);
+       Siguiente->setParent(FondoRepisa);
+       Nuevo->setParent(FondoRepisa);
+       Buscar->setParent(FondoRepisa);
+       Cerrar->setParent(FondoRepisa);
 
 }
 
@@ -78,6 +83,7 @@ void Repisa::LLenarDetalles()
     LabelTitulo->setFont(serifFont);
     LabelTitulo->setText("Sin Nombre");
 
+    LabelTitulo->setParent(FondoRepisa);
 
     QString style="QDateEdit {"
             "border: 1px solid gray;"
@@ -126,14 +132,14 @@ void Repisa::LLenarDetalles()
                               "background: transparent;"
                               "selection-background-color: darkgray;");
     LineBuscar->setFont(serifFont);
-
+    LineBuscar->setParent(FondoRepisa);
     /*Combo*/
 
     ComboTipo=new QComboBox(Formulario);
     ComboTipo->setGeometry(120,160,150,20);
     ComboTipo->setStyleSheet(stylecombo);
     ComboTipo->setFont(serifFont);
-
+   ComboTipo->setParent(FondoRepisa);
     /*Fechas*/
 
 
@@ -142,13 +148,14 @@ void Repisa::LLenarDetalles()
     FechaInicio->setGeometry(120,135,150,20);
     FechaInicio->setStyleSheet(style);
     FechaInicio->setFont(serifFont);
+   FechaInicio->setParent(FondoRepisa);
 
     FechaFin=new QDateEdit(Formulario);
     FechaFin->setCalendarPopup(true);
     FechaFin->setGeometry(120,160,150,20);
     FechaFin->setStyleSheet(style);
     FechaFin->setFont(serifFont);
-
+   FechaFin->setParent(FondoRepisa);
 
   MostrarLabel();
 /*Vinculando Señales*/
@@ -163,9 +170,9 @@ void Repisa::DibujarRepisa()
 {
 
     QPixmap* pix=new QPixmap(":/Imagenes/fondos/estante.png");
-    QLabel* muroder=new QLabel(Formulario);
-    muroder->setGeometry(0,0,420,577);
-    muroder->setPixmap(pix->scaled(371,561,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    FondoRepisa=new QLabel(Formulario);
+    FondoRepisa->setGeometry(0,0,420,577);
+    FondoRepisa->setPixmap(pix->scaled(371,561,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
 
    /*
@@ -371,7 +378,8 @@ void Repisa::RecibirTipoConsulta(int index, bool detalle, int registros)
     IndiceBusqueda=index;
     DetalleBusqueda=detalle;
     RegistrosBusqueda=registros;
-   // qDebug()<<"ssssss";
+    Atras->setVisible(true);
+    qDebug()<<"Entre a la consulta";
 
     if (detalle)
     {

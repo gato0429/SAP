@@ -46,6 +46,25 @@ private slots:
     void on_ButtonEliminar_clicked();
     void on_ButtonRegresar_clicked();
     void on_ButtonArchivoImagen_clicked();
+
+    /*Movimiento del Form*/
+protected:
+    void mousePressEvent(QMouseEvent *evt)
+    {
+        oldPos = evt->globalPos();
+    }
+
+    void mouseMoveEvent(QMouseEvent *evt)
+    {
+        const QPoint delta = evt->globalPos() - oldPos;
+        Form->move(Form->x()+delta.x(), Form->y()+delta.y());
+        oldPos = evt->globalPos();
+    }
+
+protected:
+    QPoint oldPos;
+
+
 };
 
 #endif // FORMMARCA_H

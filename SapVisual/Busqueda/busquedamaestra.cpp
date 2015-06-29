@@ -21,18 +21,23 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
                          | Qt::WindowMaximizeButtonHint
                          | Qt::WindowCloseButtonHint);
 
-     QPixmap bkgnd(FondoForm);
+     QPixmap bkgnd(FondoBusqueda);
 
-        bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+        bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
         QPalette palette;
-        palette.setBrush(QPalette::Background, bkgnd);
+        palette.setBrush(QPalette::Window, bkgnd);
+
         this->setPalette(palette);
+        setAttribute(Qt::WA_TranslucentBackground);
+
+
     /*------------------------------------------------*/
 
         /*Conexion con la BD y Fabrica*/
 
            //     ui->ComboCampos->addItem("Todo");
                // ComboCampos=new QComboBox(this);
+        ui->ComboCamposLabel->installEventFilter(this);
                 ComboCampos=this->ui->ComboCamposLabel;
                // ComboCampos->addItem("Todo");
                 //ui->LineFin_2->setValidator(new QIntValidator(LineFin));
@@ -53,6 +58,18 @@ BusquedaMaestra::BusquedaMaestra(QWidget *parent) :
 
         BD->Fabrica->Desconectar();
         */
+/*
+               QPixmap* pix=new QPixmap(FondoBusqueda);
+               QLabel* muroder=new QLabel(this);
+               muroder->setGeometry(0,0,this->size().width(),this->size().height());
+                muroder->setPixmap(pix->scaled(245,115,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+                this->ui->ComboCamposLabel->setParent(muroder);
+                this->ui->ComboCamposLabel->setGeometry(this->ui->ComboCamposLabel->geometry());
+       this->ui->checkBoxDetalle->setParent(muroder);
+                this->ui->checkBoxDetalle->setGeometry(1,31,134,23);
+*/
+
+
 }
 
 void BusquedaMaestra::CambiarCombo(int index)
@@ -115,13 +132,19 @@ void BusquedaMaestra::on_checkBoxDetalle_stateChanged(int arg1)
 
 void BusquedaMaestra::on_ComboCamposLabel_currentIndexChanged(int index)
 {
+
+    if(index!=-1)
+    {
+
     emit(SignalBusquedaTipo(index,ui->checkBoxDetalle->isChecked(),ui->LineFin_2->value()));
 
-    if (!ui->checkBoxDetalle->isChecked())
-    {
+        if (!ui->checkBoxDetalle->isChecked())
+        {
         this->close();
       this->destroy();
         emit (Activar());
+        }
     }
+
 
 }

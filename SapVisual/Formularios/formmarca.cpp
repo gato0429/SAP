@@ -65,6 +65,7 @@ bool FormMarca::Guardar()
         mensaje.exec();
         return false;
     }
+
     return true;
 }
 
@@ -110,6 +111,7 @@ bool FormMarca::Eliminar()
             MensajeEmergente mensaje;
             mensaje.SetMensaje("Marca Eliminada",ADVERTENCIA);
             mensaje.exec();
+
             return true;
         }
       Bd->Fabrica->Desconectar();
@@ -148,20 +150,28 @@ void FormMarca::AsignarCampos()
 {
     Antiguo.setCodigo(ui->LineCodigo->text());
     Objeto.setNombre(ui->LineNombre->text());
-    Objeto.setCodigo(CodigoImagen);
+    Objeto.setCodigoImagen(CodigoImagen);
 }
 
 void FormMarca::SetObjeto(ObjetoMaestro *ObjetoTipo)
 {
 
     Objeto=*((Marca*)(ObjetoTipo));
-    //Objeto.setCodigo(Externo.getCodigo());
     ui->LineNombre->setEnabled(false);
-    ui->LineImagen->setReadOnly(true);
+//    ui->LineImagen->setReadOnly(true);
+
+    ui->LineCodigo->setText(Objeto.getCodigo());
+    ui->LineNombre->setText(Objeto.getNombre());
+    ui->LineImagen->setText(Objeto.getRutaImagen());
+
+    QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getRutaImagen());
+    ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
 
     ui->ButtonModificar->setEnabled(true);
     ui->ButtonEliminar->setEnabled(true);
     ui->ButtonGuardar->setEnabled(false);
+    ui->ButtonArchivoImagen->setEnabled(false);
 }
 
 void FormMarca::Ruta(QString Codigo, QString Cadena)
@@ -181,28 +191,43 @@ void FormMarca::on_ButtonGuardar_clicked()
 {
     if(Estado==INSERTAR)
     {
-    Guardar();
+    if(Guardar())
     emit ActualizarRepisa((ObjetoMaestro*)new Marca());
     }
     if(Estado==MODIFICAR)
     {
-    Modificar();
+    if(Modificar())
      emit ActualizarRepisa((ObjetoMaestro*)new Marca());
     }
 }
 
 void FormMarca::on_ButtonModificar_clicked()
 {
-
+   Estado=MODIFICAR;
+   ui->ButtonModificar->setEnabled(false);
+   ui->ButtonEliminar->setEnabled(false);
+   ui->ButtonGuardar->setEnabled(true);
+   ui->ButtonArchivoImagen->setEnabled(true);
+   ui->LineNombre->setEnabled(true);
 }
 
 void FormMarca::on_ButtonEliminar_clicked()
 {
-
+    if(Eliminar())
+    {
+    emit(ActivarBoton(Objeto.getCodigo()));
+    emit ActualizarRepisa((ObjetoMaestro*)new Marca());
+        this->close();
+        this->destroy();
+    }
 }
 
 void FormMarca::on_ButtonRegresar_clicked()
 {
+
+    emit(ActivarBoton(Objeto.getCodigo()));
+    this->close();
+    this->destroy();
 
 }
 

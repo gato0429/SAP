@@ -54,6 +54,7 @@ protected:
     void VisibleFecha();
     void VisibleCombo();
 
+
 private slots:
 
 
@@ -82,6 +83,7 @@ protected:
 private:
     QPoint oldPos;*/
 /*---------------------------------------------*/
+
 };
 
 #endif // BUSQUEDAMAESTRA_H
