@@ -85,3 +85,8 @@ FabricaMarca *Postgres::CrearMarca()
 {
     return new PgMarca;
 }
+
+FabricaModelo *Postgres::CrearModelo()
+{
+    return new PgModelo;
+}

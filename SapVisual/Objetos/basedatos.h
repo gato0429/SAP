@@ -11,6 +11,7 @@
 #include "../Fabricas/fabricaunidades.h"
 #include "../Fabricas/fabricaarticuloalias.h"
 #include "../Fabricas/fabricamarca.h"
+#include "../Fabricas/fabricamodelo.h"
 using namespace std;
 
 class BaseDatos
@@ -58,6 +59,7 @@ public:
     virtual FabricaUnidades       *CrearUnidad()=0;
     virtual FabricaArticuloAlias  *CrearArticuloAlias()=0;
     virtual FabricaMarca          *CrearMarca()=0;
+    virtual FabricaModelo         *CrearModelo()=0;
 };
 
 #endif // BASEDATOS_H
