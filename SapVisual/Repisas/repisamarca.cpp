@@ -125,8 +125,9 @@ void RepisaMarca::ObjetosIndependientes()
 
     Botones.push_back(pp);
     //qDebug()<<i->getCodigo();
-    pp->setVisible(true);
+
     pp->setParent(FondoRepisa);
+    pp->setVisible(true);
     if(ObjetosAbiertos.contains(i->getCodigo()))
     {
         pp->setEnabled(false);

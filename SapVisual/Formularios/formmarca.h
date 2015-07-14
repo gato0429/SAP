@@ -35,6 +35,9 @@ protected:
     bool Eliminar();
     bool ValidarCampos();
     void AsignarCampos();
+    void Habilitar();
+    void Deshabilitar();
+    void Limpiar();
 public:
     void SetObjeto(ObjetoMaestro *ObjetoTipo);
 private slots:

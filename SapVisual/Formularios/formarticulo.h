@@ -46,6 +46,9 @@ protected:
     bool Eliminar();
     bool ValidarCampos();
     void AsignarCampos();
+    void Habilitar();
+    void Deshabilitar();
+    void Limpiar();
     /*--Esto cambiara en otra version-*/
     FabricaArticuloAlias*               FabAlias;
     bool ValidarCamposAlias();

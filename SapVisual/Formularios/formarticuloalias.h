@@ -36,6 +36,9 @@ protected:
     bool Eliminar();
     bool ValidarCampos();
     void AsignarCampos();
+    void Habilitar();
+    void Deshabilitar();
+    void Limpiar();
 private slots:
     void on_eliminar_clicked();
     void on_modificar_clicked();

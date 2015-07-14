@@ -109,19 +109,19 @@ Marca PgMarca::Buscar(Marca valor)
 
     if(!valor.getCodigo().isNull())
     {
-        consulta=consulta+" codigo like '%"+valor.getCodigo()+"%' AND ";
+        consulta=consulta+" codigo ilike '%"+valor.getCodigo()+"%' AND ";
     }
     if(!valor.getNombre().isNull())
     {
-        consulta=consulta+" nombre like '%"+valor.getNombre()+"%' AND ";
+        consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
     }
     if(!valor.getCodigoImagen().isNull())
     {
-        consulta=consulta+" codigo_imagen like '%"+valor.getCodigoImagen()+"%' AND ";
+        consulta=consulta+" codigo_imagen ilike '%"+valor.getCodigoImagen()+"%' AND ";
     }
     if(!valor.getRutaImagen().isNull())
     {
-        consulta=consulta+" ruta_img like '%"+valor.getRutaImagen()+"%' AND ";
+        consulta=consulta+" ruta_img ilike '%"+valor.getRutaImagen()+"%' AND ";
     }
     consulta.replace(consulta.size()-5,5," ");
 
@@ -168,20 +168,20 @@ QMap<QString, ObjetoMaestro *> *PgMarca::BuscarMapa(ObjetoMaestro *valor, QStrin
 
     if(!val->getCodigo().isNull())
     {
-        consulta=consulta+" codigo like '%"+val->getCodigo()+"%' AND ";
+        consulta=consulta+" codigo ilike '%"+val->getCodigo()+"%' AND ";
     }
 
     if(!val->getNombre().isNull())
     {
-        consulta=consulta+" nombre like '%"+val->getNombre()+"%' AND ";
+        consulta=consulta+" nombre ilike '%"+val->getNombre()+"%' AND ";
     }
     if(!val->getCodigoImagen().isNull())
     {
-        consulta=consulta+" codigo_imagen like '%"+val->getCodigoImagen()+"%' AND ";
+        consulta=consulta+" codigo_imagen ilike '%"+val->getCodigoImagen()+"%' AND ";
     }
     if(!val->getRutaImagen().isNull())
     {
-        consulta=consulta+" ruta_img like '%"+val->getRutaImagen()+"%' AND ";
+        consulta=consulta+" ruta_img ilike '%"+val->getRutaImagen()+"%' AND ";
     }
 
     consulta.replace(consulta.size()-5,5," ");
@@ -235,20 +235,20 @@ qint64 PgMarca::ContarConsulta(ObjetoMaestro *valor)
 
     if(!val->getCodigo().isNull())
     {
-        consulta=consulta+" codigo like '%"+val->getCodigo()+"%' AND ";
+        consulta=consulta+" codigo ilike '%"+val->getCodigo()+"%' AND ";
     }
 
     if(!val->getNombre().isNull())
     {
-        consulta=consulta+" nombre like '%"+val->getNombre()+"%' AND ";
+        consulta=consulta+" nombre ilike '%"+val->getNombre()+"%' AND ";
     }
     if(!val->getCodigoImagen().isNull())
     {
-        consulta=consulta+" codigo_imagen like '%"+val->getCodigoImagen()+"%' AND ";
+        consulta=consulta+" codigo_imagen ilike '%"+val->getCodigoImagen()+"%' AND ";
     }
     if(!val->getRutaImagen().isNull())
     {
-        consulta=consulta+" ruta_img like '%"+val->getRutaImagen()+"%' AND ";
+        consulta=consulta+" ruta_img ilike '%"+val->getRutaImagen()+"%' AND ";
     }
     consulta.replace(consulta.size()-5,5," ");
 
@@ -279,16 +279,16 @@ QSqlQueryModel *PgMarca::BuscarTabla(Marca valor, QString Extra, CONSULTA tipo)
 
      if(!valor.getCodigo().isNull())
      {
-         consulta=consulta+" codigo like '%"+valor.getCodigo()+"%' AND ";
+         consulta=consulta+" codigo ilike '%"+valor.getCodigo()+"%' AND ";
      }
 
      if(!valor.getNombre().isNull())
      {
-         consulta=consulta+" nombre like '%"+valor.getNombre()+"%' AND ";
+         consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
      }
      if(!valor.getCodigoImagen().isNull())
      {
-         consulta=consulta+" codigo_imagen like '%"+valor.getCodigoImagen()+"%' AND ";
+         consulta=consulta+" codigo_imagen ilike '%"+valor.getCodigoImagen()+"%' AND ";
      }
      if(!valor.getRutaImagen().isNull())
      {

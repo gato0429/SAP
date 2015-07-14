@@ -213,6 +213,21 @@ void FormEmpleado::AsignarCampos()
 
 }
 
+void FormEmpleado::Habilitar()
+{
+
+}
+
+void FormEmpleado::Deshabilitar()
+{
+
+}
+
+void FormEmpleado::Limpiar()
+{
+
+}
+
 void FormEmpleado::on_BotonGuardar_clicked()
 {
     if(Estado==INSERTAR)
