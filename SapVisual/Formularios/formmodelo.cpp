@@ -38,14 +38,23 @@ void FormModelo::SetObjeto(ObjetoMaestro *ObjetoTipo)
 {
 
     Objeto=*((Modelo*)(ObjetoTipo));
-    //Objeto.setCodigo(Externo.getCodigo());
+
+
     ui->LineNombre->setEnabled(false);
-    ui->LineImagen->setReadOnly(true);
+
+
+    ui->LineCodigo->setText(Objeto.getCodigo());
+    ui->LineNombre->setText(Objeto.getNombre());
+    ui->LineImagen->setText(Objeto.getRutaImagen());
+
+    QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getRutaImagen());
+    ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
 
     ui->ButtonModificar->setEnabled(true);
     ui->ButtonEliminar->setEnabled(true);
     ui->ButtonGuardar->setEnabled(false);
-
+    ui->ButtonArchivoImagen->setEnabled(false);
 }
 
 bool FormModelo::Guardar()
@@ -127,6 +136,7 @@ bool FormModelo::Eliminar()
             MensajeEmergente mensaje;
             mensaje.SetMensaje("Modelo Eliminado",ADVERTENCIA);
             mensaje.exec();
+            
             return true;
         }
       Bd->Fabrica->Desconectar();
@@ -167,29 +177,69 @@ void FormModelo::AsignarCampos()
 
     Antiguo.setCodigo(ui->LineCodigo->text());
     Objeto.setNombre(ui->LineNombre->text());
-    Objeto.setCodigo(CodigoImagen);
+    Objeto.setCodigoImagen(CodigoImagen);
 }
+void FormModelo::Ruta(QString Codigo, QString Cadena)
+{
+    QString fileName = Cadena;
+    CodigoImagen=Codigo;
+   if (!fileName.isEmpty())
+   {
+     QPixmap*  pix=new QPixmap(RutaImagenes+fileName);
+
+       ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+       ui->LineImagen->setText(fileName);
+    }
+}
+
 void FormModelo::on_ButtonGuardar_clicked()
 {
+    if(Estado==INSERTAR)
+    {
+    if(Guardar())
+    emit ActualizarRepisa((ObjetoMaestro*)new Modelo());
+    }
+    if(Estado==MODIFICAR)
+    {
+    if(Modificar())
+     emit ActualizarRepisa((ObjetoMaestro*)new Modelo());
+    }
 
 }
 
 void FormModelo::on_ButtonModificar_clicked()
 {
+    Estado=MODIFICAR;
+    ui->ButtonModificar->setEnabled(false);
+    ui->ButtonEliminar->setEnabled(false);
+    ui->ButtonGuardar->setEnabled(true);
+    ui->ButtonArchivoImagen->setEnabled(true);
+    ui->LineNombre->setEnabled(true);
+ }
 
-}
+
 
 void FormModelo::on_ButtonEliminar_clicked()
 {
-
+    if(Eliminar())
+    {
+    emit(ActivarBoton(Objeto.getCodigo()));
+    emit ActualizarRepisa((ObjetoMaestro*)new Modelo());
+        this->close();
+        this->destroy();
+    }
 }
 
 void FormModelo::on_ButtonRegresar_clicked()
 {
 
+    emit(ActivarBoton(Objeto.getCodigo()));
+    this->close();
+    this->destroy();
 }
 
 void FormModelo::on_ButtonArchivoImagen_clicked()
 {
-
+    VisorImagenes* v=new VisorImagenes(this);
+    v->exec();
 }

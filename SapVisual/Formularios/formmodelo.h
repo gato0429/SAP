@@ -27,6 +27,11 @@ public:
     ~FormModelo();
 
 private slots:
+
+        /*Agregar esto para cada ves que se desee llamar una imagen*/
+        void Ruta(QString Codigo,QString Cadena);
+        /*-------------------------*/
+
     void on_ButtonGuardar_clicked();
 
     void on_ButtonModificar_clicked();
@@ -50,6 +55,24 @@ protected:
     bool Eliminar();
     bool ValidarCampos();
     void AsignarCampos();
-};
 
+/*Movimiento del Form*/
+protected:
+void mousePressEvent(QMouseEvent *evt)
+{
+    oldPos = evt->globalPos();
+}
+
+void mouseMoveEvent(QMouseEvent *evt)
+{
+    const QPoint delta = evt->globalPos() - oldPos;
+    Form->move(Form->x()+delta.x(), Form->y()+delta.y());
+    oldPos = evt->globalPos();
+}
+
+protected:
+QPoint oldPos;
+
+
+};
 #endif // FORMMODELO_H
