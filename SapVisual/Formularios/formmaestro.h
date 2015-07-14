@@ -25,7 +25,9 @@ protected:
      virtual bool Eliminar()=0;
      virtual bool ValidarCampos()=0;
      virtual void AsignarCampos()=0;
-
+     virtual void Habilitar()=0;
+     virtual void Deshabilitar()=0;
+     virtual void Limpiar()=0;
 };
 
 #endif // FORMMAESTRO_H

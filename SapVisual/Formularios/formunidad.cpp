@@ -186,7 +186,22 @@ void FormUnidad::AsignarCampos()
     Objeto.setNombre(ui->LineNombre->text());
     Objeto.setSimbolo(ui->LineSimbolo->text());
    Objeto.setCodigoImagen(CodigoImagen);
-    qDebug()<<"PAse"+CodigoImagen;
+   qDebug()<<"PAse"+CodigoImagen;
+}
+
+void FormUnidad::Habilitar()
+{
+
+}
+
+void FormUnidad::Deshabilitar()
+{
+
+}
+
+void FormUnidad::Limpiar()
+{
+
 }
 
 void FormUnidad::on_guardar_clicked()

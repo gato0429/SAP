@@ -24,7 +24,7 @@ FormMarca::FormMarca(QWidget *parent) :
     ui->ButtonModificar->setEnabled(false);
     ui->ButtonEliminar->setEnabled(false);
     ui->ButtonGuardar->setEnabled(true);
-
+    Habilitar();
 }
 
 FormMarca::~FormMarca()
@@ -153,12 +153,29 @@ void FormMarca::AsignarCampos()
     Objeto.setCodigoImagen(CodigoImagen);
 }
 
+void FormMarca::Habilitar()
+{
+    ui->LineNombre->setEnabled(true);
+}
+
+void FormMarca::Deshabilitar()
+{
+    ui->LineNombre->setEnabled(false);
+}
+
+void FormMarca::Limpiar()
+{
+    ui->LineCodigo->clear();
+    ui->LineImagen->clear();
+    ui->LineNombre->clear();
+    CodigoImagen.clear();
+}
+
 void FormMarca::SetObjeto(ObjetoMaestro *ObjetoTipo)
 {
 
     Objeto=*((Marca*)(ObjetoTipo));
-    ui->LineNombre->setEnabled(false);
-//    ui->LineImagen->setReadOnly(true);
+    Deshabilitar();
 
     ui->LineCodigo->setText(Objeto.getCodigo());
     ui->LineNombre->setText(Objeto.getNombre());
@@ -167,7 +184,7 @@ void FormMarca::SetObjeto(ObjetoMaestro *ObjetoTipo)
     QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getRutaImagen());
     ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
-
+    /*-----Manipulacion de los Botones------*/
     ui->ButtonModificar->setEnabled(true);
     ui->ButtonEliminar->setEnabled(true);
     ui->ButtonGuardar->setEnabled(false);
@@ -192,11 +209,17 @@ void FormMarca::on_ButtonGuardar_clicked()
     if(Estado==INSERTAR)
     {
     if(Guardar())
+    Limpiar();
     emit ActualizarRepisa((ObjetoMaestro*)new Marca());
     }
     if(Estado==MODIFICAR)
     {
     if(Modificar())
+        Deshabilitar();
+        /*Volver a su estado los botones*/
+        ui->ButtonGuardar->setEnabled(false);
+        ui->ButtonModificar->setEnabled(true);
+        ui->ButtonEliminar->setEnabled(true);
      emit ActualizarRepisa((ObjetoMaestro*)new Marca());
     }
 }
@@ -204,13 +227,14 @@ void FormMarca::on_ButtonGuardar_clicked()
 void FormMarca::on_ButtonModificar_clicked()
 {
    Estado=MODIFICAR;
+   /*--Habilitacion Botones-*/
    ui->ButtonModificar->setEnabled(false);
    ui->ButtonEliminar->setEnabled(false);
    ui->ButtonGuardar->setEnabled(true);
    ui->ButtonArchivoImagen->setEnabled(true);
-   ui->LineNombre->setEnabled(true);
+   /*---Desabilitar Campos--*/
+   Habilitar();
 }
-
 void FormMarca::on_ButtonEliminar_clicked()
 {
     if(Eliminar())

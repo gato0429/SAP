@@ -72,7 +72,9 @@ protected:
     bool Eliminar();
     bool ValidarCampos();
     void AsignarCampos();
-
+    void Habilitar();
+    void Deshabilitar();
+    void Limpiar();
     // FormMaestro interface
 public:
     void SetObjeto(ObjetoMaestro *ObjetoTipo);

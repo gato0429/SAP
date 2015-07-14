@@ -244,6 +244,21 @@ void FormArticuloTipo::AsignarCampos()
     qDebug()<<"PAse"+CodigoImagen;
 }
 
+void FormArticuloTipo::Habilitar()
+{
+
+}
+
+void FormArticuloTipo::Deshabilitar()
+{
+
+}
+
+void FormArticuloTipo::Limpiar()
+{
+
+}
+
 
 void FormArticuloTipo::SetObjeto(ObjetoMaestro *ObjetoTipo)
 {

@@ -310,6 +310,21 @@ void FormArticulo::AsignarCampos()
     Objeto.setVigencia(ui->ComboVigencia->currentText());
 }
 
+void FormArticulo::Habilitar()
+{
+
+}
+
+void FormArticulo::Deshabilitar()
+{
+
+}
+
+void FormArticulo::Limpiar()
+{
+
+}
+
 
 
 

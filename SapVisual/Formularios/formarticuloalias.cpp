@@ -146,6 +146,21 @@ void FormArticuloAlias::AsignarCampos()
     Objeto.setCodigoArticulo(ui->LineCodigoArticulo->text());
 
 }
+
+void FormArticuloAlias::Habilitar()
+{
+
+}
+
+void FormArticuloAlias::Deshabilitar()
+{
+
+}
+
+void FormArticuloAlias::Limpiar()
+{
+
+}
 void FormArticuloAlias::on_eliminar_clicked()
 {
     Eliminar();
