@@ -1,17 +1,17 @@
-#include "pgmodelo.h"
+#include "pgmoneda.h"
 
-PgModelo::PgModelo()
+PgMoneda::PgMoneda()
 {
 
 }
 
 
 
-bool PgModelo::Borrar(Modelo valor)
+bool PgMoneda::Borrar(Moneda valor)
 {
     QSqlQuery query;
 
-    bool flag=query.exec("DELETE FROM modelo WHERE codigo='"+valor.getCodigo()+"'");
+    bool flag=query.exec("DELETE FROM moneda WHERE codigo='"+valor.getCodigo()+"'");
 
     if(!flag)
     {
@@ -22,33 +22,31 @@ bool PgModelo::Borrar(Modelo valor)
     return  flag;
 }
 
-bool PgModelo::Insertar(Modelo valor)
-{
-    QSqlQuery query;
-      query.prepare("INSERT INTO modelo("
-                    "nombre, codigo_imagen)"
-            "VALUES (?, ?);");
+bool PgMoneda::Insertar(Moneda valor)
+{QSqlQuery query;
+    query.prepare("INSERT INTO moneda(nombre, codigo_imagen)"
+          " VALUES (?, ?);");
 
-      query.addBindValue(valor.getNombre());
-      query.addBindValue(valor.getCodigoImagen());
+    query.addBindValue(valor.getNombre());
+    query.addBindValue(valor.getCodigoImagen());
 
-      bool flag=query.exec();
-      if(!flag)
-      {
-          MensajeEmergente mensaje;
-          mensaje.SetMensaje(query.lastError().databaseText(),ADVERTENCIA);
-          mensaje.exec();
-      }
-      return  flag;
+    bool flag=query.exec();
+    if(!flag)
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje(query.lastError().databaseText(),ADVERTENCIA);
+        mensaje.exec();
+    }
+    return  flag;
 
 }
 
-bool PgModelo::Actualizar(Modelo Antiguo, Modelo Nuevo)
+bool PgMoneda::Actualizar(Moneda Antiguo, Moneda Nuevo)
 {
     QSqlQuery query;
 
     QString consulta;
-    consulta="UPDATE modelo SET ";
+    consulta="UPDATE moneda SET ";
 
     int c=consulta.size();
 
@@ -97,15 +95,15 @@ bool PgModelo::Actualizar(Modelo Antiguo, Modelo Nuevo)
         mensaje.exec();
     }
     return flag;
+
 }
 
-Modelo PgModelo::Buscar(Modelo valor)
+Moneda PgMoneda::Buscar(Moneda valor)
 {
-
     QString consulta;
 
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_modelo WHERE ";
+                "FROM vista_detalle_moneda WHERE ";
 
 
     if(!valor.getCodigo().isNull())
@@ -136,7 +134,7 @@ Modelo PgModelo::Buscar(Modelo valor)
     QSqlQuery query(consulta);
 
     bool flag=true;
-    Modelo* resp=new Modelo();
+    Moneda* resp=new Moneda();
       while (query.next()&&flag ) {
 
           resp->setCodigo(query.value(0).toString());
@@ -150,23 +148,23 @@ Modelo PgModelo::Buscar(Modelo valor)
 
 }
 
-QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA Tipo)
+QMap<QString, ObjetoMaestro *> *PgMoneda::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
 {
     MapaRepisaGlobal=new QList<ObjetoMaestro*>();
 
-    Modelo* val=(Modelo*)(valor);
+    Moneda* val=(Moneda*)(valor);
     QString consulta;
 
-    if(Tipo==TODO)
+    if(tipo==TODO)
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_modelo";
+                "FROM vista_detalle_moneda";
 
     }
     else
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_modelo WHERE ";
+                "FROM vista_detalle_moneda WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -196,7 +194,7 @@ QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QStri
     QSqlQuery query(consulta);
 
       while (query.next() ) {
-          Modelo* resp=new Modelo();
+          Moneda* resp=new Moneda();
           resp->setCodigo(query.value(0).toString());
           resp->setNombre(query.value(1).toString());
           resp->setCodigoImagen(query.value(2).toString());
@@ -209,12 +207,12 @@ QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QStri
 
 
     return salida;
+
 }
 
-qint64 PgModelo::Contar()
+qint64 PgMoneda::Contar()
 {
-
-    QString consulta="SELECT count(*) FROM modelo";
+    QString consulta="SELECT count(*) FROM moneda";
     qint64 num=0;
 
     QSqlQuery query(consulta);
@@ -228,13 +226,13 @@ qint64 PgModelo::Contar()
   return num;
 }
 
-qint64 PgModelo::ContarConsulta(ObjetoMaestro *valor)
+qint64 PgMoneda::ContarConsulta(ObjetoMaestro *valor)
 {
-    Modelo* val=(Modelo*)(valor);
+    Moneda* val=(Moneda*)(valor);
     QString consulta;
 
     consulta="SELECT count(*) "
-            "FROM vista_detalle_modelo WHERE ";
+            "FROM vista_detalle_moneda WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -265,48 +263,48 @@ qint64 PgModelo::ContarConsulta(ObjetoMaestro *valor)
         }
 
     return num;
-
 }
 
-QSqlQueryModel *PgModelo::BuscarTabla(Modelo valor, QString Extra, CONSULTA tipo)
+QSqlQueryModel *PgMoneda::BuscarTabla(Moneda valor, QString Extra, CONSULTA tipo)
 {
     QString consulta;
 
-         if(tipo==TODO)
-         {
-             consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                     "FROM vista_detalle_modelo";
-         }
-         else
-         {
-             consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                           "FROM vista_detalle_modelo where";
+     if(tipo==TODO)
+     {
+         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+                 "FROM vista_detalle_moneda";
+     }
+     else
+     {
+         consulta="SELECT codigo, nombre,simbolo,  codigo_imagen, ruta_img "
+                       "FROM vista_detalle_moneda where";
 
-         if(!valor.getCodigo().isNull())
-         {
-             consulta=consulta+" codigo ilike '%"+valor.getCodigo()+"%' AND ";
-         }
+     if(!valor.getCodigo().isNull())
+     {
+         consulta=consulta+" codigo ilike '%"+valor.getCodigo()+"%' AND ";
+     }
 
-         if(!valor.getNombre().isNull())
-         {
-             consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
-         }
-         if(!valor.getCodigoImagen().isNull())
-         {
-             consulta=consulta+" codigo_imagen ilike '%"+valor.getCodigoImagen()+"%' AND ";
-         }
-         if(!valor.getRutaImagen().isNull())
-         {
-             consulta=consulta+" ruta_img ilike '%"+valor.getRutaImagen()+"%' AND ";
-         }
+     if(!valor.getNombre().isNull())
+     {
+         consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
+     }
+     if(!valor.getCodigoImagen().isNull())
+     {
+         consulta=consulta+" codigo_imagen ilike '%"+valor.getCodigoImagen()+"%' AND ";
+     }
+     if(!valor.getRutaImagen().isNull())
+     {
+         consulta=consulta+" ruta_img like '%"+valor.getRutaImagen()+"%' AND ";
+     }
 
-         consulta.replace(consulta.size()-5,5," ");
-         }
-         consulta=consulta+Extra;
+     consulta.replace(consulta.size()-5,5," ");
+     }
+     consulta=consulta+Extra;
 
-         QSqlQueryModel* model=new QSqlQueryModel();
-         model->setQuery(consulta);
+     QSqlQueryModel* model=new QSqlQueryModel();
+     model->setQuery(consulta);
 
-         qDebug()<<consulta;
-         return model;
+     qDebug()<<consulta;
+
+     return model;
 }

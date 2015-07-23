@@ -90,3 +90,7 @@ FabricaModelo *Postgres::CrearModelo()
 {
     return new PgModelo;
 }
+FabricaMoneda *Postgres::CrearMoneda()
+{
+    return new PgMoneda;
+}

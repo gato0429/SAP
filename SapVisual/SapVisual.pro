@@ -73,7 +73,11 @@ SOURCES += main.cpp\
     Fabricas/fabricamodelo.cpp \
     Postgres/pgmodelo.cpp \
     Repisas/repisamodelo.cpp \
-    Formularios/formmodelo.cpp
+    Formularios/formmodelo.cpp \
+    Fabricas/fabricamoneda.cpp \
+    Postgres/pgmoneda.cpp \
+    Formularios/formmoneda.cpp \
+    Repisas/repisamoneda.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -140,7 +144,11 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricamodelo.h \
     Postgres/pgmodelo.h \
     Repisas/repisamodelo.h \
-    Formularios/formmodelo.h
+    Formularios/formmodelo.h \
+    Fabricas/fabricamoneda.h \
+    Postgres/pgmoneda.h \
+    Formularios/formmoneda.h \
+    Repisas/repisamoneda.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -155,7 +163,8 @@ FORMS    += mainwindow.ui \
     Extras/visorimagenes.ui \
     Busqueda/busquedamaestra.ui \
     Formularios/formmarca.ui \
-    Formularios/formmodelo.ui
+    Formularios/formmodelo.ui \
+    Formularios/formmoneda.ui
 
 RESOURCES += \
     Recursos.qrc

@@ -265,7 +265,8 @@ qint64 PgMarca::ContarConsulta(ObjetoMaestro *valor)
 }
 
 QSqlQueryModel *PgMarca::BuscarTabla(Marca valor, QString Extra, CONSULTA tipo)
-{    QString consulta;
+{
+    QString consulta;
 
      if(tipo==TODO)
      {

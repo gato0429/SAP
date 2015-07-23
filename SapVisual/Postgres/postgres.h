@@ -11,6 +11,7 @@
 #include "pgarticuloalias.h"
 #include "pgmarca.h"
 #include "pgmodelo.h"
+#include "pgmoneda.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -36,6 +37,7 @@ public:
     FabricaArticuloAlias *CrearArticuloAlias();
     FabricaMarca         *CrearMarca();
     FabricaModelo        *CrearModelo();
+    FabricaMoneda        *CrearMoneda();
 };
 
 
