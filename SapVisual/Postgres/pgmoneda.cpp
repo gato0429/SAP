@@ -1,15 +1,17 @@
-#include "pgmarca.h"
+#include "pgmoneda.h"
 
-PgMarca::PgMarca()
+PgMoneda::PgMoneda()
 {
 
 }
 
-bool PgMarca::Borrar(Marca valor)
+
+
+bool PgMoneda::Borrar(Moneda valor)
 {
     QSqlQuery query;
 
-    bool flag=query.exec("DELETE FROM marca WHERE codigo='"+valor.getCodigo()+"'");
+    bool flag=query.exec("DELETE FROM moneda WHERE codigo='"+valor.getCodigo()+"'");
 
     if(!flag)
     {
@@ -20,33 +22,31 @@ bool PgMarca::Borrar(Marca valor)
     return  flag;
 }
 
-bool PgMarca::Insertar(Marca valor)
-{
+bool PgMoneda::Insertar(Moneda valor)
+{QSqlQuery query;
+    query.prepare("INSERT INTO moneda(nombre, codigo_imagen)"
+          " VALUES (?, ?);");
 
-    QSqlQuery query;
-      query.prepare("INSERT INTO marca(nombre, codigo_imagen)"
-            " VALUES (?, ?);");
+    query.addBindValue(valor.getNombre());
+    query.addBindValue(valor.getCodigoImagen());
 
-      query.addBindValue(valor.getNombre());
-      query.addBindValue(valor.getCodigoImagen());
-
-      bool flag=query.exec();
-      if(!flag)
-      {
-          MensajeEmergente mensaje;
-          mensaje.SetMensaje(query.lastError().databaseText(),ADVERTENCIA);
-          mensaje.exec();
-      }
-      return  flag;
+    bool flag=query.exec();
+    if(!flag)
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje(query.lastError().databaseText(),ADVERTENCIA);
+        mensaje.exec();
+    }
+    return  flag;
 
 }
 
-bool PgMarca::Actualizar(Marca Antiguo, Marca Nuevo)
+bool PgMoneda::Actualizar(Moneda Antiguo, Moneda Nuevo)
 {
     QSqlQuery query;
 
     QString consulta;
-    consulta="UPDATE marca SET ";
+    consulta="UPDATE moneda SET ";
 
     int c=consulta.size();
 
@@ -98,13 +98,12 @@ bool PgMarca::Actualizar(Marca Antiguo, Marca Nuevo)
 
 }
 
-Marca PgMarca::Buscar(Marca valor)
+Moneda PgMoneda::Buscar(Moneda valor)
 {
-
     QString consulta;
 
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_marca WHERE ";
+                "FROM vista_detalle_moneda WHERE ";
 
 
     if(!valor.getCodigo().isNull())
@@ -135,7 +134,7 @@ Marca PgMarca::Buscar(Marca valor)
     QSqlQuery query(consulta);
 
     bool flag=true;
-    Marca* resp=new Marca();
+    Moneda* resp=new Moneda();
       while (query.next()&&flag ) {
 
           resp->setCodigo(query.value(0).toString());
@@ -146,25 +145,26 @@ Marca PgMarca::Buscar(Marca valor)
       }
 
        return *resp;
+
 }
-/*aqui toy*/
-QMap<QString, ObjetoMaestro *> *PgMarca::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
+
+QMap<QString, ObjetoMaestro *> *PgMoneda::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
 {
     MapaRepisaGlobal=new QList<ObjetoMaestro*>();
 
-    Marca* val=(Marca*)(valor);
+    Moneda* val=(Moneda*)(valor);
     QString consulta;
 
     if(tipo==TODO)
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_marca";
+                "FROM vista_detalle_moneda";
 
     }
     else
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_marca WHERE ";
+                "FROM vista_detalle_moneda WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -194,7 +194,7 @@ QMap<QString, ObjetoMaestro *> *PgMarca::BuscarMapa(ObjetoMaestro *valor, QStrin
     QSqlQuery query(consulta);
 
       while (query.next() ) {
-          Marca* resp=new Marca();
+          Moneda* resp=new Moneda();
           resp->setCodigo(query.value(0).toString());
           resp->setNombre(query.value(1).toString());
           resp->setCodigoImagen(query.value(2).toString());
@@ -207,11 +207,12 @@ QMap<QString, ObjetoMaestro *> *PgMarca::BuscarMapa(ObjetoMaestro *valor, QStrin
 
 
     return salida;
+
 }
 
-qint64 PgMarca::Contar()
+qint64 PgMoneda::Contar()
 {
-    QString consulta="SELECT count(*) FROM marca";
+    QString consulta="SELECT count(*) FROM moneda";
     qint64 num=0;
 
     QSqlQuery query(consulta);
@@ -225,13 +226,13 @@ qint64 PgMarca::Contar()
   return num;
 }
 
-qint64 PgMarca::ContarConsulta(ObjetoMaestro *valor)
+qint64 PgMoneda::ContarConsulta(ObjetoMaestro *valor)
 {
-    Marca* val=(Marca*)(valor);
+    Moneda* val=(Moneda*)(valor);
     QString consulta;
 
     consulta="SELECT count(*) "
-            "FROM vista_detalle_marca WHERE ";
+            "FROM vista_detalle_moneda WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -264,19 +265,19 @@ qint64 PgMarca::ContarConsulta(ObjetoMaestro *valor)
     return num;
 }
 
-QSqlQueryModel *PgMarca::BuscarTabla(Marca valor, QString Extra, CONSULTA tipo)
+QSqlQueryModel *PgMoneda::BuscarTabla(Moneda valor, QString Extra, CONSULTA tipo)
 {
     QString consulta;
 
      if(tipo==TODO)
      {
          consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                 "FROM vista_detalle_marca";
+                 "FROM vista_detalle_moneda";
      }
      else
      {
-         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                       "FROM vista_detalle_marca where";
+         consulta="SELECT codigo, nombre,simbolo,  codigo_imagen, ruta_img "
+                       "FROM vista_detalle_moneda where";
 
      if(!valor.getCodigo().isNull())
      {

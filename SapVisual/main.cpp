@@ -2,8 +2,9 @@
 #include "principal.h"
 #include <QApplication>
 
+#include "Repisas/repisamodelo.h"
+#include "Repisas/repisamoneda.h"
 #include "Repisas/repisamarca.h"
-
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +15,7 @@ int main(int argc, char *argv[])
    // RepisaImagenes* w=new RepisaImagenes();
    //RepisaArticulo* w=new RepisaArticulo();
    //RepisaEmpleados* w=new RepisaEmpleados();
-   RepisaMarca* w=new RepisaMarca();
+   RepisaMoneda* w=new RepisaMoneda();
    w->show();
 
 

@@ -10,6 +10,8 @@
 #include "pgunidad.h"
 #include "pgarticuloalias.h"
 #include "pgmarca.h"
+#include "pgmodelo.h"
+#include "pgmoneda.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -33,7 +35,9 @@ public:
     FabricaEmpleados     *CrearEmpleado();
     FabricaUnidades      *CrearUnidad();
     FabricaArticuloAlias *CrearArticuloAlias();
-    FabricaMarca *CrearMarca();
+    FabricaMarca         *CrearMarca();
+    FabricaModelo        *CrearModelo();
+    FabricaMoneda        *CrearMoneda();
 };
 
 
