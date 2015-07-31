@@ -75,6 +75,7 @@ void FormMoneda::on_ButtonGuardar_clicked()
         ui->ButtonGuardar->setEnabled(false);
         ui->ButtonModificar->setEnabled(true);
         ui->ButtonEliminar->setEnabled(true);
+        ui->ButtonArchivoImagen->setEnabled(false);
      emit ActualizarRepisa((ObjetoMaestro*)new Moneda());
     }
 }
@@ -107,7 +108,7 @@ void FormMoneda::SetObjeto(ObjetoMaestro *ObjetoTipo)
     ui->LineCodigo->setText(Objeto.getCodigo());
     ui->LineNombre->setText(Objeto.getNombre());
     ui->LineImagen->setText(Objeto.getRutaImagen());
-
+    ui->LineSimbolo->setText(Objeto.getSimbolo());
     QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getRutaImagen());
     ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
@@ -221,6 +222,13 @@ bool FormMoneda::ValidarCampos()
         mensaje.exec();
         return false;
     }
+    if(ui->LineSimbolo->text().isEmpty())
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje("Simbolo Vacio",ADVERTENCIA);
+        mensaje.exec();
+        return false;
+    }
     if(ui->LineImagen->text().isEmpty())
     {
         MensajeEmergente mensaje;
@@ -236,17 +244,20 @@ void FormMoneda::AsignarCampos()
 {
     Antiguo.setCodigo(ui->LineCodigo->text());
     Objeto.setNombre(ui->LineNombre->text());
+    Objeto.setSimbolo(ui->LineSimbolo->text());
     Objeto.setCodigoImagen(CodigoImagen);
 }
 
 void FormMoneda::Habilitar()
 {
     ui->LineNombre->setEnabled(true);
+    ui->LineSimbolo->setEnabled(true);
 }
 
 void FormMoneda::Deshabilitar()
 {
     ui->LineNombre->setEnabled(false);
+    ui->LineSimbolo->setEnabled(false);
 }
 
 void FormMoneda::Limpiar()
