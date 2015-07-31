@@ -9,7 +9,7 @@ bool PgVehiculoTipo::Borrar(VehiculoTipo valor)
 {
     QSqlQuery query;
 
-    bool flag=query.exec("DELETE FROM VehiculoTipo WHERE codigo='"+valor.getCodigo()+"'");
+    bool flag=query.exec("DELETE FROM vehiculo_tipo WHERE codigo='"+valor.getCodigo()+"'");
 
     if(!flag)
     {
@@ -23,7 +23,7 @@ bool PgVehiculoTipo::Borrar(VehiculoTipo valor)
 bool PgVehiculoTipo::Insertar(VehiculoTipo valor)
 {
     QSqlQuery query;
-      query.prepare("INSERT INTO vehiculotipo(nombre, codigo_imagen)"
+      query.prepare("INSERT INTO vehiculo_tipo(nombre, codigo_imagen)"
             " VALUES (?, ?);");
 
       query.addBindValue(valor.getNombre());
@@ -44,7 +44,7 @@ bool PgVehiculoTipo::Actualizar(VehiculoTipo Antiguo, VehiculoTipo Nuevo)
     QSqlQuery query;
 
     QString consulta;
-    consulta="UPDATE vehiculotipo SET ";
+    consulta="UPDATE vehiculo_tipo SET ";
 
     int c=consulta.size();
 
@@ -100,7 +100,7 @@ VehiculoTipo PgVehiculoTipo::Buscar(VehiculoTipo valor)
     QString consulta;
 
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_vehiculotipo WHERE ";
+                "FROM vista_detalle_vehiculo_tipo WHERE ";
 
 
     if(!valor.getCodigo().isNull())
@@ -154,13 +154,13 @@ QMap<QString, ObjetoMaestro *> *PgVehiculoTipo::BuscarMapa(ObjetoMaestro *valor,
     if(tipo==TODO)
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_vehiculotipo";
+                "FROM vista_detalle_vehiculo_tipo";
 
     }
     else
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_vehiculotipo WHERE ";
+                "FROM vista_detalle_vehiculo_tipo WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -207,7 +207,7 @@ QMap<QString, ObjetoMaestro *> *PgVehiculoTipo::BuscarMapa(ObjetoMaestro *valor,
 
 qint64 PgVehiculoTipo::Contar()
 {
-    QString consulta="SELECT count(*) FROM vehiculotipo";
+    QString consulta="SELECT count(*) FROM vehiculo_tipo";
     qint64 num=0;
 
     QSqlQuery query(consulta);
@@ -227,7 +227,7 @@ qint64 PgVehiculoTipo::ContarConsulta(ObjetoMaestro *valor)
     QString consulta;
 
     consulta="SELECT count(*) "
-            "FROM vista_detalle_vehiculotipo WHERE ";
+            "FROM vista_detalle_vehiculo_tipo WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -267,12 +267,12 @@ QSqlQueryModel *PgVehiculoTipo::BuscarTabla(VehiculoTipo valor, QString Extra, C
      if(tipo==TODO)
      {
          consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                 "FROM vista_detalle_vehiculotipo";
+                 "FROM vista_detalle_vehiculo_tipo";
      }
      else
      {
          consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                       "FROM vista_detalle_vehiculotipo where";
+                       "FROM vista_detalle_vehiculo_tipo where";
 
      if(!valor.getCodigo().isNull())
      {
