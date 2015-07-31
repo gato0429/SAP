@@ -9,7 +9,7 @@ static FabricaBaseDatos* IniciarBD()
     {
      FabricaBaseDatos* mybd=FabricaBaseDatos::IniciarFabrica(POSTGRES);
           mybd->Fabrica->setDataBaseName("Core2015");
-          mybd->Fabrica->setHostName("localhost");
+          mybd->Fabrica->setHostName("192.168.1.40");
           mybd->Fabrica->setPort(5432);
           mybd->Fabrica->setUserName("postgres");
           mybd->Fabrica->setPassword("root");
