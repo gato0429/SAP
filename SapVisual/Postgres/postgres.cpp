@@ -94,3 +94,7 @@ FabricaMoneda *Postgres::CrearMoneda()
 {
     return new PgMoneda;
 }
+FabricaVehiculoTipo *Postgres::CrearVehiculoTipo()
+{
+    return new PgVehiculoTipo;
+}

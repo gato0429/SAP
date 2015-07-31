@@ -13,6 +13,7 @@
 #include "../Fabricas/fabricamarca.h"
 #include "../Fabricas/fabricamodelo.h"
 #include "../Fabricas/fabricamoneda.h"
+#include "../Fabricas/fabricavehiculotipo.h"
 
 using namespace std;
 
@@ -63,7 +64,7 @@ public:
     virtual FabricaMarca          *CrearMarca()=0;
     virtual FabricaModelo         *CrearModelo()=0;
     virtual FabricaMoneda         *CrearMoneda()=0;
-
+    virtual FabricaVehiculoTipo   *CrearVehiculoTipo()=0;
 };
 
 #endif // BASEDATOS_H

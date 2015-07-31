@@ -12,6 +12,7 @@
 #include "pgmarca.h"
 #include "pgmodelo.h"
 #include "pgmoneda.h"
+#include "pgvehiculotipo.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -38,6 +39,7 @@ public:
     FabricaMarca         *CrearMarca();
     FabricaModelo        *CrearModelo();
     FabricaMoneda        *CrearMoneda();
+    FabricaVehiculoTipo  *CrearVehiculoTipo();
 };
 
 
