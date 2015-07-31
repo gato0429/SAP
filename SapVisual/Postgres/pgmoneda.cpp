@@ -24,10 +24,11 @@ bool PgMoneda::Borrar(Moneda valor)
 
 bool PgMoneda::Insertar(Moneda valor)
 {QSqlQuery query;
-    query.prepare("INSERT INTO moneda(nombre, codigo_imagen)"
-          " VALUES (?, ?);");
+    query.prepare("INSERT INTO moneda(nombre,simbolo, codigo_imagen)"
+          " VALUES (?,?, ?);");
 
     query.addBindValue(valor.getNombre());
+    query.addBindValue(valor.getSimbolo());
     query.addBindValue(valor.getCodigoImagen());
 
     bool flag=query.exec();
@@ -59,6 +60,10 @@ bool PgMoneda::Actualizar(Moneda Antiguo, Moneda Nuevo)
     {
         consulta=consulta+", nombre='"+Nuevo.getNombre()+"'";
     }
+    if(!Nuevo.getSimbolo().isNull())
+    {
+        consulta=consulta+", simbolo='"+Nuevo.getSimbolo()+"'";
+    }
     if(!Nuevo.getCodigoImagen().isNull())
     {
         consulta=consulta+", codigo_imagen='"+Nuevo.getCodigoImagen()+"'";
@@ -77,6 +82,10 @@ bool PgMoneda::Actualizar(Moneda Antiguo, Moneda Nuevo)
     if(!Antiguo.getNombre().isNull())
     {
         consulta=consulta+"(nombre='"+Antiguo.getNombre()+"') AND ";
+    }
+    if(!Antiguo.getSimbolo().isNull())
+    {
+        consulta=consulta+"(simbolo='"+Antiguo.getSimbolo()+"') AND ";
     }
     if(!Antiguo.getCodigoImagen().isNull())
     {
@@ -102,7 +111,7 @@ Moneda PgMoneda::Buscar(Moneda valor)
 {
     QString consulta;
 
-        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+        consulta="SELECT codigo, simbolo, nombre, codigo_imagen, ruta_img "
                 "FROM vista_detalle_moneda WHERE ";
 
 
@@ -113,6 +122,10 @@ Moneda PgMoneda::Buscar(Moneda valor)
     if(!valor.getNombre().isNull())
     {
         consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
+    }
+    if(!valor.getSimbolo().isNull())
+    {
+        consulta=consulta+" simbolo ilike '%"+valor.getSimbolo()+"%' AND ";
     }
     if(!valor.getCodigoImagen().isNull())
     {
@@ -139,8 +152,9 @@ Moneda PgMoneda::Buscar(Moneda valor)
 
           resp->setCodigo(query.value(0).toString());
           resp->setNombre(query.value(1).toString());
-          resp->setCodigoImagen(query.value(2).toString());
-          resp->setRutaImagen(query.value(3).toString());
+          resp->setSimbolo(query.value(2).toString());
+          resp->setCodigoImagen(query.value(3).toString());
+          resp->setRutaImagen(query.value(4).toString());
           flag=false;
       }
 
@@ -157,13 +171,13 @@ QMap<QString, ObjetoMaestro *> *PgMoneda::BuscarMapa(ObjetoMaestro *valor, QStri
 
     if(tipo==TODO)
     {
-        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+        consulta="SELECT codigo, nombre,simbolo, codigo_imagen, ruta_img "
                 "FROM vista_detalle_moneda";
 
     }
     else
     {
-        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+        consulta="SELECT codigo, nombre,simbolo, codigo_imagen, ruta_img "
                 "FROM vista_detalle_moneda WHERE ";
 
     if(!val->getCodigo().isNull())
@@ -174,6 +188,10 @@ QMap<QString, ObjetoMaestro *> *PgMoneda::BuscarMapa(ObjetoMaestro *valor, QStri
     if(!val->getNombre().isNull())
     {
         consulta=consulta+" nombre ilike '%"+val->getNombre()+"%' AND ";
+    }
+    if(!val->getSimbolo().isNull())
+    {
+        consulta=consulta+" simbolo ilike '%"+val->getSimbolo()+"%' AND ";
     }
     if(!val->getCodigoImagen().isNull())
     {
@@ -197,8 +215,9 @@ QMap<QString, ObjetoMaestro *> *PgMoneda::BuscarMapa(ObjetoMaestro *valor, QStri
           Moneda* resp=new Moneda();
           resp->setCodigo(query.value(0).toString());
           resp->setNombre(query.value(1).toString());
-          resp->setCodigoImagen(query.value(2).toString());
-          resp->setRutaImagen(query.value(3).toString());
+          resp->setSimbolo(query.value(2).toString());
+          resp->setCodigoImagen(query.value(3).toString());
+          resp->setRutaImagen(query.value(4).toString());
 
 
           salida->insert(resp->getCodigo(),(ObjetoMaestro*)resp);
@@ -243,6 +262,10 @@ qint64 PgMoneda::ContarConsulta(ObjetoMaestro *valor)
     {
         consulta=consulta+" nombre ilike '%"+val->getNombre()+"%' AND ";
     }
+    if(!val->getSimbolo().isNull())
+    {
+        consulta=consulta+" simbolo ilike '%"+val->getSimbolo()+"%' AND ";
+    }
     if(!val->getCodigoImagen().isNull())
     {
         consulta=consulta+" codigo_imagen ilike '%"+val->getCodigoImagen()+"%' AND ";
@@ -271,7 +294,7 @@ QSqlQueryModel *PgMoneda::BuscarTabla(Moneda valor, QString Extra, CONSULTA tipo
 
      if(tipo==TODO)
      {
-         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+         consulta="SELECT codigo, nombre,simbolo, codigo_imagen, ruta_img "
                  "FROM vista_detalle_moneda";
      }
      else
@@ -287,6 +310,10 @@ QSqlQueryModel *PgMoneda::BuscarTabla(Moneda valor, QString Extra, CONSULTA tipo
      if(!valor.getNombre().isNull())
      {
          consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
+     }
+     if(!valor.getSimbolo().isNull())
+     {
+         consulta=consulta+" simbolo ilike '%"+valor.getSimbolo()+"%' AND ";
      }
      if(!valor.getCodigoImagen().isNull())
      {

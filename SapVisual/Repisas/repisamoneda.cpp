@@ -37,7 +37,7 @@ void RepisaMoneda::BuscarClick()
 {  Busqueda=new BusquedaMaestra(this);
 
     QStringList campos;
-    campos <<"Codigo" <<"Codigo Imagen"<< "Nombre";
+    campos <<"Codigo" <<"Simbolo"<<"Codigo Imagen"<< "Nombre";
     Busqueda->ComboCampos->addItems(campos);
 
     Busqueda->move(this->x()+this->width()-60,this->y()+90);
@@ -71,10 +71,14 @@ void RepisaMoneda::ObtenerConsulta()
         OrderByCampo="codigo";
         break;
     case 1:
+        ObjetoBusqueda->setSimbolo(LineBuscar->text());
+        OrderByCampo="simbolo";
+        break;
+    case 2:
         ObjetoBusqueda->setCodigoImagen(LineBuscar->text());
         OrderByCampo="codigo_imagen";
         break;
-    case 2:
+    case 3:
         ObjetoBusqueda->setNombre(LineBuscar->text());
         OrderByCampo="nombre";
         break;
@@ -93,8 +97,9 @@ void RepisaMoneda::ObtenerConsulta()
 
     Model->setHeaderData(0,Qt::Horizontal,"Codigo");
     Model->setHeaderData(1,Qt::Horizontal,"Nombre");
-    Model->setHeaderData(2,Qt::Horizontal,"Codigo Imagen");
-    Model->setHeaderData(3,Qt::Horizontal,"Ruta");
+    Model->setHeaderData(2,Qt::Horizontal,"Simbolo");
+    Model->setHeaderData(3,Qt::Horizontal,"Codigo Imagen");
+    Model->setHeaderData(4,Qt::Horizontal,"Ruta");
 
 
     QList<bool> CamposVisibles;
