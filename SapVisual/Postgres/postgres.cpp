@@ -98,3 +98,8 @@ FabricaVehiculoTipo *Postgres::CrearVehiculoTipo()
 {
     return new PgVehiculoTipo;
 }
+
+FabricaVehiculoRubro *Postgres::CrearVehiculoRubro()
+{
+    return new PgVehiculoRubro;
+}

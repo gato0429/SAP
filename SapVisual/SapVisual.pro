@@ -82,7 +82,12 @@ SOURCES += main.cpp\
     Postgres/pgvehiculotipo.cpp \
     Objetos/vehiculotipo.cpp \
     Formularios/formvehiculotipo.cpp \
-    Repisas/repisavehiculotipo.cpp
+    Repisas/repisavehiculotipo.cpp \
+    Objetos/vehiculorubro.cpp \
+    Fabricas/fabricavehiculorubro.cpp \
+    Postgres/pgvehiculorubro.cpp \
+    Formularios/formvehiculorubro.cpp \
+    Repisas/repisavehiculorubro.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -158,7 +163,12 @@ HEADERS  += mainwindow.h \
     Postgres/pgvehiculotipo.h \
     Objetos/vehiculotipo.h \
     Formularios/formvehiculotipo.h \
-    Repisas/repisavehiculotipo.h
+    Repisas/repisavehiculotipo.h \
+    Objetos/vehiculorubro.h \
+    Fabricas/fabricavehiculorubro.h \
+    Postgres/pgvehiculorubro.h \
+    Formularios/formvehiculorubro.h \
+    Repisas/repisavehiculorubro.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -175,7 +185,8 @@ FORMS    += mainwindow.ui \
     Formularios/formmarca.ui \
     Formularios/formmodelo.ui \
     Formularios/formmoneda.ui \
-    Formularios/formvehiculotipo.ui
+    Formularios/formvehiculotipo.ui \
+    Formularios/formvehiculorubro.ui
 
 RESOURCES += \
     Recursos.qrc
