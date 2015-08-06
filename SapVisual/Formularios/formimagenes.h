@@ -2,12 +2,13 @@
 #define FORMIMAGENES_H
 
 #include <QWidget>
+#include "formmaestro.h"
 #include "../Repisas/repisaimagenes.h"
 namespace Ui {
 class FormImagenes;
 }
 class RepisaImagenes;
-class FormImagenes : public QWidget
+class FormImagenes : public QDialog,FormMaestro
 {
     Q_OBJECT
 
@@ -23,7 +24,13 @@ private:
     QMap<QString,int> ListaCarpetas;
     QTreeWidgetItem*  CarpetaActual;
     ESTADO Estado;
+
     RepisaImagenes* mRepisa;
+
+    FabricaImagenes* Fab;
+    Imagen          Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
+    Imagen          Antiguo;
+
 protected:
     void mousePressEvent(QMouseEvent *evt)
     {
@@ -42,16 +49,32 @@ private slots:
 
     void on_BotonImagen_clicked();
 
-    void on_BotonAgregarImagen_clicked();
-
-    void on_BotonCarpetaBorrar_4_clicked();
-
     void on_BotonCarpetaAgregar_4_clicked();
 
-    void on_VisorArbol_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
+    void on_ButtonGuardar_clicked();
+
+    void on_ButtonModificar_clicked();
+
+    void on_ButtonEliminar_clicked();
+
+    void on_ButtonRegresar_clicked();
 
 private:
     QPoint oldPos;
+
+    // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
+protected:
+    bool Guardar();
+    bool Modificar();
+    bool Eliminar();
+    bool ValidarCampos();
+    void AsignarCampos();
+    void Habilitar();
+    void Deshabilitar();
+    void Limpiar();
 };
 
 #endif // FORMIMAGENES_H

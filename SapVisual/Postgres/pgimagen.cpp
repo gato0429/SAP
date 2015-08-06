@@ -33,6 +33,7 @@ bool PgImagen::Actualizar(Imagen Antiguo, Imagen Nuevo)
 {
     QSqlQuery query;
 
+
     QString consulta;
 
     consulta="UPDATE imagenes SET ";
@@ -41,20 +42,21 @@ bool PgImagen::Actualizar(Imagen Antiguo, Imagen Nuevo)
 
     if(!Nuevo.getCodigo().isNull())
     {
-        consulta=consulta+", codigo='"+Nuevo.getCodigo()+"'";
+        consulta=consulta+" ,codigo=:cod";
     }
     if(!Nuevo.getCarpeta().isNull())
     {
-        consulta=consulta+", carpeta='"+Nuevo.getCarpeta()+"'";
+        consulta=consulta+" ,carpeta=:car";
     }
     if(!Nuevo.getNombre().isNull())
     {
-        consulta=consulta+", nombre='"+Nuevo.getNombre()+"'";
+        consulta=consulta+" ,nombre=:nom";
     }
     if(!Nuevo.getPixel().isNull())
     {
-        consulta=consulta+", pixel='"+Nuevo.getPixel()+"'";
+        consulta=consulta+" ,pixel=:pix";
     }
+
     /*-------------------------------------*/
     /*contar la cantidad de caracteres desde el inicio hasta set*/
     consulta.replace(c,2," ");
@@ -65,25 +67,41 @@ bool PgImagen::Actualizar(Imagen Antiguo, Imagen Nuevo)
 
     if(!Antiguo.getCodigo().isNull())
     {
-        consulta=consulta+", codigo='"+Antiguo.getCodigo()+"') AND ";
+        consulta=consulta+"(codigo='"+Antiguo.getCodigo()+"') AND ";
     }
     if(!Antiguo.getCarpeta().isNull())
     {
-        consulta=consulta+", carpeta='"+Antiguo.getCarpeta()+"') AND ";
+        consulta=consulta+"(carpeta='"+Antiguo.getCarpeta()+"') AND ";
     }
     if(!Antiguo.getNombre().isNull())
     {
-        consulta=consulta+", nombre='"+Antiguo.getNombre()+"') AND ";
+        consulta=consulta+"( nombre='"+Antiguo.getNombre()+"') AND ";
     }
     if(!Antiguo.getPixel().isNull())
     {
-        consulta=consulta+", pixel='"+Antiguo.getPixel()+"') AND ";
+        consulta=consulta+"(pixel='"+Antiguo.getPixel()+"') AND ";
     }
 
 
-    consulta.replace(consulta.size()-5,5,";");
+    consulta.replace(consulta.size()-5,5," ");
+
     qDebug()<<consulta;
-    return query.exec(consulta);
+    query.prepare(consulta);
+    query.bindValue(":cod",Nuevo.getCodigo());
+    query.bindValue(":car",Nuevo.getCarpeta());
+    query.bindValue(":nom",Nuevo.getNombre());
+    query.bindValue(":pix",Nuevo.getPixel());
+
+
+    bool flag=query.exec();
+
+    if(!flag)
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje(query.lastError().databaseText(),ADVERTENCIA);
+        mensaje.exec();
+    }
+    return flag;
 }
 
 Imagen PgImagen::Buscar(Imagen valor)
@@ -97,19 +115,19 @@ Imagen PgImagen::Buscar(Imagen valor)
 
     if(!valor.getCodigo().isNull())
     {
-        consulta=consulta+" codigo like '%"+valor.getCodigo()+"%' AND ";
+        consulta=consulta+" codigo ilike '%"+valor.getCodigo()+"%' AND ";
     }
     if(!valor.getCarpeta().isNull())
     {
-        consulta=consulta+" carpeta like '%"+valor.getCarpeta()+"%' AND ";
+        consulta=consulta+" carpeta ilike '%"+valor.getCarpeta()+"%' AND ";
     }
     if(!valor.getNombre().isNull())
     {
-        consulta=consulta+" nombre like '%"+valor.getNombre()+"%' AND ";
+        consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
     }
     if(!valor.getPixel().isNull())
     {
-        consulta=consulta+" pixel like '%"+valor.getPixel()+"%' AND ";
+        consulta=consulta+" pixel ilike '%"+valor.getPixel()+"%' AND ";
     }
     consulta.replace(consulta.size()-5,5,";");
 
@@ -132,8 +150,9 @@ Imagen PgImagen::Buscar(Imagen valor)
 
 QMap<QString, ObjetoMaestro*> *PgImagen::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
 {
-    Imagen* val=(Imagen*)(valor);
+    MapaRepisaGlobal=new QList<ObjetoMaestro*>();
 
+    Imagen* val=(Imagen*)(valor);
     QString consulta;
 
     if(tipo==TODO)
@@ -150,19 +169,19 @@ QMap<QString, ObjetoMaestro*> *PgImagen::BuscarMapa(ObjetoMaestro *valor, QStrin
 
     if(!val->getCodigo().isNull())
     {
-        consulta=consulta+" codigo like '%"+val->getCodigo()+"%' AND ";
+        consulta=consulta+" codigo ilike '%"+val->getCodigo()+"%' AND ";
     }
     if(!val->getCarpeta().isNull())
     {
-        consulta=consulta+" carpeta like '%"+val->getCarpeta()+"%' AND ";
+        consulta=consulta+" carpeta ilike '%"+val->getCarpeta()+"%' AND ";
     }
     if(!val->getNombre().isNull())
     {
-        consulta=consulta+" nombre like '%"+val->getNombre()+"%' AND ";
+        consulta=consulta+" nombre ilike '%"+val->getNombre()+"%' AND ";
     }
     if(!val->getPixel().isNull())
     {
-        consulta=consulta+" pixel like '%"+val->getPixel()+"%' AND ";
+        consulta=consulta+" pixel ilike '%"+val->getPixel()+"%' AND ";
     }
 
     consulta.replace(consulta.size()-5,5,";");
@@ -183,6 +202,8 @@ QMap<QString, ObjetoMaestro*> *PgImagen::BuscarMapa(ObjetoMaestro *valor, QStrin
           resp->setNombre(query.value(2).toString());
           resp->setPixel(query.value(3).toByteArray());
           salida->insert(resp->getCodigo(), (ObjetoMaestro*)resp);
+          MapaRepisaGlobal->push_front((ObjetoMaestro*)resp);
+
       }
 
 
@@ -193,4 +214,89 @@ int PgImagen::Contar()
 {
 
 return 0;
+}
+
+
+QSqlQueryModel *PgImagen::BuscarTabla(Imagen valor, QString Extra, CONSULTA tipo)
+{
+    QString consulta;
+
+         if(tipo==TODO)
+         {
+             consulta="SELECT codigo, carpeta, nombre, pixel "
+                     " FROM imagenes;";
+         }
+         else
+         {
+             consulta="SELECT codigo, carpeta, nombre, pixel "
+                     " FROM imagenes where ";
+
+         if(!valor.getCodigo().isNull())
+         {
+             consulta=consulta+" codigo ilike '%"+valor.getCodigo()+"%' AND ";
+         }
+
+         if(!valor.getCarpeta().isNull())
+         {
+             consulta=consulta+" carpeta ilike '%"+valor.getCarpeta()+"%' AND ";
+         }
+         if(!valor.getNombre().isNull())
+         {
+             consulta=consulta+" nombre ilike '%"+valor.getNombre()+"%' AND ";
+         }
+         if(!valor.getPixel().isNull())
+         {
+             consulta=consulta+" pixel ilike '%"+valor.getPixel()+"%' AND ";
+         }
+
+         consulta.replace(consulta.size()-5,5," ");
+         }
+         consulta=consulta+Extra;
+
+         QSqlQueryModel* model=new QSqlQueryModel();
+         model->setQuery(consulta);
+
+         qDebug()<<consulta;
+         return model;
+
+}
+
+qint64 PgImagen::ContarConsulta(ObjetoMaestro *valor)
+{
+    Imagen* val=(Imagen*)(valor);
+    QString consulta;
+
+    consulta="SELECT count(*) "
+            "FROM imagenes WHERE ";
+
+    if(!val->getCodigo().isNull())
+    {
+        consulta=consulta+" codigo ilike '%"+val->getCodigo()+"%' AND ";
+    }
+    if(!val->getCarpeta().isNull())
+    {
+        consulta=consulta+" carpeta ilike '%"+val->getCarpeta()+"%' AND ";
+    }
+    if(!val->getNombre().isNull())
+    {
+        consulta=consulta+" nombre ilike '%"+val->getNombre()+"%' AND ";
+    }
+
+    if(!val->getPixel().isNull())
+    {
+        consulta=consulta+" pixel ilike '%"+val->getPixel()+"%' AND ";
+    }
+    consulta.replace(consulta.size()-5,5," ");
+
+
+        QSqlQuery query(consulta);
+        qint64 num;
+        while(query.next())
+        {
+          num=query.value(0).toLongLong();
+          return num;
+        }
+
+    return num;
+
 }

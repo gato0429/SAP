@@ -6,15 +6,70 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>490</width>
-    <height>355</height>
+    <width>377</width>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Icono</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Imagen</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="LabelImage">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Imagen</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="tabPosition">
       <enum>QTabWidget::East</enum>
@@ -37,170 +92,184 @@
        <string/>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0" colspan="2">
-        <widget class="QTreeWidget" name="VisorArbol">
-         <column>
-          <property name="text">
-           <string>Imagenes</string>
-          </property>
-         </column>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="0" column="8">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="leftMargin">
+          <number>0</number>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QLabel" name="labelImagen_4">
+          <widget class="QPushButton" name="ButtonGuardar">
            <property name="text">
-            <string>Imagen</string>
+            <string/>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/guardar.png</normaloff>:/Imagenes/iconos/guardar.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QPushButton" name="BotonCarpetaBorrar_4">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../Recursos.qrc">
-               <normaloff>:/Imagenes/iconos/delete.png</normaloff>:/Imagenes/iconos/delete.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-             <property name="autoDefault">
-              <bool>false</bool>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="BotonCarpetaAgregar_4">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../Recursos.qrc">
-               <normaloff>:/Imagenes/iconos/add.png</normaloff>:/Imagenes/iconos/add.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QPushButton" name="ButtonModificar">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/editar.png</normaloff>:/Imagenes/iconos/editar.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="LineCarpetaNueva_4"/>
+          <widget class="QPushButton" name="ButtonEliminar">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/delete.png</normaloff>:/Imagenes/iconos/delete.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ButtonRegresar">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/izquierda.png</normaloff>:/Imagenes/iconos/izquierda.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-       <item row="1" column="3">
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Carpeta:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="LineCarpeta">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="BotonImagen">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../Recursos.qrc">
-           <normaloff>:/Imagenes/iconos/buscar.png</normaloff>:/Imagenes/iconos/buscar.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>40</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Nombre:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="LineNombre"/>
-       </item>
-       <item row="3" column="3">
-        <widget class="QPushButton" name="BotonAgregarImagen">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../Recursos.qrc">
-           <normaloff>:/Imagenes/iconos/add.png</normaloff>:/Imagenes/iconos/add.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>40</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
+       <item row="0" column="0" colspan="2">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Codigo:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QPushButton" name="BotonCarpetaAgregar_4">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/add.png</normaloff>:/Imagenes/iconos/add.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLineEdit" name="LineCarpetaNueva_4"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="LineCodigo">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Carpeta:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="ComboCarpeta"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Nombre:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="LineNombre"/>
+         </item>
+         <item row="2" column="3">
+          <widget class="QPushButton" name="BotonImagen">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Recursos.qrc">
+             <normaloff>:/Imagenes/iconos/buscar.png</normaloff>:/Imagenes/iconos/buscar.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
-     </widget>
-     <widget class="QWidget" name="">
-      <attribute name="icon">
-       <iconset resource="../Recursos.qrc">
-        <normaloff>:/Imagenes/iconos/delete.png</normaloff>:/Imagenes/iconos/delete.png</iconset>
-      </attribute>
-      <attribute name="title">
-       <string/>
-      </attribute>
      </widget>
     </widget>
    </item>

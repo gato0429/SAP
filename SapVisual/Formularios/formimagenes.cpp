@@ -2,74 +2,51 @@
 #include "ui_formimagenes.h"
 
 FormImagenes::FormImagenes(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormImagenes)
+    QDialog(parent),
+    ui(new Ui::FormImagenes),FormMaestro()
 {
-    ui->setupUi(this);
-    /*Fondo Madera*/
-    this->setWindowFlags(Qt::Window
-                         | Qt::FramelessWindowHint
-                         | Qt::WindowMinimizeButtonHint
-                         | Qt::WindowMaximizeButtonHint
-                         | Qt::WindowCloseButtonHint);
 
-     QPixmap bkgnd(FondoForm);
-        bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-        QPalette palette;
-        palette.setBrush(QPalette::Background, bkgnd);
-        this->setPalette(palette);
+    ui->setupUi(this);
+    Form=this;
+    Parent=parent;
+
         connect(this,SIGNAL(ActivarBoton(QString)),parent,SLOT(ActivarBotonRepisa(QString)));
         connect(this,SIGNAL(ActualizarRepisa(ObjetoMaestro*)),parent,SLOT(ActualizarTodo(ObjetoMaestro*)));
+
+        SetFondo();
+        /*------------------------------*/
+        Fab=Bd->Fabrica->CrearImagen();
+
+        /*-----------------*/
+        ui->ButtonGuardar->setIcon(QIcon(BotonGuardar));
+        ui->ButtonModificar->setIcon(QIcon(BotonModificar));
+        ui->ButtonEliminar->setIcon(QIcon(BotonEliminar));
+
+        Estado=INSERTAR;
+        ui->ButtonModificar->setEnabled(false);
+        ui->ButtonEliminar->setEnabled(false);
+        ui->ButtonGuardar->setEnabled(true);
+        Habilitar();
 
 
      /*--------------------------*/
 
-        FabricaBaseDatos* bd=DefBD::IniciarBD();
-        bd->Fabrica->Conectar();
-        FabricaImagenes* Img=bd->Fabrica->CrearImagen();
-        QMap<QString,ObjetoMaestro*>* mapa=Img->BuscarMapa((ObjetoMaestro*)new Imagen(),"",TODO);
+        Bd->Fabrica->Conectar();
+        QMap<QString,ObjetoMaestro*>* mapa=Fab->BuscarMapa((ObjetoMaestro*)new Imagen(),"",TODO);
 
         QMap<QString,ObjetoMaestro*>::iterator it;
 
-
-        QMap<QString,int>::iterator itc;
-
-        this->ui->VisorArbol->setColumnCount(1);
-
-        int n=-1;
         for(it=mapa->begin(); it!=mapa->end(); it++)
         {
            Imagen* i=(Imagen*)(it.value());
            QString Carpeta= i->getCarpeta();
-           QString Nombre= i->getNombre();
-
-
-            if(ListaCarpetas.contains(Carpeta))
-            {
-                itc=ListaCarpetas.find(Carpeta);
-              QTreeWidgetItem* carp=ui->VisorArbol->topLevelItem(itc.value());
-              QTreeWidgetItem *Item = new QTreeWidgetItem(carp);
-              Item->setText(0, Nombre);
-           //   DefBD::GuardarImagen(Carpeta+"/"+Nombre);
-            }
-            else
-            {
-                n++;
-                ListaCarpetas.insert(Carpeta,n);
-                QTreeWidgetItem* carp=new QTreeWidgetItem(ui->VisorArbol);
-                carp->setText(0,Carpeta);
-
-                QTreeWidgetItem *Item = new QTreeWidgetItem(carp);
-                 Item->setText(0, Nombre);
-               //     DefBD::GuardarImagen(Carpeta+"/"+Nombre);
-            }
+           if (ui->ComboCarpeta->findText(Carpeta)==-1)
+           {
+            ui->ComboCarpeta->addItem(Carpeta);
+           }
         }
+        Bd->Fabrica->Desconectar();
 
-        bd->Fabrica->Desconectar();
-/*--------------*/
-
-
-     //   mRepisa=RepisaImagenes::Iniciar();
          ui->LineNombre->setInputMask("AAAAAAAAAAAAAAAA");
 }
 
@@ -80,10 +57,7 @@ FormImagenes::~FormImagenes()
 
 void FormImagenes::on_tabWidget_tabBarClicked(int index)
 {
-    if(index==1)
-    {
-    this->close();
-    }
+
 }
 
 void FormImagenes::on_BotonImagen_clicked()
@@ -94,125 +68,257 @@ void FormImagenes::on_BotonImagen_clicked()
     {
       QPixmap*  pix=new QPixmap(fileName);
 
-        ui->labelImagen_4->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+        ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
         //ui->imagen->setText(fileName);
 
      }
 }
 
-void FormImagenes::on_BotonAgregarImagen_clicked()
-{
-    Imagen* Img=new Imagen();
-    Img->setPixel(Definiciones::toQByteArray(fileName));
 
-    if(fileName.isEmpty())
-    {
-        QMessageBox mensaje;
-        mensaje.setText("Error, Imagen Necesaria");
-        mensaje.setIcon(QMessageBox::Information);
-        mensaje.exec();
-        return;
-    }
-    if(ui->LineCarpeta->text().isEmpty())
-    {
-        QMessageBox mensaje;
-        mensaje.setText("Error, Carpeta Necesaria");
-        mensaje.setIcon(QMessageBox::Information);
-        mensaje.exec();
-        return;
-    }
-    if(ui->LineNombre->text().isEmpty())
-    {
-        QMessageBox mensaje;
-        mensaje.setText("Error, Nombre Necesario");
-        mensaje.setIcon(QMessageBox::Information);
-        mensaje.exec();
-        return;
-    }
 
-    Img->setNombre(ui->LineNombre->text()+".png");
-    Img->setCarpeta(ui->LineCarpeta->text());
 
-    FabricaBaseDatos* bd=DefBD::IniciarBD();
-    bd->Fabrica->Conectar();
-    FabricaImagenes*  fi=bd->Fabrica->CrearImagen();
-    if(fi->Insertar(*Img))
-    {
-        QTreeWidgetItem *Item = new QTreeWidgetItem(CarpetaActual);
-        Item->setText(0, Img->getNombre());
-        DefBD::GuardarImagen(Img->getCarpeta()+"/"+Img->getNombre());
-
-        QMessageBox mensaje;
-        mensaje.setText("La imagen fue agregada con Exito");
-        mensaje.setIcon(QMessageBox::Information);
-        mensaje.exec();
-
-        ui->LineCarpeta->clear();
-        ui->LineNombre->clear();
-             emit ActualizarRepisa((ObjetoMaestro*)new Imagen());
-      //  mRepisa->ActualizarMapa((ObjetoMaestro*)new Imagen());
-    }
-    else
-    {
-        QMessageBox mensaje;
-        mensaje.setText("La imagen no fue agregada,\n Posiblemente Exista el nombre y la carpeta ya en la base de datos, Error");
-        mensaje.setIcon(QMessageBox::Information);
-        mensaje.exec();
-    }
-    bd->Fabrica->Desconectar();
-}
-
-void FormImagenes::on_BotonCarpetaBorrar_4_clicked()
-{
-    if(CarpetaActual->childCount()>0)
-    {
-        QMessageBox mensaje;
-        mensaje.setText("Error, La Carpeta esta siendo usada");
-        mensaje.setIcon(QMessageBox::Information);
-        mensaje.exec();
-        return;
-    }
-
-    QTreeWidgetItem* item =CarpetaActual;
-    int i = ui->VisorArbol->indexOfTopLevelItem(item);
-    ui->VisorArbol->takeTopLevelItem(i);
-    delete item;
-}
 
 void FormImagenes::on_BotonCarpetaAgregar_4_clicked()
 {
     if(!ui->LineCarpetaNueva_4->text().isEmpty())
     {
-        QTreeWidgetItem* carp=new QTreeWidgetItem(ui->VisorArbol);
-        carp->setText(0,ui->LineCarpetaNueva_4->text());
-        ListaCarpetas.insert(ui->LineCarpetaNueva_4->text(),ListaCarpetas.size()-1);
-        ui->LineCarpetaNueva_4->clear();
+        if (ui->ComboCarpeta->findText(ui->LineCarpetaNueva_4->text())==-1)
+        {
+            ui->ComboCarpeta->addItem(ui->LineCarpetaNueva_4->text());
+            ui->LineCarpetaNueva_4->clear();
+        }
+
+    }
 
 
+}
+
+void FormImagenes::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
+
+    Objeto=*((Imagen*)(ObjetoTipo));
+    Deshabilitar();
+
+    QString t=Objeto.getNombre().remove(Objeto.getNombre().size()-4,4);
+    ui->LineCodigo->setText(Objeto.getCodigo());
+    ui->ComboCarpeta->setCurrentText(Objeto.getCarpeta());
+    ui->LineNombre->setText(t);
+    fileName=RutaImagenes+Objeto.getCarpeta()+"/"+Objeto.getNombre();
+
+    QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getCarpeta()+"/"+Objeto.getNombre());
+    ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
+    /*-----Manipulacion de los Botones------*/
+    ui->ButtonModificar->setEnabled(true);
+    ui->ButtonEliminar->setEnabled(true);
+    ui->ButtonGuardar->setEnabled(false);
+   // ui->ButtonArchivoImagen->setEnabled(false);
+}
+
+bool FormImagenes::Guardar()
+{
+    if(!ValidarCampos())
+    {
+        return false;
+    }
+
+    /*------------*/
+    AsignarCampos();
+    /*------------*/
+
+    if(Bd->Fabrica->Conectar())
+    {
+
+        if(Fab->Insertar(Objeto))
+        {
+            DefBD::GuardarImagen(Objeto.getCarpeta()+"/"+Objeto.getNombre());
+            MensajeEmergente mensaje;
+
+            mensaje.SetMensaje("Imagen Insertada",ADVERTENCIA);
+            mensaje.exec();
+
+            return true;
+        }
+
+    Bd->Fabrica->Desconectar();
+    }
+    else
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje("Error, No hay conexion con la Base de Datos",ADVERTENCIA);
+        mensaje.exec();
+        return false;
+    }
+
+    return true;
+}
+
+bool FormImagenes::Modificar()
+{
+    if(!ValidarCampos())
+    {
+        return false;
+    }
+    AsignarCampos();
+
+    if(Bd->Fabrica->Conectar())
+    {
+        if( Fab->Actualizar(Antiguo,Objeto))
+        {
+            DefBD::GuardarImagen(Objeto.getCarpeta()+"/"+Objeto.getNombre());
+            MensajeEmergente mensaje;
+            mensaje.SetMensaje("Imagen Modificada",ADVERTENCIA);
+            mensaje.exec();
+            return true;
+        }
+
+    Bd->Fabrica->Desconectar();
+    }
+    else
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje("Error, No hay conexion con la Base de Datos",ADVERTENCIA);
+        mensaje.exec();
+        return false;
+    }
+    return true;
+}
+
+bool FormImagenes::Eliminar()
+{
+    /*--------------*/
+     AsignarCampos();
+    /*---------------*/
+    if(Bd->Fabrica->Conectar())
+    {
+        if( Fab->Borrar(Antiguo))
+        {
+            MensajeEmergente mensaje;
+            mensaje.SetMensaje("Imagen Eliminada",ADVERTENCIA);
+            mensaje.exec();
+
+            return true;
+        }
+      Bd->Fabrica->Desconectar();
+    }
+    else
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje("Error, No hay conexion con la Base de Datos",ADVERTENCIA);
+        mensaje.exec();
+        return false;
+    }
+    return true;
+}
+
+bool FormImagenes::ValidarCampos()
+{
+
+    if( fileName.isEmpty())
+     {
+      MensajeEmergente mensaje;
+      mensaje.SetMensaje("Imagen Vacia",ADVERTENCIA);
+      mensaje.exec();
+      return false;
+     }
+
+    if(ui->LineNombre->text().isEmpty())
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje("Nombre Vacio",ADVERTENCIA);
+        mensaje.exec();
+        return false;
+    }
+    if(ui->ComboCarpeta->currentText().isEmpty())
+    {
+        MensajeEmergente mensaje;
+        mensaje.SetMensaje("Carpeta Vacia",ADVERTENCIA);
+        mensaje.exec();
+        return false;
+    }
+
+    return true;
+}
+
+void FormImagenes::AsignarCampos()
+{
+    Antiguo.setCodigo(ui->LineCodigo->text());
+    Objeto.setNombre(ui->LineNombre->text()+".png");
+    Objeto.setCarpeta(ui->ComboCarpeta->currentText());
+    qDebug()<<"casasdasd:"<<fileName;
+    Objeto.setPixel(Definiciones::toQByteArray(fileName));
+    //Objeto.setCodigoImagen(CodigoImagen);
+}
+
+void FormImagenes::Habilitar()
+{
+        ui->LineNombre->setEnabled(true);
+        ui->ComboCarpeta->setEnabled(true);
+        ui->LineCarpetaNueva_4->setEnabled(true);
+
+}
+
+void FormImagenes::Deshabilitar()
+{
+        ui->LineNombre->setEnabled(false);
+        ui->ComboCarpeta->setEnabled(false);
+        ui->LineCarpetaNueva_4->setEnabled(false);
+}
+
+void FormImagenes::Limpiar()
+{
+    ui->LineCodigo->clear();
+    //ui->LineImagen->clear();
+    ui->LineNombre->clear();
+    //ui->LineCarpeta->clear();
+  //  CodigoImagen.clear();
+}
+void FormImagenes::on_ButtonGuardar_clicked()
+{
+    if(Estado==INSERTAR)
+    {
+    if(Guardar())
+    Limpiar();
+    emit ActualizarRepisa((ObjetoMaestro*)new Imagen());
+    }
+    if(Estado==MODIFICAR)
+    {
+    if(Modificar())
+        Deshabilitar();
+        /*Volver a su estado los botones*/
+        ui->ButtonGuardar->setEnabled(false);
+        ui->ButtonModificar->setEnabled(true);
+        ui->ButtonEliminar->setEnabled(true);
+     emit ActualizarRepisa((ObjetoMaestro*)new Imagen());
     }
 }
 
-void FormImagenes::on_VisorArbol_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+void FormImagenes::on_ButtonModificar_clicked()
 {
+    Estado=MODIFICAR;
+    /*--Habilitacion Botones-*/
+    ui->ButtonModificar->setEnabled(false);
+    ui->ButtonEliminar->setEnabled(false);
+    ui->ButtonGuardar->setEnabled(true);
+   // ui->ButtonArchivoImagen->setEnabled(true);
+    /*---Desabilitar Campos--*/
+    Habilitar();
+}
 
-    if(ListaCarpetas.contains(current->text(0)))
+void FormImagenes::on_ButtonEliminar_clicked()
+{
+    if(Eliminar())
     {
-      ui->LineCarpeta->setText(current->text(0));
-      CarpetaActual=current;
+    emit(ActivarBoton(Objeto.getCodigo()));
+    emit ActualizarRepisa((ObjetoMaestro*)new Imagen());
+        this->close();
+        this->destroy();
     }
+}
 
-    if(!ListaCarpetas.contains(current->text(0)))
-    {
-       QTreeWidgetItem*Padre= current->parent();
-       CarpetaActual=Padre;
-       QString TextP=Padre->text(0);
-       ui->LineCarpeta->setText(TextP);
-       QString name=current->text(0);
-       name.chop(4);
-       ui->LineNombre->setText(name);
-     QString ruta=RutaImagenes+TextP+"/"+current->text(0);
-      QPixmap*  pix=new QPixmap(ruta);
-     ui->labelImagen_4->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-
-    }
+void FormImagenes::on_ButtonRegresar_clicked()
+{
+    emit(ActivarBoton(Objeto.getCodigo()));
+    this->close();
+    this->destroy();
 }

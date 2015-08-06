@@ -19,6 +19,13 @@ public slots:
     void NuevoClick();
     void BuscarClick();
     void GrupoBotonesClick(QAbstractButton *buttonID);
+
+    // Repisa interface
+protected:
+    void ConsultarBusqueda();
+
+public:
+    void ObtenerConsulta();
 };
 
 #endif // REPISAIMAGENES_H

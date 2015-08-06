@@ -41,7 +41,9 @@ static void GuardarImagen(QString CarpetaImagen)
            i.setCarpeta(CarpetaLocal);
            i.setNombre(Ruta);
            FabricaImagenes* img=IniciarBD()->Fabrica->CrearImagen();
+           IniciarBD()->Fabrica->Conectar();
            Imagen d=img->Buscar(i);
+           IniciarBD()->Fabrica->Desconectar();
            qDebug()<<"Entre a la imagen pixel";
            QPixmap pixmap=Definiciones::toQpixmap(d.getPixel());
            qDebug()<<"Entre a la imagen png";
