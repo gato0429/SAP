@@ -1,14 +1,15 @@
-#ifndef FORMMARCA_H
-#define FORMMARCA_H
-
+#ifndef FORMESTADO_H
+#define FORMESTADO_H
 #include <QWidget>
 #include "formmaestro.h"
-#include "../Fabricas/fabricamarca.h"
+#include "../Fabricas/fabricaestado.h"
+#include <QDialog>
+
 namespace Ui {
-class FormMarca;
+class FormEstado;
 }
 
-class FormMarca : public QDialog,FormMaestro
+class FormEstado : public QDialog,FormMaestro
 {
     Q_OBJECT
 
@@ -16,19 +17,21 @@ signals:
     void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 private:
-    Marca                        Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
-    Marca                        Antiguo;
-    FabricaMarca*                Fab;
+    Estado                        Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
+    Estado                        Antiguo;
+    FabricaEstado*                Fab;
     QString CodigoImagen;
 public:
-
-    explicit FormMarca(QWidget *parent = 0);
-    ~FormMarca();
+    explicit FormEstado(QWidget *parent = 0);
+    ~FormEstado();
 
 private:
-    Ui::FormMarca *ui;
+    Ui::FormEstado *ui;
 
     // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
+
 protected:
     bool Guardar();
     bool Modificar();
@@ -38,8 +41,6 @@ protected:
     void Habilitar();
     void Deshabilitar();
     void Limpiar();
-public:
-    void SetObjeto(ObjetoMaestro *ObjetoTipo);
 private slots:
     /*Agregar esto para cada ves que se desee llamar una imagen*/
     void Ruta(QString Codigo,QString Cadena);
@@ -49,7 +50,6 @@ private slots:
     void on_ButtonEliminar_clicked();
     void on_ButtonRegresar_clicked();
     void on_ButtonArchivoImagen_clicked();
-
     /*Movimiento del Form*/
 protected:
     void mousePressEvent(QMouseEvent *evt)
@@ -66,8 +66,6 @@ protected:
 
 protected:
     QPoint oldPos;
-
-
 };
 
-#endif // FORMMARCA_H
+#endif // FORMESTADO_H

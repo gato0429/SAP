@@ -1,34 +1,36 @@
-#ifndef FORMMARCA_H
-#define FORMMARCA_H
+#ifndef FORMVEHICULORUBRO_H
+#define FORMVEHICULORUBRO_H
 
+#include <QDialog>
 #include <QWidget>
 #include "formmaestro.h"
-#include "../Fabricas/fabricamarca.h"
+#include "../Fabricas/fabricavehiculorubro.h"
 namespace Ui {
-class FormMarca;
+class FormVehiculoRubro;
 }
 
-class FormMarca : public QDialog,FormMaestro
+class FormVehiculoRubro : public QDialog,FormMaestro
 {
     Q_OBJECT
-
 signals:
     void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
 private:
-    Marca                        Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
-    Marca                        Antiguo;
-    FabricaMarca*                Fab;
-    QString CodigoImagen;
+    VehiculoRubro                        Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
+    VehiculoRubro                        Antiguo;
+    FabricaVehiculoRubro*                Fab;
+        QString CodigoImagen;
 public:
-
-    explicit FormMarca(QWidget *parent = 0);
-    ~FormMarca();
+    explicit FormVehiculoRubro(QWidget *parent = 0);
+    ~FormVehiculoRubro();
 
 private:
-    Ui::FormMarca *ui;
+    Ui::FormVehiculoRubro *ui;
 
     // FormMaestro interface
+public:
+    void SetObjeto(ObjetoMaestro *ObjetoTipo);
+
 protected:
     bool Guardar();
     bool Modificar();
@@ -38,8 +40,7 @@ protected:
     void Habilitar();
     void Deshabilitar();
     void Limpiar();
-public:
-    void SetObjeto(ObjetoMaestro *ObjetoTipo);
+
 private slots:
     /*Agregar esto para cada ves que se desee llamar una imagen*/
     void Ruta(QString Codigo,QString Cadena);
@@ -70,4 +71,4 @@ protected:
 
 };
 
-#endif // FORMMARCA_H
+#endif // FORMVEHICULORUBRO_H

@@ -1,9 +1,9 @@
-#include "formmodelo.h"
-#include "ui_formmodelo.h"
+#include "formvehiculotipo.h"
+#include "ui_formvehiculotipo.h"
 
-FormModelo::FormModelo(QWidget *parent) :
+FormVehiculoTipo::FormVehiculoTipo(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::FormModelo),FormMaestro()
+    ui(new Ui::FormVehiculoTipo)
 {
     ui->setupUi(this);
     Form=this;
@@ -13,7 +13,7 @@ FormModelo::FormModelo(QWidget *parent) :
 
     SetFondo();
     /*------------------------------*/
-    Fab=Bd->Fabrica->CrearModelo();
+    Fab=Bd->Fabrica->CrearVehiculoTipo();
 
     /*-----------------*/
     ui->ButtonGuardar->setIcon(QIcon(BotonGuardar));
@@ -27,19 +27,84 @@ FormModelo::FormModelo(QWidget *parent) :
     Habilitar();
 }
 
-FormModelo::~FormModelo()
+FormVehiculoTipo::~FormVehiculoTipo()
 {
     delete ui;
 }
 
-
-
-void FormModelo::SetObjeto(ObjetoMaestro *ObjetoTipo)
+void FormVehiculoTipo::Ruta(QString Codigo, QString Cadena)
 {
+    QString fileName = Cadena;
+    CodigoImagen=Codigo;
+   if (!fileName.isEmpty())
+   {
+     QPixmap*  pix=new QPixmap(RutaImagenes+fileName);
 
-    Objeto=*((Modelo*)(ObjetoTipo));
+       ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+       ui->LineImagen->setText(fileName);
+    }
+}
+
+void FormVehiculoTipo::on_ButtonGuardar_clicked()
+{
+    if(Estados==INSERTAR)
+    {
+    if(Guardar())
+    Limpiar();
+    emit ActualizarRepisa((ObjetoMaestro*)new Marca());
+    }
+    if(Estados==MODIFICAR)
+    {
+    if(Modificar())
+        Deshabilitar();
+        /*Volver a su estado los botones*/
+        ui->ButtonGuardar->setEnabled(false);
+        ui->ButtonModificar->setEnabled(true);
+        ui->ButtonEliminar->setEnabled(true);
+     emit ActualizarRepisa((ObjetoMaestro*)new VehiculoTipo());
+    }
+}
+
+void FormVehiculoTipo::on_ButtonModificar_clicked()
+{
+    Estados=MODIFICAR;
+    /*--Habilitacion Botones-*/
+    ui->ButtonModificar->setEnabled(false);
+    ui->ButtonEliminar->setEnabled(false);
+    ui->ButtonGuardar->setEnabled(true);
+    ui->ButtonArchivoImagen->setEnabled(true);
+    /*---Desabilitar Campos--*/
+    Habilitar();
+}
+
+void FormVehiculoTipo::on_ButtonEliminar_clicked()
+{
+    if(Eliminar())
+    {
+    emit(ActivarBoton(Objeto.getCodigo()));
+    emit ActualizarRepisa((ObjetoMaestro*)new VehiculoTipo());
+        this->close();
+        this->destroy();
+    }
+}
+
+void FormVehiculoTipo::on_ButtonRegresar_clicked()
+{
+    emit(ActivarBoton(Objeto.getCodigo()));
+    this->close();
+    this->destroy();
+}
+
+void FormVehiculoTipo::on_ButtonArchivoImagen_clicked()
+{
+    VisorImagenes* v=new VisorImagenes(this);
+    v->exec();
+}
+
+void FormVehiculoTipo::SetObjeto(ObjetoMaestro *ObjetoTipo)
+{
+    Objeto=*((VehiculoTipo*)(ObjetoTipo));
     Deshabilitar();
-
 
     ui->LineCodigo->setText(Objeto.getCodigo());
     ui->LineNombre->setText(Objeto.getNombre());
@@ -48,14 +113,14 @@ void FormModelo::SetObjeto(ObjetoMaestro *ObjetoTipo)
     QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getRutaImagen());
     ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
- /*-----Manipulacion de los Botones------*/
+    /*-----Manipulacion de los Botones------*/
     ui->ButtonModificar->setEnabled(true);
     ui->ButtonEliminar->setEnabled(true);
     ui->ButtonGuardar->setEnabled(false);
     ui->ButtonArchivoImagen->setEnabled(false);
 }
 
-bool FormModelo::Guardar()
+bool FormVehiculoTipo::Guardar()
 {
     if(!ValidarCampos())
     {
@@ -73,7 +138,7 @@ bool FormModelo::Guardar()
         {
 
             MensajeEmergente mensaje;
-            mensaje.SetMensaje("Modelo Insertado",ADVERTENCIA);
+            mensaje.SetMensaje("VehiculoTipo Insertada",ADVERTENCIA);
             mensaje.exec();
             return true;
         }
@@ -87,11 +152,11 @@ bool FormModelo::Guardar()
         mensaje.exec();
         return false;
     }
+
     return true;
 }
 
-
-bool FormModelo::Modificar()
+bool FormVehiculoTipo::Modificar()
 {
     if(!ValidarCampos())
     {
@@ -104,7 +169,7 @@ bool FormModelo::Modificar()
         if( Fab->Actualizar(Antiguo,Objeto))
         {
             MensajeEmergente mensaje;
-            mensaje.SetMensaje("Modelo Modificado",ADVERTENCIA);
+            mensaje.SetMensaje("VehiculoTipo Modificada",ADVERTENCIA);
             mensaje.exec();
             return true;
         }
@@ -119,10 +184,9 @@ bool FormModelo::Modificar()
         return false;
     }
     return true;
-
 }
 
-bool FormModelo::Eliminar()
+bool FormVehiculoTipo::Eliminar()
 {
     /*--------------*/
      AsignarCampos();
@@ -132,9 +196,9 @@ bool FormModelo::Eliminar()
         if( Fab->Borrar(Antiguo))
         {
             MensajeEmergente mensaje;
-            mensaje.SetMensaje("Modelo Eliminado",ADVERTENCIA);
+            mensaje.SetMensaje("VehiculoTipo Eliminada",ADVERTENCIA);
             mensaje.exec();
-            
+
             return true;
         }
       Bd->Fabrica->Desconectar();
@@ -149,7 +213,7 @@ bool FormModelo::Eliminar()
     return true;
 }
 
-bool FormModelo::ValidarCampos()
+bool FormVehiculoTipo::ValidarCampos()
 {
     if(ui->LineNombre->text().isEmpty())
     {
@@ -167,103 +231,29 @@ bool FormModelo::ValidarCampos()
     }
 
     return true;
-
 }
 
-void FormModelo::AsignarCampos()
+void FormVehiculoTipo::AsignarCampos()
 {
-
     Antiguo.setCodigo(ui->LineCodigo->text());
     Objeto.setNombre(ui->LineNombre->text());
     Objeto.setCodigoImagen(CodigoImagen);
 }
-void FormModelo::Habilitar()
+
+void FormVehiculoTipo::Habilitar()
 {
-    ui->LineNombre->setEnabled(true);
+ ui->LineNombre->setEnabled(true);
 }
 
-void FormModelo::Deshabilitar()
+void FormVehiculoTipo::Deshabilitar()
 {
-    ui->LineNombre->setEnabled(false);
+ui->LineNombre->setEnabled(false);
 }
 
-void FormModelo::Limpiar()
+void FormVehiculoTipo::Limpiar()
 {
     ui->LineCodigo->clear();
     ui->LineImagen->clear();
     ui->LineNombre->clear();
     CodigoImagen.clear();
-}
-
-void FormModelo::Ruta(QString Codigo, QString Cadena)
-{
-    QString fileName = Cadena;
-    CodigoImagen=Codigo;
-   if (!fileName.isEmpty())
-   {
-     QPixmap*  pix=new QPixmap(RutaImagenes+fileName);
-
-       ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-       ui->LineImagen->setText(fileName);
-    }
-}
-
-void FormModelo::on_ButtonGuardar_clicked()
-{
-    if(Estados==INSERTAR)
-    {
-    if(Guardar())
-    Limpiar();
-    emit ActualizarRepisa((ObjetoMaestro*)new Modelo());
-    }
-    if(Estados==MODIFICAR)
-    {
-    if(Modificar())
-        Deshabilitar();
-        /*Volver a su estado los botones*/
-        ui->ButtonGuardar->setEnabled(false);
-        ui->ButtonModificar->setEnabled(true);
-        ui->ButtonEliminar->setEnabled(true);
-     emit ActualizarRepisa((ObjetoMaestro*)new Modelo());
-    }
-
-}
-
-void FormModelo::on_ButtonModificar_clicked()
-{
-    Estados=MODIFICAR;
-    /*--Habilitacion Botones-*/
-    ui->ButtonModificar->setEnabled(false);
-    ui->ButtonEliminar->setEnabled(false);
-    ui->ButtonGuardar->setEnabled(true);
-    ui->ButtonArchivoImagen->setEnabled(true);
-    /*---Desabilitar Campos--*/
-    Habilitar();
-}
-
-
-
-void FormModelo::on_ButtonEliminar_clicked()
-{
-    if(Eliminar())
-    {
-    emit(ActivarBoton(Objeto.getCodigo()));
-    emit ActualizarRepisa((ObjetoMaestro*)new Modelo());
-        this->close();
-        this->destroy();
-    }
-}
-
-void FormModelo::on_ButtonRegresar_clicked()
-{
-
-    emit(ActivarBoton(Objeto.getCodigo()));
-    this->close();
-    this->destroy();
-}
-
-void FormModelo::on_ButtonArchivoImagen_clicked()
-{
-    VisorImagenes* v=new VisorImagenes(this);
-    v->exec();
 }

@@ -21,7 +21,7 @@ FormEmpleado::FormEmpleado(QWidget *parent) :
     ui->BotonModificar->setIcon(QIcon(BotonModificar));
     ui->BotonEliminar->setIcon(QIcon(BotonEliminar));
 
-    Estado=INSERTAR;
+    Estados=INSERTAR;
     ui->BotonModificar->setEnabled(false);
     ui->BotonEliminar->setEnabled(false);
     ui->BotonGuardar->setEnabled(true);
@@ -230,12 +230,12 @@ void FormEmpleado::Limpiar()
 
 void FormEmpleado::on_BotonGuardar_clicked()
 {
-    if(Estado==INSERTAR)
+    if(Estados==INSERTAR)
     {
     Guardar();
     emit ActualizarRepisa((ObjetoMaestro*)new Empleado());
     }
-    if(Estado==MODIFICAR)
+    if(Estados==MODIFICAR)
     {
     Modificar();
     qDebug()<<"ante de modificar gatunooooo";
@@ -245,7 +245,7 @@ void FormEmpleado::on_BotonGuardar_clicked()
 
 void FormEmpleado::on_BotonModificar_clicked()
 {
-    Estado=MODIFICAR;
+    Estados=MODIFICAR;
     ui->BotonModificar->setEnabled(false);
     ui->BotonGuardar->setEnabled(true);
     ui->BotonEliminar->setEnabled(false);

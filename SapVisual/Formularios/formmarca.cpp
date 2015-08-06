@@ -20,7 +20,7 @@ FormMarca::FormMarca(QWidget *parent) :
     ui->ButtonModificar->setIcon(QIcon(BotonModificar));
     ui->ButtonEliminar->setIcon(QIcon(BotonEliminar));
 
-    Estado=INSERTAR;
+    Estados=INSERTAR;
     ui->ButtonModificar->setEnabled(false);
     ui->ButtonEliminar->setEnabled(false);
     ui->ButtonGuardar->setEnabled(true);
@@ -206,13 +206,13 @@ void FormMarca::Ruta(QString Codigo, QString Cadena)
 
 void FormMarca::on_ButtonGuardar_clicked()
 {
-    if(Estado==INSERTAR)
+    if(Estados==INSERTAR)
     {
     if(Guardar())
     Limpiar();
     emit ActualizarRepisa((ObjetoMaestro*)new Marca());
     }
-    if(Estado==MODIFICAR)
+    if(Estados==MODIFICAR)
     {
     if(Modificar())
         Deshabilitar();
@@ -226,7 +226,7 @@ void FormMarca::on_ButtonGuardar_clicked()
 
 void FormMarca::on_ButtonModificar_clicked()
 {
-   Estado=MODIFICAR;
+   Estados=MODIFICAR;
    /*--Habilitacion Botones-*/
    ui->ButtonModificar->setEnabled(false);
    ui->ButtonEliminar->setEnabled(false);
