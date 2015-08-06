@@ -16,7 +16,7 @@ FormArticuloAlias::FormArticuloAlias(QWidget *parent) :
     SetFondo();
     /*------------------------------*/
     Fab=Bd->Fabrica->CrearArticuloAlias();
-    Estado=INSERTAR;
+    Estados=INSERTAR;
     /*-----------------*/
     ui->eliminar->setEnabled(false);
     ui->modificar->setEnabled(false);
@@ -168,7 +168,7 @@ void FormArticuloAlias::on_eliminar_clicked()
 
 void FormArticuloAlias::on_modificar_clicked()
 {
-    Estado=MODIFICAR;
+    Estados=MODIFICAR;
     ui->modificar->setEnabled(false);
     ui->guardar->setEnabled(true);
     ui->eliminar->setEnabled(false);

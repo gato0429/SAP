@@ -18,7 +18,7 @@ protected:
      QWidget*          Form;
      QWidget*          Parent;
      FabricaBaseDatos* Bd;
-     ESTADO Estado;
+     ESTADO Estados;
      void SetFondo();
      virtual bool Guardar()=0;
      virtual bool Modificar()=0;

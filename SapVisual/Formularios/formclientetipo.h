@@ -1,34 +1,38 @@
-#ifndef FORMMARCA_H
-#define FORMMARCA_H
+#ifndef FORMCLIENTETIPO_H
+#define FORMCLIENTETIPO_H
 
+#include <QDialog>
 #include <QWidget>
 #include "formmaestro.h"
-#include "../Fabricas/fabricamarca.h"
+#include "../Fabricas/fabricaclientetipo.h"
+
 namespace Ui {
-class FormMarca;
+class FormClienteTipo;
 }
 
-class FormMarca : public QDialog,FormMaestro
+class FormClienteTipo : public QDialog,FormMaestro
 {
     Q_OBJECT
 
 signals:
     void ActivarBoton(QString);
     void ActualizarRepisa(ObjetoMaestro* );
-private:
-    Marca                        Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
-    Marca                        Antiguo;
-    FabricaMarca*                Fab;
-    QString CodigoImagen;
+
 public:
-
-    explicit FormMarca(QWidget *parent = 0);
-    ~FormMarca();
+    explicit FormClienteTipo(QWidget *parent = 0);
+    ~FormClienteTipo();
+private:
+    ClienteTipo                        Objeto;   //Cada Form trabaja con su objeto nuevo y antiguo
+    ClienteTipo                        Antiguo;
+    FabricaClienteTipo*                Fab;
+        QString CodigoImagen;
 
 private:
-    Ui::FormMarca *ui;
+    Ui::FormClienteTipo *ui;
 
     // FormMaestro interface
+
+
 protected:
     bool Guardar();
     bool Modificar();
@@ -49,7 +53,6 @@ private slots:
     void on_ButtonEliminar_clicked();
     void on_ButtonRegresar_clicked();
     void on_ButtonArchivoImagen_clicked();
-
     /*Movimiento del Form*/
 protected:
     void mousePressEvent(QMouseEvent *evt)
@@ -67,7 +70,6 @@ protected:
 protected:
     QPoint oldPos;
 
-
 };
 
-#endif // FORMMARCA_H
+#endif // FORMCLIENTETIPO_H

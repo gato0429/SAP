@@ -14,6 +14,8 @@
 #include "pgmoneda.h"
 #include "pgvehiculotipo.h"
 #include "pgvehiculorubro.h"
+#include "pgclientetipo.h"
+#include "pgestado.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -42,6 +44,8 @@ public:
     FabricaMoneda        *CrearMoneda();
     FabricaVehiculoTipo  *CrearVehiculoTipo();
     FabricaVehiculoRubro *CrearVehiculoRubro();
+    FabricaClienteTipo   *CrearClienteTipo();
+    FabricaEstado        *CrearEstado();
 };
 
 

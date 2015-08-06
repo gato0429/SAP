@@ -103,3 +103,13 @@ FabricaVehiculoRubro *Postgres::CrearVehiculoRubro()
 {
     return new PgVehiculoRubro;
 }
+
+FabricaClienteTipo *Postgres::CrearClienteTipo()
+{
+    return new PgClienteTipo;
+}
+
+FabricaEstado *Postgres::CrearEstado()
+{
+    return new PgEstado;
+}

@@ -87,7 +87,17 @@ SOURCES += main.cpp\
     Fabricas/fabricavehiculorubro.cpp \
     Postgres/pgvehiculorubro.cpp \
     Formularios/formvehiculorubro.cpp \
-    Repisas/repisavehiculorubro.cpp
+    Repisas/repisavehiculorubro.cpp \
+    Objetos/clientetipo.cpp \
+    Fabricas/fabricaclientetipo.cpp \
+    Postgres/pgclientetipo.cpp \
+    Formularios/formclientetipo.cpp \
+    Repisas/repisaclientetipo.cpp \
+    Objetos/estado.cpp \
+    Fabricas/fabricaestado.cpp \
+    Postgres/pgestado.cpp \
+    Formularios/formestado.cpp \
+    Repisas/repisaestado.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -168,7 +178,17 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricavehiculorubro.h \
     Postgres/pgvehiculorubro.h \
     Formularios/formvehiculorubro.h \
-    Repisas/repisavehiculorubro.h
+    Repisas/repisavehiculorubro.h \
+    Objetos/clientetipo.h \
+    Fabricas/fabricaclientetipo.h \
+    Postgres/pgclientetipo.h \
+    Formularios/formclientetipo.h \
+    Repisas/repisaclientetipo.h \
+    Objetos/estado.h \
+    Fabricas/fabricaestado.h \
+    Postgres/pgestado.h \
+    Formularios/formestado.h \
+    Repisas/repisaestado.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -186,7 +206,9 @@ FORMS    += mainwindow.ui \
     Formularios/formmodelo.ui \
     Formularios/formmoneda.ui \
     Formularios/formvehiculotipo.ui \
-    Formularios/formvehiculorubro.ui
+    Formularios/formvehiculorubro.ui \
+    Formularios/formclientetipo.ui \
+    Formularios/formestado.ui
 
 RESOURCES += \
     Recursos.qrc

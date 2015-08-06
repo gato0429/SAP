@@ -18,7 +18,7 @@ FormArticulo::FormArticulo(QWidget *parent) :
     Fab=Bd->Fabrica->CrearArticulo();
     LlenarListaTipos();
     LlenarListaUnidad();
-    Estado=INSERTAR;
+    Estados=INSERTAR;
     /*-----------------*/
     ui->BotonBusquedaImagen->setEnabled(true);
     ui->BotonEliminar->setEnabled(false);
@@ -56,7 +56,7 @@ void FormArticulo::SetArticulo(Articulo Externo)
     ui->LineCodigoExterno->setEnabled(false);
     ui->LineCodigoInterno->setEnabled(false);
      /*-----*/
-    Estado=MODIFICAR;
+    Estados=MODIFICAR;
     ui->LineCodigo->setText(Externo.getCodigo());
     ui->LineCodTipo->setText(Externo.getCodigoTipo());
     ui->LineCodUnidad->setText(Externo.getCodigoUnidad());
@@ -362,14 +362,14 @@ void FormArticulo::on_LineNombreTipo_returnPressed()
 
 void FormArticulo::on_BotonGuardar_clicked()
 {
-    if(Estado==INSERTAR)
+    if(Estados==INSERTAR)
     {
         if(Guardar())
         {
         emit ActualizarRepisa((ObjetoMaestro*)new Articulo());
         }
     }
-    if(Estado==MODIFICAR)
+    if(Estados==MODIFICAR)
     {
         if(Modificar())
         {emit ActualizarRepisa((ObjetoMaestro*)new Articulo());
@@ -398,7 +398,7 @@ void FormArticulo::Ruta(QString Codigo, QString Cadena)
 
 void FormArticulo::on_BotonModificar_clicked()
 {
-    Estado=MODIFICAR;
+    Estados=MODIFICAR;
 
     /*----*/
     ui->BotonBusquedaImagen->setEnabled(true);
