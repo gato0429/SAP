@@ -97,7 +97,11 @@ SOURCES += main.cpp\
     Fabricas/fabricaestado.cpp \
     Postgres/pgestado.cpp \
     Formularios/formestado.cpp \
-    Repisas/repisaestado.cpp
+    Repisas/repisaestado.cpp \
+    Objetos/vehiculo.cpp \
+    Fabricas/fabricavehiculo.cpp \
+    Postgres/pgvehiculo.cpp \
+    Repisas/repisavehiculo.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -188,7 +192,11 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricaestado.h \
     Postgres/pgestado.h \
     Formularios/formestado.h \
-    Repisas/repisaestado.h
+    Repisas/repisaestado.h \
+    Objetos/vehiculo.h \
+    Fabricas/fabricavehiculo.h \
+    Postgres/pgvehiculo.h \
+    Repisas/repisavehiculo.h
 
 FORMS    += mainwindow.ui \
     principal.ui \

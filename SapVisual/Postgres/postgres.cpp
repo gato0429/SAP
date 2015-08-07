@@ -113,3 +113,8 @@ FabricaEstado *Postgres::CrearEstado()
 {
     return new PgEstado;
 }
+
+FabricaVehiculo *Postgres::CrearVehiculo()
+{
+    return new PgVehiculo;
+}
