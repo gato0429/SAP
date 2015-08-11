@@ -72,49 +72,54 @@ FabricaEmpleados *Postgres::CrearEmpleado()
 
 FabricaUnidades *Postgres::CrearUnidad()
 {
-    return new PgUnidad;
+    return new PgUnidad();
 }
 
 FabricaArticuloAlias *Postgres::CrearArticuloAlias()
 {
-    return new PgArticuloAlias;
+    return new PgArticuloAlias();
 }
 
 
 FabricaMarca *Postgres::CrearMarca()
 {
-    return new PgMarca;
+    return new PgMarca();
 }
 
 FabricaModelo *Postgres::CrearModelo()
 {
-    return new PgModelo;
+    return new PgModelo();
 }
 FabricaMoneda *Postgres::CrearMoneda()
 {
-    return new PgMoneda;
+    return new PgMoneda();
 }
 FabricaVehiculoTipo *Postgres::CrearVehiculoTipo()
 {
-    return new PgVehiculoTipo;
+    return new PgVehiculoTipo();
 }
 
 FabricaVehiculoRubro *Postgres::CrearVehiculoRubro()
 {
-    return new PgVehiculoRubro;
+    return new PgVehiculoRubro();
 }
 
 FabricaClienteTipo *Postgres::CrearClienteTipo()
 {
-    return new PgClienteTipo;
+    return new PgClienteTipo();
 }
 
 FabricaEstado *Postgres::CrearEstado()
 {
-    return new PgEstado;
+    return new PgEstado();
 }
 
 FabricaVehiculo *Postgres::CrearVehiculo()
 {
-    return new PgVehiculo;
+    return new PgVehiculo();
+}
+
+FabricaOperaciones *Postgres::CrearOperaciones()
+{
+    return new PgOperaciones();
 }

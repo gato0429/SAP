@@ -101,7 +101,12 @@ SOURCES += main.cpp\
     Objetos/vehiculo.cpp \
     Fabricas/fabricavehiculo.cpp \
     Postgres/pgvehiculo.cpp \
-    Repisas/repisavehiculo.cpp
+    Repisas/repisavehiculo.cpp \
+    Objetos/operaciones.cpp \
+    Fabricas/fabricaoperaciones.cpp \
+    Postgres/pgoperaciones.cpp \
+    Formularios/formoperaciones.cpp \
+    Repisas/repisaoperaciones.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -196,7 +201,12 @@ HEADERS  += mainwindow.h \
     Objetos/vehiculo.h \
     Fabricas/fabricavehiculo.h \
     Postgres/pgvehiculo.h \
-    Repisas/repisavehiculo.h
+    Repisas/repisavehiculo.h \
+    Objetos/operaciones.h \
+    Fabricas/fabricaoperaciones.h \
+    Postgres/pgoperaciones.h \
+    Formularios/formoperaciones.h \
+    Repisas/repisaoperaciones.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -216,7 +226,8 @@ FORMS    += mainwindow.ui \
     Formularios/formvehiculotipo.ui \
     Formularios/formvehiculorubro.ui \
     Formularios/formclientetipo.ui \
-    Formularios/formestado.ui
+    Formularios/formestado.ui \
+    Formularios/formoperaciones.ui
 
 RESOURCES += \
     Recursos.qrc

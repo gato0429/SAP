@@ -26,8 +26,8 @@ bool PgVehiculo::Insertar(Vehiculo valor)
       query.prepare("INSERT INTO vehiculo( codigo, placa, placa_antigua, fecha_ingreso)"
            " VALUES (?, ?, ?, ?);");
 
-      query.addBindValue(valor.getNombre());
-      query.addBindValue(valor.getCodigoImagen());
+      query.addBindValue(valor.getPlaca());
+      query.addBindValue(valor.getPlacaAntigua());
 
       bool flag=query.exec();
       if(!flag)
@@ -72,11 +72,11 @@ bool PgVehiculo::Actualizar(Vehiculo Antiguo, Vehiculo Nuevo)
         consulta=consulta+"(codigo='"+Antiguo.getCodigo()+"') AND ";
     }
 
-    if(!Antiguo.getNombre().isNull())
+    if(!Antiguo.getPlaca().isNull())
     {
         consulta=consulta+"(placa='"+Antiguo.getPlaca()+"') AND ";
     }
-    if(!Antiguo.getCodigoImagen().isNull())
+    if(!Antiguo.getPlacaAntigua().isNull())
     {
         consulta=consulta+"(placa_antigua='"+Antiguo.getPlacaAntigua()+"') AND ";
     }
@@ -99,7 +99,7 @@ Vehiculo PgVehiculo::Buscar(Vehiculo valor)
 {
     QString consulta;
 
-        consulta="SELECT codigo, placa, placa_antigua, fecha_ingreso
+        consulta="SELECT codigo, placa, placa_antigua, fecha_ingreso"
                 "FROM vehiculo ";
 
 

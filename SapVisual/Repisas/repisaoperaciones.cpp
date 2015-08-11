@@ -1,51 +1,51 @@
-#include "repisavehiculo.h"
+#include "repisaoperaciones.h"
 
-RepisaVehiculo::RepisaVehiculo():Repisa()
+RepisaOperaciones::RepisaOperaciones()
 {
-  ActualizarMapa((ObjetoMaestro*)new Vehiculo);
+    ActualizarMapa((ObjetoMaestro*)new Operaciones);
 }
 
-void RepisaVehiculo::ConsultarBusqueda()
+void RepisaOperaciones::ConsultarBusqueda()
 {
     MostrarLabel();
     return;
 }
 
-void RepisaVehiculo::GrupoBotonesClick(QAbstractButton *buttonID)
+void RepisaOperaciones::GrupoBotonesClick(QAbstractButton *buttonID)
 {
     /*Cambia*/
-    //Dialogo=new FormVehiculo(this);
-    /*Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
-    Dialogo->SetObjeto(((Vehiculo*)MapaRepisa->value(buttonID->objectName())));
+    Dialogo=new FormOperaciones(this);
+    Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
+    Dialogo->SetObjeto(((Operaciones*)MapaRepisa->value(buttonID->objectName())));
     ObjetosAbiertos.push_back(buttonID->objectName());
     buttonID->setEnabled(false);
-
-    Dialogo->show();*/
+    /**/
+    Dialogo->show();
 }
 
-void RepisaVehiculo::NuevoClick()
+void RepisaOperaciones::NuevoClick()
 {
-   // Dialogo=new FormVehiculo(this);
-   /* Dialogo->move(this->x()+this->width(),this->y());
-    Dialogo->exec();*/
+    Dialogo=new FormOperaciones(this);
+    Dialogo->move(this->x()+this->width(),this->y());
+    Dialogo->exec();
 }
 
-void RepisaVehiculo::BuscarClick()
+void RepisaOperaciones::BuscarClick()
 {
     Busqueda=new BusquedaMaestra(this);
 
-    QStringList campos;
-    campos <<"Codigo" <<"Placa"<< "Placa Antigua";
-    Busqueda->ComboCampos->addItems(campos);
+       QStringList campos;
+       campos <<"Codigo" <<"Descripcion"<<"Codigo Imagen"<< "Nombre";
+       Busqueda->ComboCampos->addItems(campos);
 
-    Busqueda->move(this->x()+this->width()-60,this->y()+90);
-    Busqueda->show();
+       Busqueda->move(this->x()+this->width()-60,this->y()+90);
+       Busqueda->show();
 
-    Nuevo->setEnabled(false);
-    Buscar->setEnabled(false);
+       Nuevo->setEnabled(false);
+       Buscar->setEnabled(false);
 }
 
-void RepisaVehiculo::ObtenerConsulta()
+void RepisaOperaciones::ObtenerConsulta()
 {
     QString ord;
 
@@ -59,7 +59,7 @@ void RepisaVehiculo::ObtenerConsulta()
     }
     Ordenamiento=ord;
     OrderByCampo="codigo";
-    Vehiculo* ObjetoBusqueda=new Vehiculo();
+    Operaciones* ObjetoBusqueda=new Operaciones();
 
     switch (IndiceBusqueda)
     {
@@ -68,12 +68,16 @@ void RepisaVehiculo::ObtenerConsulta()
         OrderByCampo="codigo";
         break;
     case 1:
-        ObjetoBusqueda->setPlacaAntigua(LineBuscar->text());
-        OrderByCampo="placa_antigua";
+        ObjetoBusqueda->setDescripcion(LineBuscar->text());
+        OrderByCampo="simbolo";
         break;
     case 2:
-        ObjetoBusqueda->setPlaca(LineBuscar->text());
-        OrderByCampo="placa";
+        ObjetoBusqueda->setCodigoImagen(LineBuscar->text());
+        OrderByCampo="codigo_imagen";
+        break;
+    case 3:
+        ObjetoBusqueda->setNombre(LineBuscar->text());
+        OrderByCampo="nombre";
         break;
     default:
         break;
@@ -90,8 +94,9 @@ void RepisaVehiculo::ObtenerConsulta()
 
     Model->setHeaderData(0,Qt::Horizontal,"Codigo");
     Model->setHeaderData(1,Qt::Horizontal,"Nombre");
-    Model->setHeaderData(2,Qt::Horizontal,"Codigo Imagen");
-    Model->setHeaderData(3,Qt::Horizontal,"Ruta");
+    Model->setHeaderData(2,Qt::Horizontal,"Simbolo");
+    Model->setHeaderData(3,Qt::Horizontal,"Codigo Imagen");
+    Model->setHeaderData(4,Qt::Horizontal,"Ruta");
 
 
     QList<bool> CamposVisibles;
@@ -103,21 +108,22 @@ void RepisaVehiculo::ObtenerConsulta()
 
     emit my_signal(Model,CamposVisibles);
     ActualizarMapa((ObjetoMaestro*)ObjetoBusqueda);
+
 }
 
-void RepisaVehiculo::ObjetosIndependientes()
+void RepisaOperaciones::ObjetosIndependientes()
 {
     /*
      * Para el Tool Tip
     */
     QPushButton* pp=new QPushButton(this);
-    Vehiculo *i=(Vehiculo*)(*it);
+    Operaciones *i=(Operaciones*)(*it);
     pp->setObjectName(i->getCodigo());
-    pp->setIcon(*i);
+    pp->setIcon(DefBD::toQicon(i->getRutaImagen()));
     pp->setIconSize(QSize(55,55));
     pp->setFlat(true);
     pp->setGeometry(ix,iy,55,55);
-    pp->setToolTip("Codigo: "+i->getCodigo()+"\n"+"Placa: "+i->getPlaca());
+    pp->setToolTip("Codigo: "+i->getCodigo()+"\n"+"Nombre: "+i->getNombre());
     GrupoBotones->addButton(pp);
 
     Botones.push_back(pp);
@@ -131,9 +137,9 @@ void RepisaVehiculo::ObjetosIndependientes()
     }
 }
 
-void RepisaVehiculo::ActualizarConsulta()
+void RepisaOperaciones::ActualizarConsulta()
 {
-    FabricaLocal=Bd->Fabrica->CrearVehiculo();
+    FabricaLocal=Bd->Fabrica->CrearOperaciones();
     Bd->Fabrica->Conectar();
     RegistrosTabla=FabricaLocal->ContarConsulta(ObjetoConsulta);
     QString extra=" order by "+OrderByCampo+" "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);

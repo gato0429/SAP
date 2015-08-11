@@ -18,6 +18,7 @@
 #include "../Fabricas/fabricaclientetipo.h"
 #include "../Fabricas/fabricaestado.h"
 #include "../Fabricas/fabricavehiculo.h"
+#include "../Fabricas/fabricaoperaciones.h"
 
 using namespace std;
 
@@ -73,6 +74,7 @@ public:
     virtual FabricaClienteTipo    *CrearClienteTipo()=0;
     virtual FabricaEstado         *CrearEstado()=0;
     virtual FabricaVehiculo       *CrearVehiculo()=0;
+    virtual FabricaOperaciones    *CrearOperaciones()=0;
 };
 
 #endif // BASEDATOS_H

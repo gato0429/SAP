@@ -17,6 +17,7 @@
 #include "pgclientetipo.h"
 #include "pgestado.h"
 #include "pgvehiculo.h"
+#include "pgoperaciones.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -48,6 +49,7 @@ public:
     FabricaClienteTipo   *CrearClienteTipo();
     FabricaEstado        *CrearEstado();
     FabricaVehiculo      *CrearVehiculo();
+    FabricaOperaciones   *CrearOperaciones();
 };
 
 
