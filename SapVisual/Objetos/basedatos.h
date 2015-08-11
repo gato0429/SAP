@@ -20,6 +20,7 @@
 #include "../Fabricas/fabricavehiculo.h"
 #include "../Fabricas/fabricaoperaciones.h"
 #include "../Fabricas/fabricaempleadoarea.h"
+#include "../Fabricas/fabricaempleadocargo.h"
 
 using namespace std;
 
@@ -77,6 +78,7 @@ public:
     virtual FabricaVehiculo       *CrearVehiculo()=0;
     virtual FabricaOperaciones    *CrearOperaciones()=0;
     virtual FabricaEmpleadoArea   *CrearEmpleadoArea()=0;
+    virtual FabricaEmpleadoCargo  *CrearEmpleadoCargo()=0;
 };
 
 #endif // BASEDATOS_H

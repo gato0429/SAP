@@ -1,9 +1,9 @@
-#include "formempleadoarea.h"
-#include "ui_formempleadoarea.h"
+#include "formempleadocargo.h"
+#include "ui_formempleadocargo.h"
 
-FormEmpleadoArea::FormEmpleadoArea(QWidget *parent) :
+FormEmpleadoCargo::FormEmpleadoCargo(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::FormEmpleadoArea),FormMaestro()
+    ui(new Ui::FormEmpleadoCargo),FormMaestro()
 {
     ui->setupUi(this);
     Form=this;
@@ -13,7 +13,7 @@ FormEmpleadoArea::FormEmpleadoArea(QWidget *parent) :
 
     SetFondo();
     /*------------------------------*/
-    Fab=Bd->Fabrica->CrearEmpleadoArea();
+    Fab=Bd->Fabrica->CrearEmpleadoCargo();
 
     /*-----------------*/
     ui->ButtonGuardar->setIcon(QIcon(BotonGuardar));
@@ -27,12 +27,12 @@ FormEmpleadoArea::FormEmpleadoArea(QWidget *parent) :
     Habilitar();
 }
 
-FormEmpleadoArea::~FormEmpleadoArea()
+FormEmpleadoCargo::~FormEmpleadoCargo()
 {
     delete ui;
 }
 
-void FormEmpleadoArea::Ruta(QString Codigo, QString Cadena)
+void FormEmpleadoCargo::Ruta(QString Codigo, QString Cadena)
 {
     QString fileName = Cadena;
     CodigoImagen=Codigo;
@@ -45,13 +45,13 @@ void FormEmpleadoArea::Ruta(QString Codigo, QString Cadena)
     }
 }
 
-void FormEmpleadoArea::on_ButtonGuardar_clicked()
+void FormEmpleadoCargo::on_ButtonGuardar_clicked()
 {
     if(Estados==INSERTAR)
     {
     if(Guardar())
     Limpiar();
-    emit ActualizarRepisa((ObjetoMaestro*)new EmpleadoArea());
+    emit ActualizarRepisa((ObjetoMaestro*)new EmpleadoCargo());
     }
     if(Estados==MODIFICAR)
     {
@@ -61,12 +61,12 @@ void FormEmpleadoArea::on_ButtonGuardar_clicked()
         ui->ButtonGuardar->setEnabled(false);
         ui->ButtonModificar->setEnabled(true);
         ui->ButtonEliminar->setEnabled(true);
-     emit ActualizarRepisa((ObjetoMaestro*)new EmpleadoArea());
+     emit ActualizarRepisa((ObjetoMaestro*)new EmpleadoCargo());
     }
 
 }
 
-void FormEmpleadoArea::on_ButtonModificar_clicked()
+void FormEmpleadoCargo::on_ButtonModificar_clicked()
 {
     Estados=MODIFICAR;
     /*--Habilitacion Botones-*/
@@ -78,33 +78,33 @@ void FormEmpleadoArea::on_ButtonModificar_clicked()
     Habilitar();
 }
 
-void FormEmpleadoArea::on_ButtonEliminar_clicked()
+void FormEmpleadoCargo::on_ButtonEliminar_clicked()
 {
     if(Eliminar())
     {
     emit(ActivarBoton(Objeto.getCodigo()));
-    emit ActualizarRepisa((ObjetoMaestro*)new EmpleadoArea());
+    emit ActualizarRepisa((ObjetoMaestro*)new EmpleadoCargo());
         this->close();
         this->destroy();
     }
 }
 
-void FormEmpleadoArea::on_ButtonRegresar_clicked()
+void FormEmpleadoCargo::on_ButtonRegresar_clicked()
 {
     emit(ActivarBoton(Objeto.getCodigo()));
     this->close();
     this->destroy();
 }
 
-void FormEmpleadoArea::on_ButtonArchivoImagen_clicked()
+void FormEmpleadoCargo::on_ButtonArchivoImagen_clicked()
 {
     VisorImagenes* v=new VisorImagenes(this);
     v->exec();
 }
 
-void FormEmpleadoArea::SetObjeto(ObjetoMaestro *ObjetoTipo)
+void FormEmpleadoCargo::SetObjeto(ObjetoMaestro *ObjetoTipo)
 {
-    Objeto=*((EmpleadoArea*)(ObjetoTipo));
+    Objeto=*((EmpleadoCargo*)(ObjetoTipo));
     Deshabilitar();
 
 
@@ -123,7 +123,7 @@ void FormEmpleadoArea::SetObjeto(ObjetoMaestro *ObjetoTipo)
 
 }
 
-bool FormEmpleadoArea::Guardar()
+bool FormEmpleadoCargo::Guardar()
 {
     if(!ValidarCampos())
     {
@@ -141,7 +141,7 @@ bool FormEmpleadoArea::Guardar()
         {
 
             MensajeEmergente mensaje;
-            mensaje.SetMensaje("Empleado_area Insertado",ADVERTENCIA);
+            mensaje.SetMensaje("Empleado_cargo Insertado",ADVERTENCIA);
             mensaje.exec();
             return true;
         }
@@ -158,7 +158,7 @@ bool FormEmpleadoArea::Guardar()
     return true;
 }
 
-bool FormEmpleadoArea::Modificar()
+bool FormEmpleadoCargo::Modificar()
 {
     if(!ValidarCampos())
     {
@@ -171,7 +171,7 @@ bool FormEmpleadoArea::Modificar()
         if( Fab->Actualizar(Antiguo,Objeto))
         {
             MensajeEmergente mensaje;
-            mensaje.SetMensaje("Empleado_area Modificado",ADVERTENCIA);
+            mensaje.SetMensaje("Empleado_cargo Modificado",ADVERTENCIA);
             mensaje.exec();
             return true;
         }
@@ -188,7 +188,7 @@ bool FormEmpleadoArea::Modificar()
     return true;
 }
 
-bool FormEmpleadoArea::Eliminar()
+bool FormEmpleadoCargo::Eliminar()
 {
     /*--------------*/
      AsignarCampos();
@@ -198,7 +198,7 @@ bool FormEmpleadoArea::Eliminar()
         if( Fab->Borrar(Antiguo))
         {
             MensajeEmergente mensaje;
-            mensaje.SetMensaje("Empleado_area Eliminado",ADVERTENCIA);
+            mensaje.SetMensaje("Empleado_cargo Eliminado",ADVERTENCIA);
             mensaje.exec();
 
             return true;
@@ -215,7 +215,7 @@ bool FormEmpleadoArea::Eliminar()
     return true;
 }
 
-bool FormEmpleadoArea::ValidarCampos()
+bool FormEmpleadoCargo::ValidarCampos()
 {
     if(ui->LineNombre->text().isEmpty())
     {
@@ -235,7 +235,7 @@ bool FormEmpleadoArea::ValidarCampos()
     return true;
 }
 
-void FormEmpleadoArea::AsignarCampos()
+void FormEmpleadoCargo::AsignarCampos()
 {
     Antiguo.setCodigo(ui->LineCodigo->text());
     Objeto.setNombre(ui->LineNombre->text());
@@ -243,17 +243,17 @@ void FormEmpleadoArea::AsignarCampos()
 
 }
 
-void FormEmpleadoArea::Habilitar()
+void FormEmpleadoCargo::Habilitar()
 {
     ui->LineNombre->setEnabled(true);
 }
 
-void FormEmpleadoArea::Deshabilitar()
+void FormEmpleadoCargo::Deshabilitar()
 {
      ui->LineNombre->setEnabled(false);
 }
 
-void FormEmpleadoArea::Limpiar()
+void FormEmpleadoCargo::Limpiar()
 {
     ui->LineCodigo->clear();
     ui->LineImagen->clear();

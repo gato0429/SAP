@@ -128,3 +128,8 @@ FabricaEmpleadoArea *Postgres::CrearEmpleadoArea()
 {
     return new PgEmpleadoArea();
 }
+
+FabricaEmpleadoCargo *Postgres::CrearEmpleadoCargo()
+{
+    return new PgEmpleadoCargo();
+}

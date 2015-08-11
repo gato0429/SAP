@@ -111,7 +111,12 @@ SOURCES += main.cpp\
     Fabricas/fabricaempleadoarea.cpp \
     Postgres/pgempleadoarea.cpp \
     Formularios/formempleadoarea.cpp \
-    Repisas/repisaempleadoarea.cpp
+    Repisas/repisaempleadoarea.cpp \
+    Objetos/empleadocargo.cpp \
+    Fabricas/fabricaempleadocargo.cpp \
+    Postgres/pgempleadocargo.cpp \
+    Formularios/formempleadocargo.cpp \
+    Repisas/repisaempleadocargo.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -216,7 +221,12 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricaempleadoarea.h \
     Postgres/pgempleadoarea.h \
     Formularios/formempleadoarea.h \
-    Repisas/repisaempleadoarea.h
+    Repisas/repisaempleadoarea.h \
+    Objetos/empleadocargo.h \
+    Fabricas/fabricaempleadocargo.h \
+    Postgres/pgempleadocargo.h \
+    Formularios/formempleadocargo.h \
+    Repisas/repisaempleadocargo.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -238,7 +248,8 @@ FORMS    += mainwindow.ui \
     Formularios/formclientetipo.ui \
     Formularios/formestado.ui \
     Formularios/formoperaciones.ui \
-    Formularios/formempleadoarea.ui
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
 
 RESOURCES += \
     Recursos.qrc

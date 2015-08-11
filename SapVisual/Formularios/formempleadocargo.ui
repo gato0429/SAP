@@ -1,85 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FormEmpleadoArea</class>
- <widget class="QDialog" name="FormEmpleadoArea">
+ <class>FormEmpleadoCargo</class>
+ <widget class="QDialog" name="FormEmpleadoCargo">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
-    <height>344</height>
+    <width>410</width>
+    <height>334</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>321</width>
-     <height>82</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>80</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Icono</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_4">
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>80</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Marca</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="LabelImage">
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>80</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Imagen</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>-10</x>
      <y>100</y>
      <width>382</width>
      <height>236</height>
@@ -376,6 +313,69 @@ QTabBar::tab {
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>321</width>
+     <height>82</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="label_6">
+      <property name="minimumSize">
+       <size>
+        <width>60</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Icono</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="minimumSize">
+       <size>
+        <width>60</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Marca</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="LabelImage">
+      <property name="minimumSize">
+       <size>
+        <width>60</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Imagen</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources>
