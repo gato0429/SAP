@@ -18,6 +18,7 @@
 #include "pgestado.h"
 #include "pgvehiculo.h"
 #include "pgoperaciones.h"
+#include "pgempleadoarea.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -50,6 +51,7 @@ public:
     FabricaEstado        *CrearEstado();
     FabricaVehiculo      *CrearVehiculo();
     FabricaOperaciones   *CrearOperaciones();
+    FabricaEmpleadoArea  *CrearEmpleadoArea();
 };
 
 

@@ -1,15 +1,15 @@
-#include "pgmodelo.h"
+#include "pgempleadoarea.h"
 
-PgModelo::PgModelo()
+PgEmpleadoArea::PgEmpleadoArea()
 {
 
 }
 
-bool PgModelo::Borrar(Modelo valor)
+bool PgEmpleadoArea::Borrar(EmpleadoArea valor)
 {
     QSqlQuery query;
 
-    bool flag=query.exec("DELETE FROM modelo WHERE codigo='"+valor.getCodigo()+"'");
+    bool flag=query.exec("DELETE FROM empleado_area WHERE codigo='"+valor.getCodigo()+"'");
 
     if(!flag)
     {
@@ -20,10 +20,10 @@ bool PgModelo::Borrar(Modelo valor)
     return  flag;
 }
 
-bool PgModelo::Insertar(Modelo valor)
+bool PgEmpleadoArea::Insertar(EmpleadoArea valor)
 {
     QSqlQuery query;
-      query.prepare("INSERT INTO modelo("
+      query.prepare("INSERT INTO empleado_area("
                     "nombre, codigo_imagen)"
             "VALUES (?, ?);");
 
@@ -38,15 +38,14 @@ bool PgModelo::Insertar(Modelo valor)
           mensaje.exec();
       }
       return  flag;
-
 }
 
-bool PgModelo::Actualizar(Modelo Antiguo, Modelo Nuevo)
+bool PgEmpleadoArea::Actualizar(EmpleadoArea Antiguo, EmpleadoArea Nuevo)
 {
     QSqlQuery query;
 
     QString consulta;
-    consulta="UPDATE modelo SET ";
+    consulta="UPDATE empleado_area SET ";
 
     int c=consulta.size();
 
@@ -97,13 +96,12 @@ bool PgModelo::Actualizar(Modelo Antiguo, Modelo Nuevo)
     return flag;
 }
 
-Modelo PgModelo::Buscar(Modelo valor)
+EmpleadoArea PgEmpleadoArea::Buscar(EmpleadoArea valor)
 {
-
     QString consulta;
 
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_modelo WHERE ";
+                "FROM vista_detalle_empleado_area WHERE ";
 
 
     if(!valor.getCodigo().isNull())
@@ -134,7 +132,7 @@ Modelo PgModelo::Buscar(Modelo valor)
     QSqlQuery query(consulta);
 
     bool flag=true;
-    Modelo* resp=new Modelo();
+    EmpleadoArea* resp=new EmpleadoArea();
       while (query.next()&&flag ) {
 
           resp->setCodigo(query.value(0).toString());
@@ -148,23 +146,23 @@ Modelo PgModelo::Buscar(Modelo valor)
 
 }
 
-QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA Tipo)
+QMap<QString, ObjetoMaestro *> *PgEmpleadoArea::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA Tipo)
 {
     MapaRepisaGlobal=new QList<ObjetoMaestro*>();
 
-    Modelo* val=(Modelo*)(valor);
+    EmpleadoArea* val=(EmpleadoArea*)(valor);
     QString consulta;
 
     if(Tipo==TODO)
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_modelo";
+                "FROM vista_detalle_empleado_area";
 
     }
     else
     {
         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                "FROM vista_detalle_modelo WHERE ";
+                "FROM vista_detalle_empleado_area WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -194,7 +192,7 @@ QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QStri
     QSqlQuery query(consulta);
 
       while (query.next() ) {
-          Modelo* resp=new Modelo();
+          EmpleadoArea* resp=new EmpleadoArea();
           resp->setCodigo(query.value(0).toString());
           resp->setNombre(query.value(1).toString());
           resp->setCodigoImagen(query.value(2).toString());
@@ -209,10 +207,9 @@ QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QStri
     return salida;
 }
 
-qint64 PgModelo::Contar()
+qint64 PgEmpleadoArea::Contar()
 {
-
-    QString consulta="SELECT count(*) FROM modelo";
+    QString consulta="SELECT count(*) FROM empleado_area";
     qint64 num=0;
 
     QSqlQuery query(consulta);
@@ -226,13 +223,13 @@ qint64 PgModelo::Contar()
   return num;
 }
 
-qint64 PgModelo::ContarConsulta(ObjetoMaestro *valor)
+qint64 PgEmpleadoArea::ContarConsulta(ObjetoMaestro *valor)
 {
-    Modelo* val=(Modelo*)(valor);
+    EmpleadoArea* val=(EmpleadoArea*)(valor);
     QString consulta;
 
     consulta="SELECT count(*) "
-            "FROM vista_detalle_modelo WHERE ";
+            "FROM vista_detalle_empleado_area WHERE ";
 
     if(!val->getCodigo().isNull())
     {
@@ -263,22 +260,21 @@ qint64 PgModelo::ContarConsulta(ObjetoMaestro *valor)
         }
 
     return num;
-
 }
 
-QSqlQueryModel *PgModelo::BuscarTabla(Modelo valor, QString Extra, CONSULTA tipo)
+QSqlQueryModel *PgEmpleadoArea::BuscarTabla(EmpleadoArea valor, QString Extra, CONSULTA tipo)
 {
     QString consulta;
 
          if(tipo==TODO)
          {
              consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                     "FROM vista_detalle_modelo";
+                     "FROM vista_detalle_empleado_area";
          }
          else
          {
              consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
-                           "FROM vista_detalle_modelo where";
+                           "FROM vista_detalle_empleado_area where";
 
          if(!valor.getCodigo().isNull())
          {
@@ -308,3 +304,4 @@ QSqlQueryModel *PgModelo::BuscarTabla(Modelo valor, QString Extra, CONSULTA tipo
          qDebug()<<consulta;
          return model;
 }
+

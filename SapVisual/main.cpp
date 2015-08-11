@@ -11,6 +11,7 @@
 #include "Repisas/repisaclientetipo.h"
 #include "Repisas/repisaestado.h"
 #include "Repisas/repisaoperaciones.h"
+#include "Repisas/repisaempleadoarea.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -25,7 +26,8 @@ int main(int argc, char *argv[])
 //    RepisaMoneda* w=new RepisaMoneda();
     // RepisaClienteTipo* w=new RepisaClienteTipo();
        //RepisaEstado* w=new RepisaEstado();
-    RepisaOperaciones* w=new RepisaOperaciones();
+   // RepisaOperaciones* w=new RepisaOperaciones();
+    RepisaEmpleadoArea* w=new RepisaEmpleadoArea();
     w->show();
 
 

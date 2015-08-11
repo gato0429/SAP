@@ -123,3 +123,8 @@ FabricaOperaciones *Postgres::CrearOperaciones()
 {
     return new PgOperaciones();
 }
+
+FabricaEmpleadoArea *Postgres::CrearEmpleadoArea()
+{
+    return new PgEmpleadoArea();
+}
