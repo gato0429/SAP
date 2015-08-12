@@ -133,3 +133,8 @@ FabricaEmpleadoCargo *Postgres::CrearEmpleadoCargo()
 {
     return new PgEmpleadoCargo();
 }
+
+FabricaProveedor *Postgres::CrearProveedor()
+{
+    return new PgProveedor();
+}

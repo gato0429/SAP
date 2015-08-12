@@ -21,7 +21,7 @@
 #include "../Fabricas/fabricaoperaciones.h"
 #include "../Fabricas/fabricaempleadoarea.h"
 #include "../Fabricas/fabricaempleadocargo.h"
-
+#include "../Fabricas/fabricaproveedor.h"
 using namespace std;
 
 class BaseDatos
@@ -79,6 +79,7 @@ public:
     virtual FabricaOperaciones    *CrearOperaciones()=0;
     virtual FabricaEmpleadoArea   *CrearEmpleadoArea()=0;
     virtual FabricaEmpleadoCargo  *CrearEmpleadoCargo()=0;
+    virtual FabricaProveedor      *CrearProveedor()=0;
 };
 
 #endif // BASEDATOS_H

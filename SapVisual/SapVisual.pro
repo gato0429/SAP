@@ -116,7 +116,11 @@ SOURCES += main.cpp\
     Fabricas/fabricaempleadocargo.cpp \
     Postgres/pgempleadocargo.cpp \
     Formularios/formempleadocargo.cpp \
-    Repisas/repisaempleadocargo.cpp
+    Repisas/repisaempleadocargo.cpp \
+    Objetos/proveedor.cpp \
+    Fabricas/fabricaproveedor.cpp \
+    Postgres/pgproveedor.cpp \
+    Repisas/repisaproveedor.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -226,7 +230,11 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricaempleadocargo.h \
     Postgres/pgempleadocargo.h \
     Formularios/formempleadocargo.h \
-    Repisas/repisaempleadocargo.h
+    Repisas/repisaempleadocargo.h \
+    Objetos/proveedor.h \
+    Fabricas/fabricaproveedor.h \
+    Postgres/pgproveedor.h \
+    Repisas/repisaproveedor.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
