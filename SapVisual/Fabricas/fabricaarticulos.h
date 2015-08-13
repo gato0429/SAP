@@ -9,6 +9,7 @@ class FabricaArticulos
 {
 public:
     FabricaArticulos();
+    QList<ObjetoMaestro*>* MapaRepisaGlobal;
 
     virtual bool Borrar(Articulo valor)=0;
     virtual bool Insertar(Articulo valor)=0;

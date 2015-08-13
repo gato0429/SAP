@@ -106,6 +106,7 @@ void Repisa::LLenarDetalles()
           "padding: 0 8px;"
           "background: transparent;"
           "selection-background-color: darkgray;"
+            "font: italic 12pt 'Cambria';"
     "}"
 
    " QComboBox QListView"
@@ -137,8 +138,10 @@ void Repisa::LLenarDetalles()
 
     ComboTipo=new QComboBox(Formulario);
     ComboTipo->setGeometry(120,160,150,20);
+    ComboTipo->setEditable(true); //luego corregir
     ComboTipo->setStyleSheet(stylecombo);
     ComboTipo->setFont(serifFont);
+
    ComboTipo->setParent(FondoRepisa);
     /*Fechas*/
 

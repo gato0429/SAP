@@ -335,3 +335,30 @@ QSqlQueryModel *PgMoneda::BuscarTabla(Moneda valor, QString Extra, CONSULTA tipo
 
      return model;
 }
+
+QMap<QString, ObjetoMaestro*> *PgMoneda::BuscarClave()
+{
+    QString consulta;
+
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+                "FROM vista_detalle_moneda";
+
+
+
+        QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
+        QSqlQuery query(consulta);
+
+          while (query.next() ) {
+              Moneda* resp=new Moneda();
+              resp->setCodigo(query.value(0).toString());
+              resp->setNombre(query.value(1).toString());
+              resp->setCodigoImagen(query.value(2).toString());
+              resp->setRutaImagen(query.value(3).toString());
+
+
+              salida->insert(query.value(1).toString(),(ObjetoMaestro*)resp);
+          }
+
+
+        return salida;
+}

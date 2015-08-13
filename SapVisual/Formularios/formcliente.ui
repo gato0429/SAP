@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormCliente</class>
+ <widget class="QDialog" name="FormCliente">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>353</width>
+    <height>557</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Icono</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Marca</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="LabelImage">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Imagen</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="ButtonGuardar">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/guardar.png</normaloff>:/Imagenes/iconos/guardar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonModificar">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/editar.png</normaloff>:/Imagenes/iconos/editar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonEliminar">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/delete.png</normaloff>:/Imagenes/iconos/delete.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonRegresar">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/izquierda.png</normaloff>:/Imagenes/iconos/izquierda.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonRepresentate">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/dado.png</normaloff>:/Imagenes/iconos/dado.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonAccionista">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/plus_grey.png</normaloff>:/Imagenes/iconos/plus_grey.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ButtonAutos">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Imagenes/iconos/cat.png</normaloff>:/Imagenes/iconos/cat.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Telefono:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Contacto:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineTelefono">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_13">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Web:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Codigo Interno:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>E-Mail:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineCodigoInterno">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="label_14">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Descuento:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1" colspan="4">
+      <widget class="QLineEdit" name="LinePais">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineDireccion">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineContacto">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Fecha Ingreso:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineEmail">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineWeb">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tipo Documento:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="4">
+      <widget class="QComboBox" name="ComboDocumento">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dni</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ruc</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineNombre">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Nombre:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_16">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Documento:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1" colspan="4">
+      <widget class="QLineEdit" name="LineDocumento">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhFormattedNumbersOnly</set>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Imagen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="3" colspan="2">
+      <widget class="QToolButton" name="ButtonArchivoImagen">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Codigo:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="1" colspan="2">
+      <widget class="QLineEdit" name="LineImagen">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>18</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1" colspan="3">
+      <widget class="QLineEdit" name="LineCodigo">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Direccion:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Pais:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_17">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tipo Cliente:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="4">
+      <widget class="QComboBox" name="ComboClienteTipo">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1" colspan="4">
+      <widget class="QDoubleSpinBox" name="SpinBoxDescuento">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <double>100.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="1" colspan="4">
+      <widget class="QDateEdit" name="DateIngreso">
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../Recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

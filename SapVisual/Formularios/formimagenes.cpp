@@ -22,7 +22,7 @@ FormImagenes::FormImagenes(QWidget *parent) :
         ui->ButtonModificar->setIcon(QIcon(BotonModificar));
         ui->ButtonEliminar->setIcon(QIcon(BotonEliminar));
 
-        Estado=INSERTAR;
+        Estados=INSERTAR;
         ui->ButtonModificar->setEnabled(false);
         ui->ButtonEliminar->setEnabled(false);
         ui->ButtonGuardar->setEnabled(true);
@@ -275,17 +275,17 @@ void FormImagenes::Limpiar()
 }
 void FormImagenes::on_ButtonGuardar_clicked()
 {
-    if(Estado==INSERTAR)
+    if(Estados==INSERTAR)
     {
     if(Guardar())
     Limpiar();
     emit ActualizarRepisa((ObjetoMaestro*)new Imagen());
     }
-    if(Estado==MODIFICAR)
+    if(Estados==MODIFICAR)
     {
     if(Modificar())
         Deshabilitar();
-        /*Volver a su estado los botones*/
+        /*Volver a su Estados los botones*/
         ui->ButtonGuardar->setEnabled(false);
         ui->ButtonModificar->setEnabled(true);
         ui->ButtonEliminar->setEnabled(true);
@@ -295,7 +295,7 @@ void FormImagenes::on_ButtonGuardar_clicked()
 
 void FormImagenes::on_ButtonModificar_clicked()
 {
-    Estado=MODIFICAR;
+    Estados=MODIFICAR;
     /*--Habilitacion Botones-*/
     ui->ButtonModificar->setEnabled(false);
     ui->ButtonEliminar->setEnabled(false);

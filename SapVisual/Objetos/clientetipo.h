@@ -9,6 +9,7 @@ private:
     QString Nombre;
     QString CodigoImagen;
     QString RutaImagen;
+    QString Tipo;
 
 public:
     ClienteTipo();
@@ -20,6 +21,8 @@ public:
     void setCodigoImagen(const QString &value);
     QString getRutaImagen() const;
     void setRutaImagen(const QString &value);
+    QString getTipo() const;
+    void setTipo(const QString &value);
 };
 
 #endif // CLIENTETIPO_H

@@ -149,6 +149,66 @@ void Cliente::setNumDoc(const QString &value)
 {
     NumDoc = value;
 }
+
+QString Cliente::getCodigoTipo() const
+{
+    return CodigoTipo;
+}
+
+void Cliente::setCodigoTipo(const QString &value)
+{
+    CodigoTipo = value;
+}
+
+QString Cliente::getNombreTipo() const
+{
+    return NombreTipo;
+}
+
+void Cliente::setNombreTipo(const QString &value)
+{
+    NombreTipo = value;
+}
+
+QString Cliente::getRutaImagenTipo() const
+{
+    return RutaImagenTipo;
+}
+
+void Cliente::setRutaImagenTipo(const QString &value)
+{
+    RutaImagenTipo = value;
+}
+
+QString Cliente::getCodigoImagen() const
+{
+    return CodigoImagen;
+}
+
+void Cliente::setCodigoImagen(const QString &value)
+{
+    CodigoImagen = value;
+}
+
+QString Cliente::getRutaImagen() const
+{
+    return RutaImagen;
+}
+
+void Cliente::setRutaImagen(const QString &value)
+{
+    RutaImagen = value;
+}
+
+QDate Cliente::getFechaFin() const
+{
+    return FechaFin;
+}
+
+void Cliente::setFechaFin(const QDate &value)
+{
+    FechaFin = value;
+}
 Cliente::Cliente()
 {
 

@@ -97,7 +97,9 @@ SOURCES += main.cpp\
     Fabricas/fabricaestado.cpp \
     Postgres/pgestado.cpp \
     Formularios/formestado.cpp \
-    Repisas/repisaestado.cpp
+    Repisas/repisaestado.cpp \
+    Repisas/repisacliente.cpp \
+    Formularios/formcliente.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -188,7 +190,9 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricaestado.h \
     Postgres/pgestado.h \
     Formularios/formestado.h \
-    Repisas/repisaestado.h
+    Repisas/repisaestado.h \
+    Repisas/repisacliente.h \
+    Formularios/formcliente.h
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -208,7 +212,8 @@ FORMS    += mainwindow.ui \
     Formularios/formvehiculotipo.ui \
     Formularios/formvehiculorubro.ui \
     Formularios/formclientetipo.ui \
-    Formularios/formestado.ui
+    Formularios/formestado.ui \
+    Formularios/formcliente.ui
 
 RESOURCES += \
     Recursos.qrc

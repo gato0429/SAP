@@ -19,7 +19,7 @@
      <x>20</x>
      <y>10</y>
      <width>291</width>
-     <height>81</height>
+     <height>82</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -159,7 +159,7 @@ QTabBar::tab {
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
@@ -169,25 +169,11 @@ QTabBar::tab {
           </font>
          </property>
          <property name="text">
-          <string>Imagen</string>
+          <string>Imagen:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <family>Cambria</family>
-           <pointsize>12</pointsize>
-           <italic>true</italic>
-          </font>
-         </property>
-         <property name="text">
-          <string>Codigo:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3" colspan="2">
+       <item row="3" column="3" colspan="2">
         <widget class="QToolButton" name="ButtonArchivoImagen">
          <property name="font">
           <font>
@@ -215,6 +201,51 @@ QTabBar::tab {
          </property>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string>Codigo:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="3">
+        <widget class="QLineEdit" name="LineCodigo">
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhNone</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="QLineEdit" name="LineImagen">
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="1" colspan="4">
         <widget class="QLineEdit" name="LineNombre">
          <property name="font">
@@ -226,20 +257,6 @@ QTabBar::tab {
          </property>
          <property name="inputMethodHints">
           <set>Qt::ImhFormattedNumbersOnly</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" colspan="2">
-        <widget class="QLineEdit" name="LineImagen">
-         <property name="font">
-          <font>
-           <family>Cambria</family>
-           <pointsize>12</pointsize>
-           <italic>true</italic>
-          </font>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -259,8 +276,8 @@ QTabBar::tab {
          </property>
         </spacer>
        </item>
-       <item row="0" column="1" colspan="3">
-        <widget class="QLineEdit" name="LineCodigo">
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_9">
          <property name="font">
           <font>
            <family>Cambria</family>
@@ -268,12 +285,35 @@ QTabBar::tab {
            <italic>true</italic>
           </font>
          </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhNone</set>
+         <property name="text">
+          <string>Tipo:</string>
          </property>
-         <property name="readOnly">
-          <bool>true</bool>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="4">
+        <widget class="QComboBox" name="ComboTipo">
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
          </property>
+         <item>
+          <property name="text">
+           <string/>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Simple</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Compuesto</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>

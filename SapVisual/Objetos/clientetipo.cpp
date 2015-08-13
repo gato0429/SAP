@@ -40,6 +40,16 @@ void ClienteTipo::setRutaImagen(const QString &value)
 {
     RutaImagen = value;
 }
+
+QString ClienteTipo::getTipo() const
+{
+    return Tipo;
+}
+
+void ClienteTipo::setTipo(const QString &value)
+{
+    Tipo = value;
+}
 ClienteTipo::ClienteTipo()
 {
 

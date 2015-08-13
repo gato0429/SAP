@@ -20,6 +20,7 @@ void RepisaEstado::GrupoBotonesClick(QAbstractButton *buttonID)
     ObjetosAbiertos.push_back(buttonID->objectName());
     buttonID->setEnabled(false);
     /**/
+
     Dialogo->show();
 }
 

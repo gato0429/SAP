@@ -7,6 +7,14 @@ RepisaClienteTipo::RepisaClienteTipo():Repisa()
 
 void RepisaClienteTipo::ConsultarBusqueda()
 {
+    if (IndiceBusqueda==3)
+    {
+        ComboTipo->clear();
+        ComboTipo->addItem("Simple");
+        ComboTipo->addItem("Compuesto");
+        MostrarCombo();
+        return;
+    }
     MostrarLabel();
     return;
 }
@@ -35,7 +43,7 @@ void RepisaClienteTipo::BuscarClick()
     Busqueda=new BusquedaMaestra(this);
 
     QStringList campos;
-    campos <<"Codigo" <<"Codigo Imagen"<< "Nombre";
+    campos <<"Codigo" <<"Codigo Imagen"<< "Nombre"<<"Tipo";
     Busqueda->ComboCampos->addItems(campos);
 
     Busqueda->move(this->x()+this->width()-60,this->y()+90);
@@ -75,6 +83,10 @@ void RepisaClienteTipo::ObtenerConsulta()
         ObjetoBusqueda->setNombre(LineBuscar->text());
         OrderByCampo="nombre";
         break;
+    case 3:
+        ObjetoBusqueda->setTipo(ComboTipo->currentText());
+        OrderByCampo="tipo";
+        break;
     default:
         break;
     }
@@ -92,9 +104,11 @@ void RepisaClienteTipo::ObtenerConsulta()
     Model->setHeaderData(1,Qt::Horizontal,"Nombre");
     Model->setHeaderData(2,Qt::Horizontal,"Codigo Imagen");
     Model->setHeaderData(3,Qt::Horizontal,"Ruta");
+    Model->setHeaderData(4,Qt::Horizontal,"Tipo");
 
 
     QList<bool> CamposVisibles;
+    CamposVisibles.push_back(true);
     CamposVisibles.push_back(true);
     CamposVisibles.push_back(true);
     CamposVisibles.push_back(true);

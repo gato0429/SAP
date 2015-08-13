@@ -11,10 +11,6 @@ class PgCliente:public FabricaClientes
 public:
     PgCliente();
 
-    // FabricaClientes interface
-public:
-
-
 
     // FabricaClientes interface
 public:
@@ -26,6 +22,7 @@ public:
     int Contar();
     int ContarConsulta(ObjetoMaestro *valor);
     QSqlQueryModel *BuscarTabla(Cliente valor, QString Extra, CONSULTA tipo);
+
 };
 
 #endif // PGCLIENTE_H

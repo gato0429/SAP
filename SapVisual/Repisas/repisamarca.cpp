@@ -84,8 +84,6 @@ void RepisaMarca::ObtenerConsulta()
 
 
     Bd->Fabrica->Conectar();
-
-
     QString Extra=" order by "+OrderByCampo+" "+ord+" LIMIT "+QString::number(RegistrosBusqueda)+" offset 0";
     QSqlQueryModel* Model= FabricaLocal->BuscarTabla(*ObjetoBusqueda,Extra,CAMPOS);
     Bd->Fabrica->Desconectar();

@@ -20,7 +20,7 @@ public:
     virtual qint64 Contar()=0;
     virtual qint64 ContarConsulta(ObjetoMaestro* valor)=0;
     virtual     QSqlQueryModel* BuscarTabla(ClienteTipo valor,QString Extra,CONSULTA tipo)=0;
-
+ virtual QMap<QString, ObjetoMaestro *> *BuscarClave()=0;
 };
 
 #endif // FABRICACLIENTETIPO_H

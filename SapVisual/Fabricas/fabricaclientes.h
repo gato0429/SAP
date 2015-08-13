@@ -10,6 +10,8 @@ class FabricaClientes
 {
 public:
     FabricaClientes();
+    QList<ObjetoMaestro*>* MapaRepisaGlobal;
+
     virtual bool Borrar(Cliente valor)=0;
     virtual bool Insertar(Cliente valor)=0;
     virtual bool Actualizar(Cliente Antiguo, Cliente Nuevo)=0;
@@ -18,6 +20,7 @@ public:
     virtual int Contar()=0;
     virtual int ContarConsulta(ObjetoMaestro* valor)=0;
     virtual QSqlQueryModel* BuscarTabla(Cliente valor,QString Extra,CONSULTA tipo)=0;
+
 };
 
 #endif // FABRICACLIENTES_H

@@ -339,3 +339,31 @@ QSqlQueryModel *PgUnidad::BuscarTabla(Unidad valor, QString Extra, CONSULTA tipo
 
     return model;
 }
+
+QMap<QString, ObjetoMaestro *> *PgUnidad::BuscarClave()
+{
+    QString consulta;
+
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta "
+                " FROM vista_detalle_unidad";
+
+
+
+        QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
+        QSqlQuery query(consulta);
+
+          while (query.next() ) {
+
+              Unidad* resp=new Unidad();
+              resp->setCodigo(query.value(0).toString());
+              resp->setNombre(query.value(1).toString());
+              resp->setCodigoImagen(query.value(2).toString());
+              resp->setRutaImagen(query.value(3).toString());
+
+
+              salida->insert(query.value(1).toString(),(ObjetoMaestro*)resp);
+          }
+
+
+        return salida;
+}

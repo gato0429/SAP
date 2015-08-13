@@ -30,12 +30,13 @@ bool PgCliente::Insertar(Cliente valor)
     }
     QSqlQuery query;
       query.prepare("INSERT INTO clientes( "
-                    "codigo, tipo, nombre, direccion, pais, contacto, telefono, email, "
-                    "web, descuento, fecha, codigo_interno, num_doc) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, "
-                    "?, ?, ?, ?, ?);)");
+                    " tipo, nombre, direccion, pais, contacto, telefono, email, "
+                    "web, descuento, fecha, codigo_interno, num_doc, codigo_tipo, "
+                    "codigo_imagen ) "
+            "VALUES ( ?, ?, ?, ?, ?, ?, ?, "
+                    "?, ?, ?, ?, ?, ?, ?);");
 
-      query.addBindValue(valor.getCodigo());
+
       query.addBindValue(valor.getTipo());
       query.addBindValue(valor.getNombre());
       query.addBindValue(valor.getDireccion());
@@ -48,6 +49,8 @@ bool PgCliente::Insertar(Cliente valor)
       query.addBindValue(valor.getFecha());
       query.addBindValue(valor.getCodigoInterno());
       query.addBindValue(valor.getNumDoc());
+      query.addBindValue(valor.getCodigoTipo());
+      query.addBindValue(valor.getCodigoImagen());
 
       bool flag=query.exec();
       if(!flag)
@@ -123,6 +126,14 @@ bool PgCliente::Actualizar(Cliente Antiguo, Cliente Nuevo)
     {
         consulta=consulta+", num_doc='"+Nuevo.getNumDoc()+"'";
     }
+    if(!Nuevo.getCodigoTipo().isNull())
+    {
+        consulta=consulta+", codigo_tipo='"+Nuevo.getCodigoTipo()+"'";
+    }
+    if(!Nuevo.getCodigoImagen().isNull())
+    {
+        consulta=consulta+", num_doc='"+Nuevo.getCodigoImagen()+"'";
+    }
 
     /*-------------------------------------*/
     /*contar la cantidad de caracteres desde el inicio hasta set*/
@@ -186,6 +197,15 @@ bool PgCliente::Actualizar(Cliente Antiguo, Cliente Nuevo)
         consulta=consulta+"(num_doc='"+Antiguo.getNumDoc()+"') AND ";
     }
 
+    if(!Antiguo.getCodigoTipo().isNull())
+    {
+        consulta=consulta+", codigo_tipo='"+Antiguo.getCodigoTipo()+"'";
+    }
+    if(!Antiguo.getCodigoImagen().isNull())
+    {
+        consulta=consulta+", num_doc='"+Antiguo.getCodigoImagen()+"'";
+    }
+
     consulta.replace(consulta.size()-5,5,";");
     qDebug()<<consulta;
     bool flag= query.exec(consulta);
@@ -206,63 +226,79 @@ Cliente PgCliente::Buscar(Cliente valor)
 
     QString consulta="SELECT codigo, tipo, nombre, direccion, pais, contacto, telefono, email,"
             " web, descuento, fecha, codigo_interno, num_doc "
-            " FROM clientes"
+            " codigo_tipo, nombre_tipo, ruta_img_tipo, codigo_imagen, ruta_img"
+            " FROM vista_detalle_cliente;"
             " WHERE ";
 
     if(!valor.getCodigo().isNull())
     {
-        consulta=consulta+"(codigo like '%"+valor.getCodigo()+"%') AND ";
+        consulta=consulta+"(codigo ilike '%"+valor.getCodigo()+"%') AND ";
     }
     if(!valor.getTipo().isNull())
     {
-        consulta=consulta+"(tipo like '%"+valor.getTipo()+"%') AND ";
+        consulta=consulta+"(tipo ilike '%"+valor.getTipo()+"%') AND ";
     }
     if(!valor.getNombre().isNull())
     {
-        consulta=consulta+"(nombre like '%"+valor.getNombre()+"%') AND ";
+        consulta=consulta+"(nombre ilike '%"+valor.getNombre()+"%') AND ";
     }
     if(!valor.getDireccion().isNull())
     {
-        consulta=consulta+"(direccion like '%"+valor.getDireccion()+"%') AND ";
+        consulta=consulta+"(direccion ilike '%"+valor.getDireccion()+"%') AND ";
     }
     if(!valor.getPais().isNull())
     {
-        consulta=consulta+"(pais like '%"+valor.getPais()+"%') AND ";
+        consulta=consulta+"(pais ilike '%"+valor.getPais()+"%') AND ";
     }
     if(!valor.getContacto().isNull())
     {
-        consulta=consulta+"(contacto like '%"+valor.getContacto()+"%') AND ";
+        consulta=consulta+"(contacto ilike '%"+valor.getContacto()+"%') AND ";
     }
     if(!valor.getTelefono().isNull())
     {
-        consulta=consulta+"(telefono like '%"+valor.getTelefono()+"%') AND ";
+        consulta=consulta+"(telefono ilike '%"+valor.getTelefono()+"%') AND ";
     }
     if(!valor.getEmail().isNull())
     {
-        consulta=consulta+"(email like '%"+valor.getEmail()+"%') AND ";
+        consulta=consulta+"(email ilike '%"+valor.getEmail()+"%') AND ";
     }
     if(!valor.getWeb().isNull())
     {
-        consulta=consulta+"(web like '%"+valor.getWeb()+"%') AND ";
+        consulta=consulta+"(web ilike '%"+valor.getWeb()+"%') AND ";
     }
     if(!(valor.getDescuento()==(-1)))
     {
-        consulta=consulta+"(descuento like '%"+QString::number(valor.getDescuento())+"%') AND ";
+        consulta=consulta+"(descuento >= "+QString::number(valor.getDescuento())+") AND ";
     }
 
     if(!(valor.getFecha()==QDate(1,1,1)))
     {
-        consulta=consulta+"(fecha='"+(valor.getFecha()).toString("yyyy-MM-dd")+"') AND ";
+        consulta=consulta+" fecha BETWEEN '"+valor.getFecha().toString("dd-MM-yyyy")+"' AND '"+valor.getFechaFin().toString("dd-MM-yyyy") +"' AND ";
     }
 
     if(!valor.getCodigoInterno().isNull())
     {
-        consulta=consulta+"(codigo_interno like '%"+valor.getCodigoInterno()+"%') AND ";
+        consulta=consulta+"(codigo_interno ilike '%"+valor.getCodigoInterno()+"%') AND ";
     }
     if(!valor.getNumDoc().isNull())
     {
-        consulta=consulta+"(num_doc like '%"+valor.getNumDoc()+"%') AND ";
+        consulta=consulta+"(num_doc ilike '%"+valor.getNumDoc()+"%') AND ";
     }
+
+    if(!valor.getCodigoTipo().isNull())
+    {
+        consulta=consulta+"(codigo_tipo ilike '%"+valor.getCodigoTipo()+"%') AND ";
+    }
+    if(!valor.getNombreTipo().isNull())
+    {
+        consulta=consulta+"(nombre_tipo ilike '%"+valor.getNombreTipo()+"%') AND ";
+    }
+    if(!valor.getCodigoImagen().isNull())
+    {
+        consulta=consulta+"(codigo_imagen ilike '%"+valor.getCodigoImagen()+"%') AND ";
+    }
+
+
     consulta.replace(consulta.size()-5,5,";");
     qDebug()<<consulta;
 
@@ -283,6 +319,14 @@ Cliente PgCliente::Buscar(Cliente valor)
           resp.setFecha(query.value(10).toDate());
           resp.setCodigoInterno(query.value(11).toString());
           resp.setNumDoc(query.value(12).toString());
+
+          resp.setCodigoTipo(query.value(13).toString());
+          resp.setNombreTipo(query.value(14).toString());
+          resp.setRutaImagenTipo(query.value(15).toString());
+          resp.setCodigoImagen(query.value(16).toString());
+          resp.setRutaImagen(query.value(17).toString());
+
+
           flag=false;
       }
 
@@ -308,6 +352,7 @@ int PgCliente::Contar()
 
 QMap<QString, ObjetoMaestro *> *PgCliente::BuscarMapa(ObjetoMaestro *valor, QString Extra, CONSULTA tipo)
 {
+    MapaRepisaGlobal=new QList<ObjetoMaestro*>();
 
         Cliente* val=(Cliente*)(valor);
 
@@ -315,74 +360,90 @@ QMap<QString, ObjetoMaestro *> *PgCliente::BuscarMapa(ObjetoMaestro *valor, QStr
     if(tipo==TODO)
 {
       consulta="SELECT codigo, tipo, nombre, direccion, pais, contacto, telefono, email,"
-                " web, descuento, fecha, codigo_interno, num_doc "
-                " FROM clientes";
+               " web, descuento, fecha, codigo_interno, num_doc, "
+               " codigo_tipo, nombre_tipo, ruta_img_tipo, codigo_imagen, ruta_img"
+               " FROM vista_detalle_cliente ";
 
 }
 else
  {
 
         consulta="SELECT codigo, tipo, nombre, direccion, pais, contacto, telefono, email,"
-                  " web, descuento, fecha, codigo_interno, num_doc "
-                  " FROM clientes"
+                 " web, descuento, fecha, codigo_interno, num_doc, "
+                 " codigo_tipo, nombre_tipo, ruta_img_tipo, codigo_imagen, ruta_img"
+                 " FROM vista_detalle_cliente "
                   " WHERE ";
 
 
         if(!val->getCodigo().isNull())
         {
-            consulta=consulta+"(codigo like '%"+val->getCodigo()+"%') AND ";
+            consulta=consulta+"(codigo ilike '%"+val->getCodigo()+"%') AND ";
         }
         if(!val->getTipo().isNull())
         {
-            consulta=consulta+"(tipo like '%"+val->getTipo()+"%') AND ";
+            consulta=consulta+"(tipo ilike '%"+val->getTipo()+"%') AND ";
         }
         if(!val->getNombre().isNull())
         {
-            consulta=consulta+"(nombre like '%"+val->getNombre()+"%') AND ";
+            consulta=consulta+"(nombre ilike '%"+val->getNombre()+"%') AND ";
         }
         if(!val->getDireccion().isNull())
         {
-            consulta=consulta+"(direccion like '%"+val->getDireccion()+"%') AND ";
+            consulta=consulta+"(direccion ilike '%"+val->getDireccion()+"%') AND ";
         }
         if(!val->getPais().isNull())
         {
-            consulta=consulta+"(pais like '%"+val->getPais()+"%') AND ";
+            consulta=consulta+"(pais ilike '%"+val->getPais()+"%') AND ";
         }
         if(!val->getContacto().isNull())
         {
-            consulta=consulta+"(contacto like '%"+val->getContacto()+"%') AND ";
+            consulta=consulta+"(contacto ilike '%"+val->getContacto()+"%') AND ";
         }
         if(!val->getTelefono().isNull())
         {
-            consulta=consulta+"(telefono like '%"+val->getTelefono()+"%') AND ";
+            consulta=consulta+"(telefono ilike '%"+val->getTelefono()+"%') AND ";
         }
         if(!val->getEmail().isNull())
         {
-            consulta=consulta+"(email like '%"+val->getEmail()+"%') AND ";
+            consulta=consulta+"(email ilike '%"+val->getEmail()+"%') AND ";
         }
         if(!val->getWeb().isNull())
         {
-            consulta=consulta+"(web like '%"+val->getWeb()+"%') AND ";
+            consulta=consulta+"(web ilike '%"+val->getWeb()+"%') AND ";
         }
         if(!(val->getDescuento()==(-1)))
         {
-            consulta=consulta+"(descuento like '%"+QString::number(val->getDescuento())+"%') AND ";
+            consulta=consulta+"(descuento >= "+QString::number(val->getDescuento())+") AND ";
         }
 
         if(!(val->getFecha()==QDate(1,1,1)))
         {
-            consulta=consulta+"(fecha='"+(val->getFecha()).toString("yyyy-MM-dd")+"') AND ";
-        }
+            consulta=consulta+" fecha BETWEEN '"+val->getFecha().toString("dd-MM-yyyy")+"' AND '"+val->getFechaFin().toString("dd-MM-yyyy") +"' AND ";
+       }
 
         if(!val->getCodigoInterno().isNull())
         {
-            consulta=consulta+"(codigo_interno like '%"+val->getCodigoInterno()+"%') AND ";
+            consulta=consulta+"(codigo_interno ilike '%"+val->getCodigoInterno()+"%') AND ";
         }
         if(!val->getNumDoc().isNull())
         {
-            consulta=consulta+"(num_doc like '%"+val->getNumDoc()+"%') AND ";
+            consulta=consulta+"(num_doc ilike '%"+val->getNumDoc()+"%') AND ";
         }
-    consulta.replace(consulta.size()-5,5,";");
+
+        if(!val->getCodigoTipo().isNull())
+        {
+            consulta=consulta+"(codigo_tipo ilike '%"+val->getCodigoTipo()+"%') AND ";
+        }
+        if(!val->getNombreTipo().isNull())
+        {
+            consulta=consulta+"(nombre_tipo ilike '%"+val->getNombreTipo()+"%') AND ";
+        }
+        if(!val->getCodigoImagen().isNull())
+        {
+            consulta=consulta+"(codigo_imagen ilike '%"+val->getCodigoImagen()+"%') AND ";
+        }
+
+    consulta.replace(consulta.size()-5,5," ");
     }
 
     consulta=consulta+Extra;
@@ -410,12 +471,19 @@ else
           resp->setTelefono(query.value(6).toString());
           resp->setEmail(query.value(7).toString());
           resp->setWeb(query.value(8).toString());
-          resp->setDescuento(query.value(9).toFloat());
+          resp->setDescuento(query.value(9).toDouble());
           resp->setFecha(query.value(10).toDate());
           resp->setCodigoInterno(query.value(11).toString());
           resp->setNumDoc(query.value(12).toString());
-          flag=false;
+
+          resp->setCodigoTipo(query.value(13).toString());
+          resp->setNombreTipo(query.value(14).toString());
+          resp->setRutaImagenTipo(query.value(15).toString());
+          resp->setCodigoImagen(query.value(16).toString());
+          resp->setRutaImagen(query.value(17).toString());
+
           salida->insert(resp->getCodigo(),(ObjetoMaestro*)resp);
+          MapaRepisaGlobal->push_front((ObjetoMaestro*)resp);
 
       }
 
@@ -433,67 +501,82 @@ int PgCliente::ContarConsulta(ObjetoMaestro *valor)
 QString consulta="";
 
     consulta="SELECT codigo, tipo, nombre, direccion, pais, contacto, telefono, email,"
-              " web, descuento, fecha, codigo_interno, num_doc "
-              " FROM clientes"
-              " WHERE ";
+             " web, descuento, fecha, codigo_interno, num_doc, "
+             " codigo_tipo, nombre_tipo, ruta_img_tipo, codigo_imagen, ruta_img"
+             " FROM vista_detalle_cliente "
+             " WHERE ";
 
 
     if(!val->getCodigo().isNull())
     {
-        consulta=consulta+"(codigo like '%"+val->getCodigo()+"%') AND ";
+        consulta=consulta+"(codigo ilike '%"+val->getCodigo()+"%') AND ";
     }
     if(!val->getTipo().isNull())
     {
-        consulta=consulta+"(tipo like '%"+val->getTipo()+"%') AND ";
+        consulta=consulta+"(tipo ilike '%"+val->getTipo()+"%') AND ";
     }
     if(!val->getNombre().isNull())
     {
-        consulta=consulta+"(nombre like '%"+val->getNombre()+"%') AND ";
+        consulta=consulta+"(nombre ilike '%"+val->getNombre()+"%') AND ";
     }
     if(!val->getDireccion().isNull())
     {
-        consulta=consulta+"(direccion like '%"+val->getDireccion()+"%') AND ";
+        consulta=consulta+"(direccion ilike '%"+val->getDireccion()+"%') AND ";
     }
     if(!val->getPais().isNull())
     {
-        consulta=consulta+"(pais like '%"+val->getPais()+"%') AND ";
+        consulta=consulta+"(pais ilike '%"+val->getPais()+"%') AND ";
     }
     if(!val->getContacto().isNull())
     {
-        consulta=consulta+"(contacto like '%"+val->getContacto()+"%') AND ";
+        consulta=consulta+"(contacto ilike '%"+val->getContacto()+"%') AND ";
     }
     if(!val->getTelefono().isNull())
     {
-        consulta=consulta+"(telefono like '%"+val->getTelefono()+"%') AND ";
+        consulta=consulta+"(telefono ilike '%"+val->getTelefono()+"%') AND ";
     }
     if(!val->getEmail().isNull())
     {
-        consulta=consulta+"(email like '%"+val->getEmail()+"%') AND ";
+        consulta=consulta+"(email ilike '%"+val->getEmail()+"%') AND ";
     }
     if(!val->getWeb().isNull())
     {
-        consulta=consulta+"(web like '%"+val->getWeb()+"%') AND ";
+        consulta=consulta+"(web ilike '%"+val->getWeb()+"%') AND ";
     }
     if(!(val->getDescuento()==(-1)))
     {
-        consulta=consulta+"(descuento like '%"+QString::number(val->getDescuento())+"%') AND ";
+        consulta=consulta+"(descuento >= "+QString::number(val->getDescuento())+") AND ";
     }
 
     if(!(val->getFecha()==QDate(1,1,1)))
     {
-        consulta=consulta+"(fecha='"+(val->getFecha()).toString("yyyy-MM-dd")+"') AND ";
+        consulta=consulta+" fecha  BETWEEN '"+val->getFecha().toString("dd-MM-yyyy")+"' AND '"+val->getFechaFin().toString("dd-MM-yyyy") +"' AND ";
     }
 
     if(!val->getCodigoInterno().isNull())
     {
-        consulta=consulta+"(codigo_interno like '%"+val->getCodigoInterno()+"%') AND ";
+        consulta=consulta+"(codigo_interno ilike '%"+val->getCodigoInterno()+"%') AND ";
     }
     if(!val->getNumDoc().isNull())
     {
-        consulta=consulta+"(num_doc like '%"+val->getNumDoc()+"%') AND ";
+        consulta=consulta+"(num_doc ilike '%"+val->getNumDoc()+"%') AND ";
     }
 
-    consulta.replace(consulta.size()-5,5,";");
+    if(!val->getCodigoTipo().isNull())
+    {
+        consulta=consulta+"(codigo_tipo ilike '%"+val->getCodigoTipo()+"%') AND ";
+    }
+    if(!val->getNombreTipo().isNull())
+    {
+        consulta=consulta+"(nombre_tipo ilike '%"+val->getNombreTipo()+"%') AND ";
+    }
+    if(!val->getCodigoImagen().isNull())
+    {
+        consulta=consulta+"(codigo_imagen ilike '%"+val->getCodigoImagen()+"%') AND ";
+    }
+
+
+    consulta.replace(consulta.size()-5,5," ");
 
 
 
@@ -516,78 +599,94 @@ QSqlQueryModel *PgCliente::BuscarTabla(Cliente valor, QString Extra, CONSULTA ti
 QString consulta="";
 if(tipo==TODO)
 {
-  consulta="SELECT codigo, tipo, nombre, direccion, pais, contacto, telefono, email,"
-            " web, descuento, fecha, codigo_interno, num_doc "
-            " FROM clientes";
+    consulta="SELECT codigo,codigo_interno, tipo, num_doc, nombre_tipo, nombre, direccion, pais, contacto, telefono, email,"
+             " web, descuento, fecha,  "
+             " codigo_tipo,  ruta_img_tipo, codigo_imagen, ruta_img"
+             " FROM vista_detalle_cliente ";
 
 }
 else
 {
 
-    consulta="SELECT codigo, tipo, nombre, direccion, pais, contacto, telefono, email,"
-              " web, descuento, fecha, codigo_interno, num_doc "
-              " FROM clientes"
-              " WHERE ";
+    consulta="SELECT codigo,codigo_interno, tipo, num_doc, nombre_tipo, nombre, direccion, pais, contacto, telefono, email,"
+             " web, descuento, fecha,  "
+             " codigo_tipo,  ruta_img_tipo, codigo_imagen, ruta_img"
+             " FROM vista_detalle_cliente "
+             " WHERE ";
 
 
     if(!valor.getCodigo().isNull())
     {
-        consulta=consulta+"(codigo like '%"+valor.getCodigo()+"%') AND ";
+        consulta=consulta+"(codigo ilike '%"+valor.getCodigo()+"%') AND ";
     }
     if(!valor.getTipo().isNull())
     {
-        consulta=consulta+"(tipo like '%"+valor.getTipo()+"%') AND ";
+        consulta=consulta+"(tipo ilike '%"+valor.getTipo()+"%') AND ";
     }
     if(!valor.getNombre().isNull())
     {
-        consulta=consulta+"(nombre like '%"+valor.getNombre()+"%') AND ";
+        consulta=consulta+"(nombre ilike '%"+valor.getNombre()+"%') AND ";
     }
     if(!valor.getDireccion().isNull())
     {
-        consulta=consulta+"(direccion like '%"+valor.getDireccion()+"%') AND ";
+        consulta=consulta+"(direccion ilike '%"+valor.getDireccion()+"%') AND ";
     }
     if(!valor.getPais().isNull())
     {
-        consulta=consulta+"(pais like '%"+valor.getPais()+"%') AND ";
+        consulta=consulta+"(pais ilike '%"+valor.getPais()+"%') AND ";
     }
     if(!valor.getContacto().isNull())
     {
-        consulta=consulta+"(contacto like '%"+valor.getContacto()+"%') AND ";
+        consulta=consulta+"(contacto ilike '%"+valor.getContacto()+"%') AND ";
     }
     if(!valor.getTelefono().isNull())
     {
-        consulta=consulta+"(telefono like '%"+valor.getTelefono()+"%') AND ";
+        consulta=consulta+"(telefono ilike '%"+valor.getTelefono()+"%') AND ";
     }
     if(!valor.getEmail().isNull())
     {
-        consulta=consulta+"(email like '%"+valor.getEmail()+"%') AND ";
+        consulta=consulta+"(email ilike '%"+valor.getEmail()+"%') AND ";
     }
     if(!valor.getWeb().isNull())
     {
-        consulta=consulta+"(web like '%"+valor.getWeb()+"%') AND ";
+        consulta=consulta+"(web ilike '%"+valor.getWeb()+"%') AND ";
     }
     if(!(valor.getDescuento()==(-1)))
     {
-        consulta=consulta+"(descuento like '%"+QString::number(valor.getDescuento())+"%') AND ";
+        consulta=consulta+"(descuento >= "+QString::number(valor.getDescuento())+") AND ";
     }
 
     if(!(valor.getFecha()==QDate(1,1,1)))
     {
-        consulta=consulta+"(fecha='"+(valor.getFecha()).toString("yyyy-MM-dd")+"') AND ";
+        consulta=consulta+" fecha  BETWEEN '"+valor.getFecha().toString("dd-MM-yyyy")+"' AND '"+valor.getFechaFin().toString("dd-MM-yyyy") +"' AND ";
     }
 
     if(!valor.getCodigoInterno().isNull())
     {
-        consulta=consulta+"(codigo_interno like '%"+valor.getCodigoInterno()+"%') AND ";
+        consulta=consulta+"(codigo_interno ilike '%"+valor.getCodigoInterno()+"%') AND ";
     }
     if(!valor.getNumDoc().isNull())
     {
-        consulta=consulta+"(num_doc like '%"+valor.getNumDoc()+"%') AND ";
+        consulta=consulta+"(num_doc ilike '%"+valor.getNumDoc()+"%') AND ";
     }
-consulta.replace(consulta.size()-5,5,";");
+
+    if(!valor.getCodigoTipo().isNull())
+    {
+        consulta=consulta+"(codigo_tipo ilike '%"+valor.getCodigoTipo()+"%') AND ";
+    }
+    if(!valor.getNombreTipo().isNull())
+    {
+        consulta=consulta+"(nombre_tipo ilike '%"+valor.getNombreTipo()+"%') AND ";
+    }
+    if(!valor.getCodigoImagen().isNull())
+    {
+        consulta=consulta+"(codigo_imagen ilike '%"+valor.getCodigoImagen()+"%') AND ";
+    }
+
+consulta.replace(consulta.size()-5,5," ");
 }
 
-qDebug()<<consulta;
+qDebug()<<"--------->"<<consulta;
 
 consulta=consulta+Extra;
 
@@ -599,3 +698,5 @@ consulta=consulta+Extra;
 
     return model;
 }
+
+

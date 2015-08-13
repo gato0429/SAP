@@ -22,7 +22,7 @@ public:
     int Contar();
     int ContarConsulta(ObjetoMaestro* valor);
     QSqlQueryModel *BuscarTabla(ArticuloTipo valor, QString Extra, CONSULTA tipo);
-
+    QMap<QString, ObjetoMaestro *> *BuscarClave();
 };
 
 #endif // PGARTICULOTIPO_H

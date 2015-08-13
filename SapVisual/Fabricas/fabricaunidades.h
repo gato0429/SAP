@@ -22,6 +22,7 @@ public:
     virtual int Contar()=0;
     virtual int ContarConsulta(ObjetoMaestro* valor)=0;
     virtual     QSqlQueryModel* BuscarTabla(Unidad valor,QString Extra,CONSULTA tipo)=0;
+    virtual QMap<QString,ObjetoMaestro*>* BuscarClave()=0;
 
 };
 

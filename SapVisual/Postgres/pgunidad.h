@@ -24,6 +24,7 @@ public:
     int Contar();
     int ContarConsulta(ObjetoMaestro *valor);
     QSqlQueryModel *BuscarTabla(Unidad valor, QString Extra, CONSULTA tipo);
+    QMap<QString, ObjetoMaestro*> *BuscarClave();
 };
 
 #endif // PGUNIDAD_H

@@ -13,7 +13,8 @@
 #include "Repisas/repisavehiculorubro.h"
 #include "Repisas/repisaclientetipo.h"
 #include "Repisas/repisaestado.h"
-
+#include "Repisas/repisaarticulo.h"
+#include "Repisas/repisacliente.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -28,11 +29,11 @@ int main(int argc, char *argv[])
   // RepisaImagenes* w=new RepisaImagenes();
 
  //  RepisaVehiculoRubro* w=new RepisaVehiculoRubro();
- // RepisaImagenes* w=new RepisaImagenes();
+ //RepisaImagenes* w=new RepisaImagenes();
 //    RepisaMoneda* w=new RepisaMoneda();
-    // RepisaClienteTipo* w=new RepisaClienteTipo();
-       RepisaEstado* w=new RepisaEstado();
-
+  //  RepisaClienteTipo* w=new RepisaClienteTipo();
+    //   RepisaEstado* w=new RepisaEstado();
+    RepisaCliente* w=new RepisaCliente();
     w->show();
 
 

@@ -143,6 +143,138 @@ void Articulo::setCodigoExterno(const QString &value)
 {
     CodigoExterno = value;
 }
+
+double Articulo::getCantidadMin() const
+{
+    return CantidadMin;
+}
+
+void Articulo::setCantidadMin(double value)
+{
+    CantidadMin = value;
+}
+
+QString Articulo::getUnico() const
+{
+    return Unico;
+}
+
+void Articulo::setUnico(QString value)
+{
+    Unico = value;
+}
+
+QString Articulo::getCodigoModelo() const
+{
+    return CodigoModelo;
+}
+
+void Articulo::setCodigoModelo(const QString &value)
+{
+    CodigoModelo = value;
+}
+
+QString Articulo::getNombreModelo() const
+{
+    return NombreModelo;
+}
+
+void Articulo::setNombreModelo(const QString &value)
+{
+    NombreModelo = value;
+}
+
+QString Articulo::getRutaImagenModelo() const
+{
+    return RutaImagenModelo;
+}
+
+void Articulo::setRutaImagenModelo(const QString &value)
+{
+    RutaImagenModelo = value;
+}
+
+QString Articulo::getCodigoMarca() const
+{
+    return CodigoMarca;
+}
+
+void Articulo::setCodigoMarca(const QString &value)
+{
+    CodigoMarca = value;
+}
+
+QString Articulo::getNombreMarca() const
+{
+    return NombreMarca;
+}
+
+void Articulo::setNombreMarca(const QString &value)
+{
+    NombreMarca = value;
+}
+
+QString Articulo::getRutaImagenMarca() const
+{
+    return RutaImagenMarca;
+}
+
+void Articulo::setRutaImagenMarca(const QString &value)
+{
+    RutaImagenMarca = value;
+}
+
+QString Articulo::getCodigoMoneda() const
+{
+    return CodigoMoneda;
+}
+
+void Articulo::setCodigoMoneda(const QString &value)
+{
+    CodigoMoneda = value;
+}
+
+QString Articulo::getNombreMoneda() const
+{
+    return NombreMoneda;
+}
+
+void Articulo::setNombreMoneda(const QString &value)
+{
+    NombreMoneda = value;
+}
+
+QString Articulo::getSimboloMoneda() const
+{
+    return SimboloMoneda;
+}
+
+void Articulo::setSimboloMoneda(const QString &value)
+{
+    SimboloMoneda = value;
+}
+
+QString Articulo::getRutaImagenMoneda() const
+{
+    return RutaImagenMoneda;
+}
+
+void Articulo::setRutaImagenMoneda(const QString &value)
+{
+    RutaImagenMoneda = value;
+}
+
+double Articulo::getPrecio() const
+{
+    return Precio;
+}
+
+void Articulo::setPrecio(double value)
+{
+    Precio = value;
+}
 Articulo::Articulo()
 {
+    CantidadMin=-1;
+    Precio=-1;
 }

@@ -149,16 +149,20 @@ void FormClienteTipo::AsignarCampos()
     Antiguo.setCodigo(ui->LineCodigo->text());
     Objeto.setNombre(ui->LineNombre->text());
     Objeto.setCodigoImagen(CodigoImagen);
+    Objeto.setTipo(ui->ComboTipo->currentText());
 }
 
 void FormClienteTipo::Habilitar()
 {
     ui->LineNombre->setEnabled(true);
+    ui->ComboTipo->setEnabled(true);
 }
 
 void FormClienteTipo::Deshabilitar()
 {
      ui->LineNombre->setEnabled(false);
+     ui->ComboTipo->setEnabled(false);
+
 }
 
 void FormClienteTipo::Limpiar()
@@ -166,6 +170,7 @@ void FormClienteTipo::Limpiar()
     ui->LineCodigo->clear();
     ui->LineImagen->clear();
     ui->LineNombre->clear();
+    ui->ComboTipo->setCurrentIndex(0);
     CodigoImagen.clear();
 }
 
@@ -177,6 +182,7 @@ void FormClienteTipo::SetObjeto(ObjetoMaestro *ObjetoTipo)
     ui->LineCodigo->setText(Objeto.getCodigo());
     ui->LineNombre->setText(Objeto.getNombre());
     ui->LineImagen->setText(Objeto.getRutaImagen());
+    ui->ComboTipo->setCurrentText(Objeto.getTipo());
 
     QPixmap*  pix=new QPixmap(RutaImagenes+Objeto.getRutaImagen());
     ui->LabelImage->setPixmap(pix->scaled(60,60,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));

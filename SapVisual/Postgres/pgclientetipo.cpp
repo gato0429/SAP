@@ -23,11 +23,12 @@ bool PgClienteTipo::Borrar(ClienteTipo valor)
 bool PgClienteTipo::Insertar(ClienteTipo valor)
 {
     QSqlQuery query;
-      query.prepare("INSERT INTO cliente_tipo(nombre, codigo_imagen)"
-            " VALUES (?, ?);");
+      query.prepare("INSERT INTO cliente_tipo(nombre, codigo_imagen, tipo)"
+            " VALUES (?, ?, ?);");
 
       query.addBindValue(valor.getNombre());
       query.addBindValue(valor.getCodigoImagen());
+      query.addBindValue(valor.getTipo());
 
       bool flag=query.exec();
       if(!flag)
@@ -61,6 +62,11 @@ bool PgClienteTipo::Actualizar(ClienteTipo Antiguo, ClienteTipo Nuevo)
     {
         consulta=consulta+", codigo_imagen='"+Nuevo.getCodigoImagen()+"'";
     }
+    if(!Nuevo.getTipo().isNull())
+    {
+        consulta=consulta+", tipo='"+Nuevo.getTipo()+"'";
+    }
+
     /*-------------------------------------*/
     /*contar la cantidad de caracteres desde el inicio hasta set*/
     consulta.replace(c,2," ");
@@ -81,6 +87,12 @@ bool PgClienteTipo::Actualizar(ClienteTipo Antiguo, ClienteTipo Nuevo)
         consulta=consulta+"(codigo_imagen='"+Antiguo.getCodigoImagen()+"') AND ";
     }
 
+    if(!Antiguo.getTipo().isNull())
+    {
+        consulta=consulta+", tipo='"+Antiguo.getTipo()+"'";
+    }
+
+
     consulta.replace(consulta.size()-5,5,";");
     qDebug()<<consulta;
 
@@ -100,7 +112,7 @@ ClienteTipo PgClienteTipo::Buscar(ClienteTipo valor)
 {
     QString consulta;
 
-        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img, tipo "
                 "FROM vista_detalle_cliente_tipo WHERE ";
 
 
@@ -120,6 +132,12 @@ ClienteTipo PgClienteTipo::Buscar(ClienteTipo valor)
     {
         consulta=consulta+" ruta_img ilike '%"+valor.getRutaImagen()+"%' AND ";
     }
+
+    if(!valor.getTipo().isNull())
+    {
+        consulta=consulta+" tipo ilike '%"+valor.getTipo()+"%' AND ";
+    }
+
     consulta.replace(consulta.size()-5,5," ");
 
 
@@ -139,6 +157,7 @@ ClienteTipo PgClienteTipo::Buscar(ClienteTipo valor)
           resp->setNombre(query.value(1).toString());
           resp->setCodigoImagen(query.value(2).toString());
           resp->setRutaImagen(query.value(3).toString());
+          resp->setTipo(query.value(4).toString());
           flag=false;
       }
 
@@ -154,13 +173,13 @@ QMap<QString, ObjetoMaestro *> *PgClienteTipo::BuscarMapa(ObjetoMaestro *valor, 
 
     if(tipo==TODO)
     {
-        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img, tipo  "
                 "FROM vista_detalle_cliente_tipo";
 
     }
     else
     {
-        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img, tipo  "
                 "FROM vista_detalle_cliente_tipo WHERE ";
 
     if(!val->getCodigo().isNull())
@@ -180,6 +199,10 @@ QMap<QString, ObjetoMaestro *> *PgClienteTipo::BuscarMapa(ObjetoMaestro *valor, 
     {
         consulta=consulta+" ruta_img ilike '%"+val->getRutaImagen()+"%' AND ";
     }
+    if(!val->getTipo().isNull())
+    {
+        consulta=consulta+" tipo ilike '%"+val->getTipo()+"%' AND ";
+    }
 
     consulta.replace(consulta.size()-5,5," ");
     }
@@ -196,6 +219,7 @@ QMap<QString, ObjetoMaestro *> *PgClienteTipo::BuscarMapa(ObjetoMaestro *valor, 
           resp->setNombre(query.value(1).toString());
           resp->setCodigoImagen(query.value(2).toString());
           resp->setRutaImagen(query.value(3).toString());
+          resp->setTipo(query.value(4).toString());
 
 
           salida->insert(resp->getCodigo(),(ObjetoMaestro*)resp);
@@ -247,6 +271,10 @@ qint64 PgClienteTipo::ContarConsulta(ObjetoMaestro *valor)
     {
         consulta=consulta+" ruta_img ilike '%"+val->getRutaImagen()+"%' AND ";
     }
+    if(!val->getTipo().isNull())
+    {
+        consulta=consulta+" tipo ilike '%"+val->getTipo()+"%' AND ";
+    }
     consulta.replace(consulta.size()-5,5," ");
 
 
@@ -267,12 +295,12 @@ QSqlQueryModel *PgClienteTipo::BuscarTabla(ClienteTipo valor, QString Extra, CON
 
      if(tipo==TODO)
      {
-         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img, tipo "
                  "FROM vista_detalle_cliente_tipo";
      }
      else
      {
-         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+         consulta="SELECT codigo, nombre, codigo_imagen, ruta_img, tipo "
                        "FROM vista_detalle_cliente_tipo where";
 
      if(!valor.getCodigo().isNull())
@@ -292,6 +320,10 @@ QSqlQueryModel *PgClienteTipo::BuscarTabla(ClienteTipo valor, QString Extra, CON
      {
          consulta=consulta+" ruta_img like '%"+valor.getRutaImagen()+"%' AND ";
      }
+     if(!valor.getTipo().isNull())
+     {
+         consulta=consulta+" tipo ilike '%"+valor.getTipo()+"%' AND ";
+     }
 
      consulta.replace(consulta.size()-5,5," ");
      }
@@ -303,5 +335,36 @@ QSqlQueryModel *PgClienteTipo::BuscarTabla(ClienteTipo valor, QString Extra, CON
      qDebug()<<consulta;
 
      return model;
+}
+
+QMap<QString, ObjetoMaestro *> *PgClienteTipo::BuscarClave()
+{
+    QString consulta;
+
+    consulta="SELECT codigo, nombre, codigo_imagen, ruta_img, tipo "
+            "FROM vista_detalle_cliente_tipo order by nombre asc";
+
+
+
+        QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
+        QSqlQuery query(consulta);
+
+          while (query.next() ) {
+
+              ClienteTipo* resp=new ClienteTipo();
+              resp->setCodigo(query.value(0).toString());
+              resp->setNombre(query.value(1).toString());
+              resp->setCodigoImagen(query.value(2).toString());
+              resp->setRutaImagen(query.value(3).toString());
+              resp->setTipo(query.value(4).toString());
+
+
+              salida->insert(query.value(1).toString(),(ObjetoMaestro*)resp);
+          }
+
+
+
+
+        return salida;
 }
 

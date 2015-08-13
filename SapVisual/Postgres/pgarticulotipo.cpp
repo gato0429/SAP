@@ -26,6 +26,8 @@ bool PgArticuloTipo::Insertar(ArticuloTipo valor)
 
       query.addBindValue(valor.getNombre());
       query.addBindValue(valor.getCodigo_Imagen());
+
+
       return query.exec();
 }
 
@@ -236,6 +238,33 @@ QSqlQueryModel *PgArticuloTipo::BuscarTabla(ArticuloTipo valor, QString Extra, C
     qDebug()<<"desde tabla"<<consulta;
 
     return model;
+}
+
+QMap<QString, ObjetoMaestro*> *PgArticuloTipo::BuscarClave()
+{
+    QString consulta;
+
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta  "
+                "FROM vista_detalle_articulo_tipo";
+
+
+
+        QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
+        QSqlQuery query(consulta);
+
+          while (query.next() ) {
+              ArticuloTipo* resp=new ArticuloTipo();
+              resp->setCodigo(query.value(0).toString());
+              resp->setNombre(query.value(1).toString());
+              resp->setCodigo_Imagen(query.value(2).toString());
+              resp->setImagen(query.value(3).toString());
+
+
+              salida->insert(query.value(1).toString(),(ObjetoMaestro*)resp);
+          }
+
+
+        return salida;
 }
 
 

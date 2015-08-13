@@ -312,3 +312,23 @@ QSqlQueryModel *PgEstado::BuscarTabla(Estado valor, QString Extra, CONSULTA tipo
 
 }
 
+QMap<QString, QString> *PgEstado::BuscarClave()
+{
+    QString consulta;
+
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+                "FROM vista_detalle_estado";
+
+
+
+        QMap<QString,QString>* salida=new QMap<QString,QString>();
+        QSqlQuery query(consulta);
+
+          while (query.next() ) {
+              salida->insert(query.value(1).toString(),query.value(0).toString());
+          }
+
+
+        return salida;
+}
+

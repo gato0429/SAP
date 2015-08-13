@@ -189,7 +189,7 @@ QMap<QString, ObjetoMaestro *> *PgModelo::BuscarMapa(ObjetoMaestro *valor, QStri
     consulta.replace(consulta.size()-5,5," ");
     }
     consulta=consulta+Extra;
-    qDebug()<<consulta;
+
 
 
     QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
@@ -309,4 +309,34 @@ QSqlQueryModel *PgModelo::BuscarTabla(Modelo valor, QString Extra, CONSULTA tipo
 
          qDebug()<<consulta;
          return model;
+}
+
+QMap<QString, ObjetoMaestro *> *PgModelo::BuscarClave()
+{
+    QString consulta;
+
+        consulta="SELECT codigo, nombre, codigo_imagen, ruta_img "
+                "FROM vista_detalle_modelo order by nombre asc";
+
+
+
+        QMap<QString,ObjetoMaestro*>* salida=new QMap<QString,ObjetoMaestro*>();
+        QSqlQuery query(consulta);
+
+          while (query.next() ) {
+
+              Modelo* resp=new Modelo();
+              resp->setCodigo(query.value(0).toString());
+              resp->setNombre(query.value(1).toString());
+              resp->setCodigoImagen(query.value(2).toString());
+              resp->setRutaImagen(query.value(3).toString());
+
+
+              salida->insert(query.value(1).toString(),(ObjetoMaestro*)resp);
+          }
+
+
+
+
+        return salida;
 }

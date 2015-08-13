@@ -25,6 +25,14 @@ protected:
     QString CodigoInterno;
     QString NumDoc;
 
+    QString CodigoTipo;
+    QString NombreTipo;
+    QString RutaImagenTipo;
+
+    QString CodigoImagen;
+    QString RutaImagen;
+    /*Comodin Fecha*/
+    QDate   FechaFin;
 public:
     Cliente();
 
@@ -57,6 +65,18 @@ public:
     void setCodigoInterno(const QString &value);
     QString getNumDoc() const;
     void setNumDoc(const QString &value);
+    QString getCodigoTipo() const;
+    void setCodigoTipo(const QString &value);
+    QString getNombreTipo() const;
+    void setNombreTipo(const QString &value);
+    QString getRutaImagenTipo() const;
+    void setRutaImagenTipo(const QString &value);
+    QString getCodigoImagen() const;
+    void setCodigoImagen(const QString &value);
+    QString getRutaImagen() const;
+    void setRutaImagen(const QString &value);
+    QDate getFechaFin() const;
+    void setFechaFin(const QDate &value);
 };
 
 #endif // CLIENTE_H

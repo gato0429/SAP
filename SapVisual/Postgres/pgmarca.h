@@ -25,6 +25,7 @@ public:
     qint64 Contar();
     qint64 ContarConsulta(ObjetoMaestro *valor);
     QSqlQueryModel *BuscarTabla(Marca valor, QString Extra, CONSULTA tipo);
+    QMap<QString, ObjetoMaestro *> *BuscarClave();
 };
 
 #endif // PGMARCA_H
