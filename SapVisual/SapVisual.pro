@@ -120,7 +120,19 @@ SOURCES += main.cpp\
     Objetos/proveedor.cpp \
     Fabricas/fabricaproveedor.cpp \
     Postgres/pgproveedor.cpp \
-    Repisas/repisaproveedor.cpp
+    Repisas/repisaproveedor.cpp \
+    Objetos/representante.cpp \
+    Fabricas/fabricarepresentante.cpp \
+    Postgres/pgrepresentante.cpp \
+    Repisas/repisarepresentante.cpp \
+    Objetos/accionista.cpp \
+    Fabricas/fabricaaccionista.cpp \
+    Postgres/pgaccionista.cpp \
+    Repisas/repisaaccionista.cpp \
+    Objetos/sucursales.cpp \
+    Fabricas/fabricasucursales.cpp \
+    Postgres/pgsucursales.cpp \
+    Repisas/repisasucursales.cpp
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -234,7 +246,19 @@ HEADERS  += mainwindow.h \
     Objetos/proveedor.h \
     Fabricas/fabricaproveedor.h \
     Postgres/pgproveedor.h \
-    Repisas/repisaproveedor.h
+    Repisas/repisaproveedor.h \
+    Objetos/representante.h \
+    Fabricas/fabricarepresentante.h \
+    Postgres/pgrepresentante.h \
+    Repisas/repisarepresentante.h \
+    Objetos/accionista.h \
+    Fabricas/fabricaaccionista.h \
+    Postgres/pgaccionista.h \
+    Repisas/repisaaccionista.h \
+    Objetos/sucursales.h \
+    Fabricas/fabricasucursales.h \
+    Postgres/pgsucursales.h \
+    Repisas/repisasucursales.h
 
 FORMS    += mainwindow.ui \
     principal.ui \

@@ -138,3 +138,18 @@ FabricaProveedor *Postgres::CrearProveedor()
 {
     return new PgProveedor();
 }
+
+FabricaRepresentante *Postgres::CrearRepresentante()
+{
+    return new PgRepresentante();
+}
+
+FabricaAccionista *Postgres::CrearAccionista()
+{
+    return new PgAccionista();
+}
+
+FabricaSucursales *Postgres::CrearSucursales()
+{
+    return new PgSucursales();
+}

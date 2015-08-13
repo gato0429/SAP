@@ -144,10 +144,10 @@ bool PgProveedor::Actualizar(Proveedor Antiguo, Proveedor Nuevo)
     {
        consulta=consulta+"(estado='"+Antiguo.getEstado()+"') AND ";
     }*/
-    if(!Antiguo.getFechaIngreso().isNull())
+   /* if(!Antiguo.getFechaIngreso().isNull())
     {
         consulta=consulta+"(fecha_ingreso='"+Antiguo.getFechaIngreso()+"') AND ";
-    }
+    }*/
     if(!Antiguo.getDocumento().isNull())
     {
         consulta=consulta+"(documento='"+Antiguo.getDocumento()+"') AND ";
@@ -215,10 +215,10 @@ Proveedor PgProveedor::Buscar(Proveedor valor)
     {
         consulta=consulta+" estado ilike '%"+valor.getEstado()+"%' AND ";
     }*/
-    if(!valor.getFechaIngreso().isNull())
+   /* if(!valor.getFechaIngreso().isNull())
     {
         consulta=consulta+" fecha_ingreso ilike '%"+valor.getFechaIngreso()+"%' AND ";
-    }
+    }*/
     if(!valor.getDocumento().isNull())
     {
         consulta=consulta+" documento ilike '%"+valor.getDocumento()+"%' AND ";
@@ -309,10 +309,10 @@ QMap<QString, ObjetoMaestro *> *PgProveedor::BuscarMapa(ObjetoMaestro *valor, QS
     {
         consulta=consulta+" estado ilike '%"+val->getEstado()+"%' AND ";
     }*/
-    if(!val->getFechaIngreso().isNull())
+    /*if(!val->getFechaIngreso().isNull())
     {
         consulta=consulta+" fecha_ingreso ilike '%"+val->getFechaIngreso()+"%' AND ";
-    }
+    }*/
     if(!val->getDocumento().isNull())
     {
         consulta=consulta+" documento ilike '%"+val->getDocumento()+"%' AND ";
@@ -409,10 +409,10 @@ qint64 PgProveedor::ContarConsulta(ObjetoMaestro *valor)
     {
         consulta=consulta+" estado ilike '%"+val->getEstado()+"%' AND ";
     }*/
-    if(!val->getFechaIngreso().isNull())
+    /*if(!val->getFechaIngreso().isNull())
     {
         consulta=consulta+" fecha_ingreso ilike '%"+val->getFechaIngreso()+"%' AND ";
-    }
+    }*/
     if(!val->getDocumento().isNull())
     {
         consulta=consulta+" documento ilike '%"+val->getDocumento()+"%' AND ";
@@ -490,9 +490,9 @@ QSqlQueryModel *PgProveedor::BuscarTabla(Proveedor valor, QString Extra, CONSULT
              consulta=consulta+" estado ilike '%"+valor.getEstado()+"%' AND ";
          }*/
          if(!valor.getFechaIngreso().isNull())
-         {
+       /*  {
              consulta=consulta+" fecha_ingreso ilike '%"+valor.getFechaIngreso()+"%' AND ";
-         }
+         }*/
          if(!valor.getDocumento().isNull())
          {
              consulta=consulta+" documento ilike '%"+valor.getDocumento()+"%' AND ";

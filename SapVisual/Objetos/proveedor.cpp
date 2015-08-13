@@ -91,12 +91,12 @@ void Proveedor::setWeb(const QString &value)
     Web = value;
 }
 
-QString Proveedor::getFechaIngreso() const
+QDate Proveedor::getFechaIngreso() const
 {
     return FechaIngreso;
 }
 
-void Proveedor::setFechaIngreso(const QString &value)
+void Proveedor::setFechaIngreso(const QDate &value)
 {
     FechaIngreso = value;
 }

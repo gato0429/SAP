@@ -21,6 +21,9 @@
 #include "pgempleadoarea.h"
 #include "pgempleadocargo.h"
 #include "pgproveedor.h"
+#include "pgrepresentante.h"
+#include "pgaccionista.h"
+#include "pgsucursales.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -56,6 +59,10 @@ public:
     FabricaEmpleadoArea  *CrearEmpleadoArea();
     FabricaEmpleadoCargo *CrearEmpleadoCargo();
     FabricaProveedor     *CrearProveedor();
+    FabricaRepresentante *CrearRepresentante();
+    FabricaAccionista    *CrearAccionista();
+    FabricaSucursales    *CrearSucursales();
+
 };
 
 

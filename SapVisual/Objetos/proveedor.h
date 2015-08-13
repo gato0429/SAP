@@ -16,7 +16,7 @@ private:
     QString Web;
     // esta me ocasiono muchos problemas
     //QString Estado;
-    QString FechaIngreso;
+    QDate FechaIngreso;
     QString Documento;
 public:
     Proveedor();
@@ -38,8 +38,8 @@ public:
     void setEmail(const QString &value);
     QString getWeb() const;
     void setWeb(const QString &value);
-    QString getFechaIngreso() const;
-    void setFechaIngreso(const QString &value);
+    QDate getFechaIngreso() const;
+    void setFechaIngreso(const QDate &value);
     QString getDocumento() const;
     void setDocumento(const QString &value);
    // QString getEstado() const;
