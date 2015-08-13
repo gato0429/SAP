@@ -102,9 +102,12 @@ SOURCES += main.cpp\
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Repisas/repisacliente.cpp \
     Formularios/formcliente.cpp
 =======
+=======
+>>>>>>> origin/panochon
 =======
 >>>>>>> origin/panochon
 =======
@@ -149,6 +152,9 @@ SOURCES += main.cpp\
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/panochon
+=======
 >>>>>>> origin/panochon
 =======
 >>>>>>> origin/panochon
@@ -251,9 +257,12 @@ HEADERS  += mainwindow.h \
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Repisas/repisacliente.h \
     Formularios/formcliente.h
 =======
+=======
+>>>>>>> origin/panochon
 =======
 >>>>>>> origin/panochon
 =======
@@ -298,6 +307,9 @@ HEADERS  += mainwindow.h \
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/panochon
+=======
 >>>>>>> origin/panochon
 =======
 >>>>>>> origin/panochon
@@ -329,7 +341,13 @@ FORMS    += mainwindow.ui \
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Formularios/formcliente.ui
+=======
+    Formularios/formoperaciones.ui \
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
+>>>>>>> origin/panochon
 =======
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
