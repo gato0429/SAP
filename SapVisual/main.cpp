@@ -15,8 +15,14 @@
 #include "Repisas/repisaestado.h"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "Repisas/repisaarticulo.h"
 #include "Repisas/repisacliente.h"
+=======
+#include "Repisas/repisaoperaciones.h"
+#include "Repisas/repisaempleadoarea.h"
+#include "Repisas/repisaempleadocargo.h"
+>>>>>>> origin/panochon
 =======
 #include "Repisas/repisaoperaciones.h"
 #include "Repisas/repisaempleadoarea.h"
@@ -54,6 +60,9 @@ int main(int argc, char *argv[])
    // RepisaEmpleadoArea* w=new RepisaEmpleadoArea();
     RepisaEmpleadoCargo* w=new RepisaEmpleadoCargo();
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/panochon
+=======
 >>>>>>> origin/panochon
 =======
 >>>>>>> origin/panochon
