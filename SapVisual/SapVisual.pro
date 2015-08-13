@@ -99,9 +99,12 @@ SOURCES += main.cpp\
     Formularios/formestado.cpp \
     Repisas/repisaestado.cpp \
 <<<<<<< HEAD
+<<<<<<< HEAD
     Repisas/repisacliente.cpp \
     Formularios/formcliente.cpp
 =======
+=======
+>>>>>>> origin/panochon
     Objetos/vehiculo.cpp \
     Fabricas/fabricavehiculo.cpp \
     Postgres/pgvehiculo.cpp \
@@ -137,6 +140,9 @@ SOURCES += main.cpp\
     Fabricas/fabricasucursales.cpp \
     Postgres/pgsucursales.cpp \
     Repisas/repisasucursales.cpp
+<<<<<<< HEAD
+>>>>>>> origin/panochon
+=======
 >>>>>>> origin/panochon
 
 HEADERS  += mainwindow.h \
@@ -230,9 +236,12 @@ HEADERS  += mainwindow.h \
     Formularios/formestado.h \
     Repisas/repisaestado.h \
 <<<<<<< HEAD
+<<<<<<< HEAD
     Repisas/repisacliente.h \
     Formularios/formcliente.h
 =======
+=======
+>>>>>>> origin/panochon
     Objetos/vehiculo.h \
     Fabricas/fabricavehiculo.h \
     Postgres/pgvehiculo.h \
@@ -268,6 +277,9 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricasucursales.h \
     Postgres/pgsucursales.h \
     Repisas/repisasucursales.h
+<<<<<<< HEAD
+>>>>>>> origin/panochon
+=======
 >>>>>>> origin/panochon
 
 FORMS    += mainwindow.ui \
@@ -290,7 +302,13 @@ FORMS    += mainwindow.ui \
     Formularios/formclientetipo.ui \
     Formularios/formestado.ui \
 <<<<<<< HEAD
+<<<<<<< HEAD
     Formularios/formcliente.ui
+=======
+    Formularios/formoperaciones.ui \
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
+>>>>>>> origin/panochon
 =======
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \

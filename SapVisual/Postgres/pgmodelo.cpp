@@ -5,8 +5,6 @@ PgModelo::PgModelo()
 
 }
 
-
-
 bool PgModelo::Borrar(Modelo valor)
 {
     QSqlQuery query;
