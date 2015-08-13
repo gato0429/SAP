@@ -1,44 +1,41 @@
-#include "repisamodelo.h"
+#include "repisaaccionista.h"
 
-RepisaModelo::RepisaModelo() : Repisa()
+RepisaAccionista::RepisaAccionista(): Repisa()
 {
-    ActualizarMapa((ObjetoMaestro*)new Modelo);
+    ActualizarMapa((ObjetoMaestro*)new Accionista);
 }
 
-
-
-void RepisaModelo::ConsultarBusqueda()
+void RepisaAccionista::ConsultarBusqueda()
 {
     MostrarLabel();
     return;
-
 }
 
-void RepisaModelo::GrupoBotonesClick(QAbstractButton *buttonID)
+void RepisaAccionista::GrupoBotonesClick(QAbstractButton *buttonID)
 {
     /*Cambia*/
-    Dialogo=new FormModelo(this);
-    Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
-    Dialogo->SetObjeto(((Modelo*)MapaRepisa->value(buttonID->objectName())));
+    //Dialogo=new FormVehiculo(this);
+    /*Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
+    Dialogo->SetObjeto(((Vehiculo*)MapaRepisa->value(buttonID->objectName())));
     ObjetosAbiertos.push_back(buttonID->objectName());
     buttonID->setEnabled(false);
-    /**/
-    Dialogo->show();
+
+    Dialogo->show();*/
 }
 
-
-void RepisaModelo::NuevoClick()
+void RepisaAccionista::NuevoClick()
 {
-    Dialogo=new FormModelo(this);
-    Dialogo->move(this->x()+this->width(),this->y());
-    Dialogo->exec();
+    // Dialogo=new FormVehiculo(this);
+    /* Dialogo->move(this->x()+this->width(),this->y());
+     Dialogo->exec();*/
 }
-void RepisaModelo::BuscarClick()
+
+void RepisaAccionista::BuscarClick()
 {
     Busqueda=new BusquedaMaestra(this);
 
     QStringList campos;
-    campos <<"Codigo" <<"Codigo Imagen"<< "Nombre";
+    campos <<"Codigo" <<"Nombre"<< "Dni"<< "Telefono"<< "Direccion"<< "Codigo Cliente"<< "Nombre Cliente"<< "Ruta Imagen";
     Busqueda->ComboCampos->addItems(campos);
 
     Busqueda->move(this->x()+this->width()-60,this->y()+90);
@@ -48,7 +45,7 @@ void RepisaModelo::BuscarClick()
     Buscar->setEnabled(false);
 }
 
-void RepisaModelo::ObtenerConsulta()
+void RepisaAccionista::ObtenerConsulta()
 {
     QString ord;
 
@@ -62,7 +59,7 @@ void RepisaModelo::ObtenerConsulta()
     }
     Ordenamiento=ord;
     OrderByCampo="codigo";
-    Modelo* ObjetoBusqueda=new Modelo();
+   Accionista* ObjetoBusqueda=new Accionista();
 
     switch (IndiceBusqueda)
     {
@@ -71,12 +68,24 @@ void RepisaModelo::ObtenerConsulta()
         OrderByCampo="codigo";
         break;
     case 1:
-        ObjetoBusqueda->setCodigoImagen(LineBuscar->text());
-        OrderByCampo="codigo_imagen";
-        break;
-    case 2:
         ObjetoBusqueda->setNombre(LineBuscar->text());
         OrderByCampo="nombre";
+        break;
+    case 2:
+        ObjetoBusqueda->setDni(LineBuscar->text());
+        OrderByCampo="dni";
+        break;
+    case 3:
+        ObjetoBusqueda->setTelefono(LineBuscar->text());
+        OrderByCampo="telefono";
+        break;
+    case 4:
+        ObjetoBusqueda->setDireccion(LineBuscar->text());
+        OrderByCampo="direccion";
+        break;
+    case 5:
+        ObjetoBusqueda->setNombreCliente(LineBuscar->text());
+        OrderByCampo="nombre_cliente";
         break;
     default:
         break;
@@ -93,8 +102,12 @@ void RepisaModelo::ObtenerConsulta()
 
     Model->setHeaderData(0,Qt::Horizontal,"Codigo");
     Model->setHeaderData(1,Qt::Horizontal,"Nombre");
-    Model->setHeaderData(2,Qt::Horizontal,"Codigo Imagen");
-    Model->setHeaderData(3,Qt::Horizontal,"Ruta");
+    Model->setHeaderData(2,Qt::Horizontal,"Dni");
+    Model->setHeaderData(3,Qt::Horizontal,"Telefono");
+    Model->setHeaderData(4,Qt::Horizontal,"Direccion");
+    Model->setHeaderData(5,Qt::Horizontal,"Codigo Cliente");
+    Model->setHeaderData(6,Qt::Horizontal,"Nombre Cliente");
+    Model->setHeaderData(7,Qt::Horizontal,"Ruta");
 
 
     QList<bool> CamposVisibles;
@@ -109,13 +122,13 @@ void RepisaModelo::ObtenerConsulta()
 
 }
 
-void RepisaModelo::ObjetosIndependientes()
+void RepisaAccionista::ObjetosIndependientes()
 {
     /*
      * Para el Tool Tip
     */
     QPushButton* pp=new QPushButton(this);
-    Modelo *i=(Modelo*)(*it);
+    Representante *i=(Representante*)(*it);
     pp->setObjectName(i->getCodigo());
     pp->setIcon(DefBD::toQicon(i->getRutaImagen()));
     pp->setIconSize(QSize(55,55));
@@ -132,13 +145,11 @@ void RepisaModelo::ObjetosIndependientes()
     {
         pp->setEnabled(false);
     }
-
 }
 
-void RepisaModelo::ActualizarConsulta()
+void RepisaAccionista::ActualizarConsulta()
 {
-
-    FabricaLocal=Bd->Fabrica->CrearModelo();
+    FabricaLocal=Bd->Fabrica->CrearAccionista();
     Bd->Fabrica->Conectar();
     RegistrosTabla=FabricaLocal->ContarConsulta(ObjetoConsulta);
     QString extra=" order by "+OrderByCampo+" "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);
@@ -150,3 +161,4 @@ void RepisaModelo::ActualizarConsulta()
     connect(GrupoBotones, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(GrupoBotonesClick(QAbstractButton*)));
 
 }
+

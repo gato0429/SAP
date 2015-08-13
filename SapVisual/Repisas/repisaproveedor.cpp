@@ -1,39 +1,36 @@
-#include "repisamodelo.h"
+#include "repisaproveedor.h"
 
-RepisaModelo::RepisaModelo() : Repisa()
+RepisaProveedor::RepisaProveedor()
 {
-    ActualizarMapa((ObjetoMaestro*)new Modelo);
+    ActualizarMapa((ObjetoMaestro*)new Proveedor);
 }
 
-
-
-void RepisaModelo::ConsultarBusqueda()
+void RepisaProveedor::ConsultarBusqueda()
 {
     MostrarLabel();
     return;
-
 }
 
-void RepisaModelo::GrupoBotonesClick(QAbstractButton *buttonID)
+void RepisaProveedor::GrupoBotonesClick(QAbstractButton *buttonID)
 {
     /*Cambia*/
-    Dialogo=new FormModelo(this);
-    Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
-    Dialogo->SetObjeto(((Modelo*)MapaRepisa->value(buttonID->objectName())));
+    //Dialogo=new FormProveedor(this);
+    /*Dialogo->move(this->x()+this->width(),this->y()); //siempre igual
+    Dialogo->SetObjeto(((Proveedor*)MapaRepisa->value(buttonID->objectName())));
     ObjetosAbiertos.push_back(buttonID->objectName());
     buttonID->setEnabled(false);
-    /**/
-    Dialogo->show();
+
+    Dialogo->show();*/
 }
 
-
-void RepisaModelo::NuevoClick()
+void RepisaProveedor::NuevoClick()
 {
-    Dialogo=new FormModelo(this);
-    Dialogo->move(this->x()+this->width(),this->y());
-    Dialogo->exec();
+    // Dialogo=new FormProveedor(this);
+    /* Dialogo->move(this->x()+this->width(),this->y());
+     Dialogo->exec();*/
 }
-void RepisaModelo::BuscarClick()
+
+void RepisaProveedor::BuscarClick()
 {
     Busqueda=new BusquedaMaestra(this);
 
@@ -48,7 +45,7 @@ void RepisaModelo::BuscarClick()
     Buscar->setEnabled(false);
 }
 
-void RepisaModelo::ObtenerConsulta()
+void RepisaProveedor::ObtenerConsulta()
 {
     QString ord;
 
@@ -62,7 +59,7 @@ void RepisaModelo::ObtenerConsulta()
     }
     Ordenamiento=ord;
     OrderByCampo="codigo";
-    Modelo* ObjetoBusqueda=new Modelo();
+    Proveedor* ObjetoBusqueda=new Proveedor();
 
     switch (IndiceBusqueda)
     {
@@ -106,16 +103,15 @@ void RepisaModelo::ObtenerConsulta()
 
     emit my_signal(Model,CamposVisibles);
     ActualizarMapa((ObjetoMaestro*)ObjetoBusqueda);
+    }
 
-}
-
-void RepisaModelo::ObjetosIndependientes()
+void RepisaProveedor::ObjetosIndependientes()
 {
     /*
      * Para el Tool Tip
     */
     QPushButton* pp=new QPushButton(this);
-    Modelo *i=(Modelo*)(*it);
+    Proveedor *i=(Proveedor*)(*it);
     pp->setObjectName(i->getCodigo());
     pp->setIcon(DefBD::toQicon(i->getRutaImagen()));
     pp->setIconSize(QSize(55,55));
@@ -132,13 +128,11 @@ void RepisaModelo::ObjetosIndependientes()
     {
         pp->setEnabled(false);
     }
-
 }
 
-void RepisaModelo::ActualizarConsulta()
+void RepisaProveedor::ActualizarConsulta()
 {
-
-    FabricaLocal=Bd->Fabrica->CrearModelo();
+    FabricaLocal=Bd->Fabrica->CrearProveedor();
     Bd->Fabrica->Conectar();
     RegistrosTabla=FabricaLocal->ContarConsulta(ObjetoConsulta);
     QString extra=" order by "+OrderByCampo+" "+Ordenamiento+" LIMIT "+ QString::number(cantidadMostrar) +" offset "+QString::number(TotalElementos);
@@ -150,3 +144,4 @@ void RepisaModelo::ActualizarConsulta()
     connect(GrupoBotones, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(GrupoBotonesClick(QAbstractButton*)));
 
 }
+

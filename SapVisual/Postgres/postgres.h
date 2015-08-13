@@ -16,6 +16,14 @@
 #include "pgvehiculorubro.h"
 #include "pgclientetipo.h"
 #include "pgestado.h"
+#include "pgvehiculo.h"
+#include "pgoperaciones.h"
+#include "pgempleadoarea.h"
+#include "pgempleadocargo.h"
+#include "pgproveedor.h"
+#include "pgrepresentante.h"
+#include "pgaccionista.h"
+#include "pgsucursales.h"
 class Postgres:public BaseDatos
 {
 private:
@@ -46,6 +54,15 @@ public:
     FabricaVehiculoRubro *CrearVehiculoRubro();
     FabricaClienteTipo   *CrearClienteTipo();
     FabricaEstado        *CrearEstado();
+    FabricaVehiculo      *CrearVehiculo();
+    FabricaOperaciones   *CrearOperaciones();
+    FabricaEmpleadoArea  *CrearEmpleadoArea();
+    FabricaEmpleadoCargo *CrearEmpleadoCargo();
+    FabricaProveedor     *CrearProveedor();
+    FabricaRepresentante *CrearRepresentante();
+    FabricaAccionista    *CrearAccionista();
+    FabricaSucursales    *CrearSucursales();
+
 };
 
 

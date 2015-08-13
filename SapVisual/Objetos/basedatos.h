@@ -17,7 +17,14 @@
 #include "../Fabricas/fabricavehiculorubro.h"
 #include "../Fabricas/fabricaclientetipo.h"
 #include "../Fabricas/fabricaestado.h"
-
+#include "../Fabricas/fabricavehiculo.h"
+#include "../Fabricas/fabricaoperaciones.h"
+#include "../Fabricas/fabricaempleadoarea.h"
+#include "../Fabricas/fabricaempleadocargo.h"
+#include "../Fabricas/fabricaproveedor.h"
+#include "../Fabricas/fabricarepresentante.h"
+#include "../Fabricas/fabricaaccionista.h"
+#include "../Fabricas/fabricasucursales.h"
 using namespace std;
 
 class BaseDatos
@@ -71,6 +78,14 @@ public:
     virtual FabricaVehiculoRubro  *CrearVehiculoRubro()=0;
     virtual FabricaClienteTipo    *CrearClienteTipo()=0;
     virtual FabricaEstado         *CrearEstado()=0;
+    virtual FabricaVehiculo       *CrearVehiculo()=0;
+    virtual FabricaOperaciones    *CrearOperaciones()=0;
+    virtual FabricaEmpleadoArea   *CrearEmpleadoArea()=0;
+    virtual FabricaEmpleadoCargo  *CrearEmpleadoCargo()=0;
+    virtual FabricaProveedor      *CrearProveedor()=0;
+    virtual FabricaRepresentante  *CrearRepresentante()=0;
+    virtual FabricaAccionista     *CrearAccionista()=0;
+    virtual FabricaSucursales     *CrearSucursales()=0;
 };
 
 #endif // BASEDATOS_H

@@ -98,8 +98,46 @@ SOURCES += main.cpp\
     Postgres/pgestado.cpp \
     Formularios/formestado.cpp \
     Repisas/repisaestado.cpp \
+<<<<<<< HEAD
     Repisas/repisacliente.cpp \
     Formularios/formcliente.cpp
+=======
+    Objetos/vehiculo.cpp \
+    Fabricas/fabricavehiculo.cpp \
+    Postgres/pgvehiculo.cpp \
+    Repisas/repisavehiculo.cpp \
+    Objetos/operaciones.cpp \
+    Fabricas/fabricaoperaciones.cpp \
+    Postgres/pgoperaciones.cpp \
+    Formularios/formoperaciones.cpp \
+    Repisas/repisaoperaciones.cpp \
+    Objetos/empleadoarea.cpp \
+    Fabricas/fabricaempleadoarea.cpp \
+    Postgres/pgempleadoarea.cpp \
+    Formularios/formempleadoarea.cpp \
+    Repisas/repisaempleadoarea.cpp \
+    Objetos/empleadocargo.cpp \
+    Fabricas/fabricaempleadocargo.cpp \
+    Postgres/pgempleadocargo.cpp \
+    Formularios/formempleadocargo.cpp \
+    Repisas/repisaempleadocargo.cpp \
+    Objetos/proveedor.cpp \
+    Fabricas/fabricaproveedor.cpp \
+    Postgres/pgproveedor.cpp \
+    Repisas/repisaproveedor.cpp \
+    Objetos/representante.cpp \
+    Fabricas/fabricarepresentante.cpp \
+    Postgres/pgrepresentante.cpp \
+    Repisas/repisarepresentante.cpp \
+    Objetos/accionista.cpp \
+    Fabricas/fabricaaccionista.cpp \
+    Postgres/pgaccionista.cpp \
+    Repisas/repisaaccionista.cpp \
+    Objetos/sucursales.cpp \
+    Fabricas/fabricasucursales.cpp \
+    Postgres/pgsucursales.cpp \
+    Repisas/repisasucursales.cpp
+>>>>>>> origin/panochon
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -191,8 +229,46 @@ HEADERS  += mainwindow.h \
     Postgres/pgestado.h \
     Formularios/formestado.h \
     Repisas/repisaestado.h \
+<<<<<<< HEAD
     Repisas/repisacliente.h \
     Formularios/formcliente.h
+=======
+    Objetos/vehiculo.h \
+    Fabricas/fabricavehiculo.h \
+    Postgres/pgvehiculo.h \
+    Repisas/repisavehiculo.h \
+    Objetos/operaciones.h \
+    Fabricas/fabricaoperaciones.h \
+    Postgres/pgoperaciones.h \
+    Formularios/formoperaciones.h \
+    Repisas/repisaoperaciones.h \
+    Objetos/empleadoarea.h \
+    Fabricas/fabricaempleadoarea.h \
+    Postgres/pgempleadoarea.h \
+    Formularios/formempleadoarea.h \
+    Repisas/repisaempleadoarea.h \
+    Objetos/empleadocargo.h \
+    Fabricas/fabricaempleadocargo.h \
+    Postgres/pgempleadocargo.h \
+    Formularios/formempleadocargo.h \
+    Repisas/repisaempleadocargo.h \
+    Objetos/proveedor.h \
+    Fabricas/fabricaproveedor.h \
+    Postgres/pgproveedor.h \
+    Repisas/repisaproveedor.h \
+    Objetos/representante.h \
+    Fabricas/fabricarepresentante.h \
+    Postgres/pgrepresentante.h \
+    Repisas/repisarepresentante.h \
+    Objetos/accionista.h \
+    Fabricas/fabricaaccionista.h \
+    Postgres/pgaccionista.h \
+    Repisas/repisaaccionista.h \
+    Objetos/sucursales.h \
+    Fabricas/fabricasucursales.h \
+    Postgres/pgsucursales.h \
+    Repisas/repisasucursales.h
+>>>>>>> origin/panochon
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -213,7 +289,13 @@ FORMS    += mainwindow.ui \
     Formularios/formvehiculorubro.ui \
     Formularios/formclientetipo.ui \
     Formularios/formestado.ui \
+<<<<<<< HEAD
     Formularios/formcliente.ui
+=======
+    Formularios/formoperaciones.ui \
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
+>>>>>>> origin/panochon
 
 RESOURCES += \
     Recursos.qrc
