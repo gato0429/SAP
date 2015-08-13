@@ -14,8 +14,14 @@
 #include "Repisas/repisaclientetipo.h"
 #include "Repisas/repisaestado.h"
 
+
 #include "Repisas/repisaarticulo.h"
 #include "Repisas/repisacliente.h"
+
+#include "Repisas/repisaoperaciones.h"
+#include "Repisas/repisaempleadoarea.h"
+#include "Repisas/repisaempleadocargo.h"
+
 
 #include "Repisas/repisaoperaciones.h"
 #include "Repisas/repisaempleadoarea.h"

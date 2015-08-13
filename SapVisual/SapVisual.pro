@@ -236,6 +236,7 @@ HEADERS  += mainwindow.h \
     Repisas/repisacliente.h \
     Formularios/formcliente.h
 
+
     Objetos/vehiculo.h \
     Fabricas/fabricavehiculo.h \
     Postgres/pgvehiculo.h \
@@ -294,6 +295,7 @@ FORMS    += mainwindow.ui \
     Formularios/formestado.ui \
 
 
+
     Formularios/formcliente.ui
 
     Formularios/formoperaciones.ui \
@@ -315,6 +317,11 @@ FORMS    += mainwindow.ui \
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
+
+    Formularios/formoperaciones.ui \
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
+
 
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
