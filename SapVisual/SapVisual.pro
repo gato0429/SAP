@@ -99,8 +99,10 @@ SOURCES += main.cpp\
     Formularios/formestado.cpp \
     Repisas/repisaestado.cpp \
 
+
     Repisas/repisacliente.cpp \
     Formularios/formcliente.cpp
+
 
     Objetos/vehiculo.cpp \
     Fabricas/fabricavehiculo.cpp \
@@ -230,6 +232,7 @@ HEADERS  += mainwindow.h \
     Formularios/formestado.h \
     Repisas/repisaestado.h \
 
+
     Repisas/repisacliente.h \
     Formularios/formcliente.h
 
@@ -290,6 +293,7 @@ FORMS    += mainwindow.ui \
     Formularios/formclientetipo.ui \
     Formularios/formestado.ui \
 
+
     Formularios/formcliente.ui
 
     Formularios/formoperaciones.ui \
@@ -311,6 +315,11 @@ FORMS    += mainwindow.ui \
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
+
+    Formularios/formoperaciones.ui \
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
+
 
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \

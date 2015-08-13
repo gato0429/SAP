@@ -46,6 +46,11 @@
 #include "Repisas/repisaempleadoarea.h"
 #include "Repisas/repisaempleadocargo.h"
 
+
+#include "Repisas/repisaoperaciones.h"
+#include "Repisas/repisaempleadoarea.h"
+#include "Repisas/repisaempleadocargo.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
