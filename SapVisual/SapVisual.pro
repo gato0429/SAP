@@ -98,22 +98,10 @@ SOURCES += main.cpp\
     Postgres/pgestado.cpp \
     Formularios/formestado.cpp \
     Repisas/repisaestado.cpp \
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     Repisas/repisacliente.cpp \
     Formularios/formcliente.cpp
-=======
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
+
     Objetos/vehiculo.cpp \
     Fabricas/fabricavehiculo.cpp \
     Postgres/pgvehiculo.cpp \
@@ -149,19 +137,7 @@ SOURCES += main.cpp\
     Fabricas/fabricasucursales.cpp \
     Postgres/pgsucursales.cpp \
     Repisas/repisasucursales.cpp
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
+
 
 HEADERS  += mainwindow.h \
     DefBD.h \
@@ -253,22 +229,10 @@ HEADERS  += mainwindow.h \
     Postgres/pgestado.h \
     Formularios/formestado.h \
     Repisas/repisaestado.h \
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     Repisas/repisacliente.h \
     Formularios/formcliente.h
-=======
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
+
     Objetos/vehiculo.h \
     Fabricas/fabricavehiculo.h \
     Postgres/pgvehiculo.h \
@@ -304,19 +268,7 @@ HEADERS  += mainwindow.h \
     Fabricas/fabricasucursales.h \
     Postgres/pgsucursales.h \
     Repisas/repisasucursales.h
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
-=======
->>>>>>> origin/panochon
+
 
 FORMS    += mainwindow.ui \
     principal.ui \
@@ -337,37 +289,33 @@ FORMS    += mainwindow.ui \
     Formularios/formvehiculorubro.ui \
     Formularios/formclientetipo.ui \
     Formularios/formestado.ui \
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     Formularios/formcliente.ui
-=======
+
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
->>>>>>> origin/panochon
-=======
+
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
->>>>>>> origin/panochon
-=======
+
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
->>>>>>> origin/panochon
-=======
+
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
->>>>>>> origin/panochon
-=======
+
     Formularios/formoperaciones.ui \
     Formularios/formempleadoarea.ui \
     Formularios/formempleadocargo.ui
->>>>>>> origin/panochon
+
+    Formularios/formoperaciones.ui \
+    Formularios/formempleadoarea.ui \
+    Formularios/formempleadocargo.ui
+
 
 RESOURCES += \
     Recursos.qrc
